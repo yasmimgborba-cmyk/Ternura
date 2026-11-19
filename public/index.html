@@ -3,104 +3,204 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Ternura Studio · Sites e softwares sob medida</title>
-<meta name="description" content="Criamos sites, lojas virtuais e softwares sob medida. Peça seu orçamento e pague com Pix ou cartão.">
-<link rel="stylesheet" href="/style.css">
+<title>Ternura · Sites, apps, software e design</title>
+<meta name="description" content="Sites, apps, softwares, design gráfico, social media e personal brand. Monte seu orçamento, veja a prévia e pague com Pix ou cartão.">
+<link rel="icon" href="/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/ternura.css">
 </head>
 <body>
-<header class="bar">
-  <a class="logo" href="/" data-brand>Ternura Studio</a>
-  <nav><a href="#servicos">Serviços</a><a href="#como">Como funciona</a><a href="#faq">Dúvidas</a><a class="btn sm" href="#orcamento">Pedir orçamento</a></nav>
+<header class="topo">
+  <a class="marca" href="/"><img src="/img/logo.png" alt="Ternura"></a>
+  <nav class="menu">
+    <a href="#servicos">Serviços</a><a href="#portfolio">Portfólio</a><a href="#blast">Blast</a><a href="#como">Como funciona</a>
+    <a class="btn sm" href="/orcamento">Monte seu orçamento</a>
+  </nav>
 </header>
 
-<section class="hero wrap">
-  <p class="eyebrow">Sites · Lojas · Sistemas · Apps</p>
-  <h1>Seu projeto digital,<br><span class="hl">feito sob medida.</span></h1>
-  <p class="lead">Você conta a ideia, a gente manda o orçamento. Aprovou? Paga com Pix ou cartão e o projeto começa.</p>
-  <div class="cta"><a class="btn" href="#orcamento">Quero um orçamento grátis</a><a class="btn ghost" href="#servicos">Ver serviços</a></div>
-  <ul class="trust"><li>✓ Orçamento sem compromisso</li><li>✓ Pix ou cartão em até 12x</li><li>✓ Suporte depois da entrega</li></ul>
-</section>
-
-<section id="servicos" class="wrap">
-  <h2>O que a gente cria</h2>
-  <div class="grid">
-    <article class="card"><div class="ico">🌐</div><h3>Sites e landing pages</h3><p>Sites rápidos, bonitos e prontos pro Google. Ideal pra marcas, profissionais e lançamentos.</p></article>
-    <article class="card"><div class="ico">🛍️</div><h3>Lojas virtuais</h3><p>E-commerce com catálogo, carrinho, frete e pagamento integrado.</p></article>
-    <article class="card"><div class="ico">⚙️</div><h3>Sistemas e softwares</h3><p>Painéis, agendamentos, CRMs e automações feitas pro seu negócio.</p></article>
-    <article class="card"><div class="ico">📱</div><h3>Apps</h3><p>Aplicativos web e mobile, do protótipo à publicação.</p></article>
-  </div>
-</section>
-
-<section id="como" class="wrap">
-  <h2>Como funciona</h2>
-  <ol class="steps">
-    <li><b>Você conta a ideia</b><span>Preenche o formulário em 2 minutos.</span></li>
-    <li><b>Recebe o orçamento</b><span>Proposta clara com valor e prazo, por e-mail ou WhatsApp.</span></li>
-    <li><b>Paga do seu jeito</b><span>Pix na hora ou cartão pela Stripe, com link seguro.</span></li>
-    <li><b>Projeto entregue</b><span>Você acompanha cada etapa até o lançamento.</span></li>
-  </ol>
-</section>
-
-<section id="orcamento" class="wrap">
-  <div class="quote">
+<main class="wrap">
+  <section class="hero">
     <div>
-      <h2>Peça seu orçamento</h2>
-      <p class="muted">Responda o básico. Quanto mais detalhes, mais certeiro o valor.</p>
-      <p class="muted small" id="contato"></p>
+      <p class="sobretitulo">sites · apps · software · design · social media</p>
+      <h1>Seu projeto digital feito com <span class="script">ternura</span> ♡</h1>
+      <p class="lead">Escolha o estilo, as cores e o que precisa. Você vê uma prévia de como fica e o valor na hora. Pagou no Pix ou no cartão, a gente começa.</p>
+      <div class="cta">
+        <a class="btn" href="/orcamento">Montar meu orçamento</a>
+        <a class="btn contorno" href="#portfolio">Ver portfólio</a>
+      </div>
+      <ul class="selos"><li>prévia antes de fechar</li><li>preço na hora</li><li>Pix ou cartão</li><li>template a partir de R$ 290</li></ul>
     </div>
-    <form id="form" class="card form">
-      <div class="two">
-        <label>Nome*<input name="nome" required maxlength="120"></label>
-        <label>E-mail*<input name="email" type="email" required maxlength="160"></label>
-      </div>
-      <div class="two">
-        <label>WhatsApp<input name="whatsapp" inputmode="tel" placeholder="(11) 99999-9999" maxlength="40"></label>
-        <label>O que você precisa?
-          <select name="tipo"><option>Site / landing page</option><option>Loja virtual</option><option>Sistema / software</option><option>App</option><option>Outro</option></select>
-        </label>
-      </div>
-      <div class="two">
-        <label>Investimento previsto
-          <select name="orcamento"><option>Ainda não sei</option><option>Até R$ 1.000</option><option>R$ 1.000 a R$ 3.000</option><option>R$ 3.000 a R$ 10.000</option><option>Acima de R$ 10.000</option></select>
-        </label>
-        <label>Prazo
-          <select name="prazo"><option>Sem pressa</option><option>Até 1 mês</option><option>Até 2 semanas</option><option>Urgente</option></select>
-        </label>
-      </div>
-      <label>Conte sua ideia*<textarea name="descricao" rows="5" required maxlength="4000" placeholder="O que o projeto precisa ter? Tem algum site de referência?"></textarea></label>
-      <input name="site" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-      <button class="btn" type="submit">Enviar pedido</button>
-      <p id="msg" class="msg" role="status"></p>
-    </form>
-  </div>
-</section>
+    <div class="moldura">
+      <span class="adesivo" style="top:-18px;right:6px;transform:rotate(14deg)"><svg width="56" height="50" viewBox="0 0 24 22"><path d="M12 21s-9-5.6-9-12A5 5 0 0 1 12 6a5 5 0 0 1 9 3c0 6.4-9 12-9 12z" fill="#E66684" stroke="#7E412A" stroke-width="1.4"/></svg></span>
+      <span class="adesivo" style="top:40%;right:-22px"><svg width="40" height="40" viewBox="0 0 24 24"><path d="M12 1l2.6 8.4L23 12l-8.4 2.6L12 23l-2.6-8.4L1 12l8.4-2.6z" fill="#7E412A"/></svg></span>
+      <span class="adesivo" style="top:22px;left:-26px"><svg width="54" height="54" viewBox="0 0 40 40" fill="none" stroke="#7E412A" stroke-width="2.6" stroke-linecap="round"><path d="M20 20c0-2 2-3 3.5-2s1.6 4-.5 5.5-6 .8-7-2.2 1-8 5.5-8.5 9.5 2.6 9.5 7.6-4.5 10-10.5 10S8.5 27 8.5 21 13 9.5 20 9.5"/></svg></span>
+      <div class="foto"><img src="/img/mascote.jpg" alt="Ilustração da Ternura" width="560" height="1088"></div>
+      <div class="balao"><b>oii!</b><br>Mal posso esperar pra te mostrar meus trabalhos ♪</div>
+    </div>
+  </section>
 
-<section id="faq" class="wrap">
-  <h2>Dúvidas</h2>
-  <details><summary>Quanto custa um site?</summary><p>Depende do que ele precisa ter. Por isso tudo é sob orçamento: você só paga pelo que usa.</p></details>
-  <details><summary>Quais formas de pagamento?</summary><p>Pix (sem taxa) ou cartão de crédito pela Stripe, com link de pagamento seguro.</p></details>
-  <details><summary>Em quanto tempo recebo o orçamento?</summary><p>Normalmente em até 2 dias úteis.</p></details>
-  <details><summary>Tem suporte depois?</summary><p>Sim. Todo projeto inclui um período de suporte e ajustes após a entrega.</p></details>
-</section>
+  <section id="servicos">
+    <div class="painel renda">
+      <span class="painel-titulo">♡ Conteúdos ♡</span>
+      <div class="servicos" id="lista-servicos">
+        <a class="servico" href="/orcamento?servico=site"><span class="bolinha">🌐</span><span><strong>Sites e lojas</strong><span>landing page, institucional, e-commerce</span></span></a>
+        <a class="servico" href="/orcamento?servico=app"><span class="bolinha">📱</span><span><strong>Apps</strong><span>Android e iPhone, do protótipo à loja</span></span></a>
+        <a class="servico" href="/orcamento?servico=software"><span class="bolinha">⚙️</span><span><strong>Software</strong><span>sistemas, painéis, automações, bots</span></span></a>
+        <a class="servico" href="/orcamento?servico=design"><span class="bolinha">🎨</span><span><strong>Design gráfico</strong><span>logo, identidade visual, peças</span></span></a>
+        <a class="servico" href="/orcamento?servico=social"><span class="bolinha">💌</span><span><strong>Social media</strong><span>posts, reels, stories e gestão mensal</span></span></a>
+        <a class="servico" href="/orcamento?servico=brand"><span class="bolinha">✨</span><span><strong>Personal brand</strong><span>sua marca pessoal completa</span></span></a>
+      </div>
+    </div>
+  </section>
 
-<footer class="wrap foot"><span>© <span id="ano"></span> <span data-brand>Ternura Studio</span></span><span id="foot-contato"></span></footer>
+  <section id="portfolio">
+    <p class="sobretitulo">portfólio</p>
+    <h2>Alguns trabalhos</h2>
+    <p class="suave">Projetos reais e projetos conceito. Clique para abrir e navegar.</p>
+    <div class="grade-port">
+      <a class="projeto" href="/exemplos/blast/" target="_blank">
+        <div class="janela"><div class="barra"><i></i><i></i><i></i></div><div class="tela"><iframe src="/exemplos/blast/" loading="lazy" tabindex="-1" title="Blast"></iframe></div></div>
+        <div class="info"><div class="tags"><span class="tag real">projeto real</span><span class="tag">software</span><span class="tag">dark / tech</span></div>
+          <h3>Blast</h3><p>Software de marketing para X/Twitter, com automação, IA e licenças.</p></div>
+      </a>
+      <a class="projeto" href="/exemplos/underground/" target="_blank">
+        <div class="janela"><div class="barra"><i></i><i></i><i></i></div><div class="tela"><iframe src="/exemplos/underground/" loading="lazy" tabindex="-1" title="Underground GYN"></iframe></div></div>
+        <div class="info"><div class="tags"><span class="tag real">projeto real</span><span class="tag">app</span><span class="tag">zine</span></div>
+          <h3>Underground GYN</h3><p>App de rolês alternativos em Goiânia, com ingressos e comunidade.</p></div>
+      </a>
+      <a class="projeto" href="/exemplos/doce-nuvem/" target="_blank">
+        <div class="janela"><div class="barra"><i></i><i></i><i></i></div><div class="tela"><iframe src="/exemplos/doce-nuvem/" loading="lazy" tabindex="-1" title="Doce Nuvem"></iframe></div></div>
+        <div class="info"><div class="tags"><span class="tag">conceito</span><span class="tag">site + social media</span><span class="tag">fofo</span></div>
+          <h3>Doce Nuvem</h3><p>Confeitaria artesanal: site com encomendas e feed do Instagram.</p></div>
+      </a>
+      <a class="projeto" href="/exemplos/lia-moreno/" target="_blank">
+        <div class="janela"><div class="barra"><i></i><i></i><i></i></div><div class="tela"><iframe src="/exemplos/lia-moreno/" loading="lazy" tabindex="-1" title="Lia Moreno"></iframe></div></div>
+        <div class="info"><div class="tags"><span class="tag">conceito</span><span class="tag">personal brand</span><span class="tag">exagerado</span></div>
+          <h3>Lia Moreno</h3><p>Marca pessoal de tatuadora, com portfólio e agenda.</p></div>
+      </a>
+      <a class="projeto" href="/exemplos/sereno/" target="_blank">
+        <div class="janela"><div class="barra"><i></i><i></i><i></i></div><div class="tela"><iframe src="/exemplos/sereno/" loading="lazy" tabindex="-1" title="Sereno"></iframe></div></div>
+        <div class="info"><div class="tags"><span class="tag">conceito</span><span class="tag">site</span><span class="tag">minimalista</span></div>
+          <h3>Sereno</h3><p>Psicologia online: site calmo, com agendamento de sessões.</p></div>
+      </a>
+      <a class="projeto" href="/exemplos/folha/" target="_blank">
+        <div class="janela"><div class="barra"><i></i><i></i><i></i></div><div class="tela"><iframe src="/exemplos/folha/" loading="lazy" tabindex="-1" title="Folha & Co"></iframe></div></div>
+        <div class="info"><div class="tags"><span class="tag">conceito</span><span class="tag">design gráfico</span><span class="tag">elegante</span></div>
+          <h3>Folha &amp; Co.</h3><p>Identidade visual de um café: logo, paleta, cardápio e embalagens.</p></div>
+      </a>
+    </div>
+  </section>
 
-<a id="wa" class="wa" target="_blank" rel="noopener" hidden aria-label="WhatsApp">💬</a>
+  <section id="blast">
+    <div class="destaque">
+      <div>
+        <p class="sobretitulo">software autoral</p>
+        <h2>Blast: marketing no X/Twitter no piloto automático</h2>
+        <p>O Blast é um software de desktop que eu criei pra agências e criadores que vivem do X. Ele cuida da parte repetitiva do crescimento enquanto você foca no conteúdo.</p>
+        <ul>
+          <li><b>Vários perfis ao mesmo tempo</b>, cada um com navegador isolado e ritmo humano.</li>
+          <li><b>Grupos de engajamento</b>: entra, mensagem e retweet com limites por hora e por dia.</li>
+          <li><b>Respostas com IA</b> (Gemini, OpenAI, Claude e outros) para comentar e aquecer contas.</li>
+          <li><b>Mensagens em massa e scraper</b> de seguidores e membros de grupos.</li>
+          <li><b>Também no Telegram</b>, com painel de KPIs, relatório diário e controle pelo celular.</li>
+          <li><b>Licença por assinatura</b> integrada à Stripe, em português, inglês e espanhol.</li>
+        </ul>
+        <a class="btn menta" href="/exemplos/blast/" target="_blank">Ver a página do Blast</a>
+      </div>
+      <div class="janela"><div class="barra"><i></i><i></i><i></i></div><div class="tela"><iframe src="/exemplos/blast/" loading="lazy" tabindex="-1" title="Blast"></iframe></div></div>
+    </div>
+  </section>
+
+  <section id="como">
+    <p class="sobretitulo">como funciona</p>
+    <h2>Do clique ao lançamento</h2>
+    <ol class="passos">
+      <li><b>Monte seu projeto</b><span>Escolha serviço, estilo, cores e extras. Ou comece de um template pronto, que sai mais barato.</span></li>
+      <li><b>Veja a prévia e o preço</b><span>A prévia muda na hora e o valor aparece antes de qualquer conversa.</span></li>
+      <li><b>Pague do seu jeito</b><span>Pix na hora ou cartão. Pode ser 50% de entrada ou à vista com desconto.</span></li>
+      <li><b>A gente cria junto</b><span>Briefing, rodadas de ajuste e entrega. Você acompanha tudo.</span></li>
+    </ol>
+  </section>
+
+  <section id="planos">
+    <p class="sobretitulo">modelos</p>
+    <h2>Escolha o nível de cuidado</h2>
+    <div class="planos">
+      <div class="cartao plano"><h3>Template pronto</h3><div class="preco"><small>sites a partir de</small><br>R$ 490</div>
+        <ul><li>Modelo pronto com sua marca e cores</li><li>Entrega rápida</li><li>Ótimo pra começar</li></ul><a class="btn contorno" href="/orcamento?modelo=template">Quero esse</a></div>
+      <div class="cartao plano destaque-plano"><h3>Personalizado</h3><div class="preco"><small>sites a partir de</small><br>R$ 1.290</div>
+        <ul><li>Layout feito no estilo que você escolheu</li><li>Até 2 rodadas de ajuste</li><li>O mais pedido ♡</li></ul><a class="btn" href="/orcamento?modelo=personalizado">Quero esse</a></div>
+      <div class="cartao plano"><h3>Exclusivo</h3><div class="preco"><small>sites a partir de</small><br>R$ 2.490</div>
+        <ul><li>Do zero, com pesquisa e protótipo</li><li>Ajustes ilimitados no protótipo</li><li>Pra marcas que querem se destacar</li></ul><a class="btn contorno" href="/orcamento?modelo=exclusivo">Quero esse</a></div>
+    </div>
+  </section>
+
+  <section id="contato">
+    <div class="contato-grade">
+      <div>
+        <p class="sobretitulo">projeto planejado</p>
+        <h2>Prefere conversar antes?</h2>
+        <p class="suave">Se o seu projeto é grande ou diferente do que tem no configurador, me conta aqui. Eu respondo com uma proposta e o link de pagamento.</p>
+        <p class="suave" id="contato-direto"></p>
+      </div>
+      <form id="form" class="cartao formulario">
+        <div class="duas">
+          <label>Nome*<input name="nome" required maxlength="120" autocomplete="name"></label>
+          <label>E-mail*<input name="email" type="email" required maxlength="160" autocomplete="email"></label>
+        </div>
+        <div class="duas">
+          <label>WhatsApp<input name="whatsapp" inputmode="tel" placeholder="(11) 99999-9999" maxlength="40"></label>
+          <label>O que você precisa?
+            <select name="tipo"><option>Site</option><option>Loja virtual</option><option>App</option><option>Software / sistema</option><option>Design gráfico</option><option>Social media</option><option>Personal brand</option><option>Outro</option></select>
+          </label>
+        </div>
+        <div class="duas">
+          <label>Investimento previsto
+            <select name="orcamento"><option>Ainda não sei</option><option>Até R$ 1.000</option><option>R$ 1.000 a R$ 3.000</option><option>R$ 3.000 a R$ 10.000</option><option>Acima de R$ 10.000</option></select>
+          </label>
+          <label>Prazo
+            <select name="prazo"><option>Sem pressa</option><option>Até 1 mês</option><option>Até 2 semanas</option><option>Urgente</option></select>
+          </label>
+        </div>
+        <label>Conte sua ideia*<textarea name="descricao" rows="5" required maxlength="4000" placeholder="O que o projeto precisa ter? Tem alguma referência?"></textarea></label>
+        <input name="site" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button class="btn" type="submit">Enviar pedido</button>
+        <p id="msg" class="msg" role="status"></p>
+      </form>
+    </div>
+  </section>
+
+  <section id="faq">
+    <p class="sobretitulo">dúvidas</p>
+    <h2>Perguntinhas</h2>
+    <details><summary>O preço do configurador é o final?</summary><p>Sim, para o que você escolheu. Se depois quiser algo a mais, eu te passo o valor antes de fazer.</p></details>
+    <details><summary>Qual a diferença do template pro personalizado?</summary><p>O template é um modelo pronto que eu adapto com sua marca, cores e textos. O personalizado é desenhado pra você no estilo escolhido.</p></details>
+    <details><summary>Quais formas de pagamento?</summary><p>Pix (aprovação na hora) ou cartão de crédito. Dá pra pagar 50% de entrada e 50% na entrega, ou tudo à vista com 5% de desconto.</p></details>
+    <details><summary>E depois de pagar?</summary><p>Eu te chamo em até 1 dia útil pra fazer o briefing e começar.</p></details>
+    <details><summary>Tem suporte depois da entrega?</summary><p>Sim. Todo projeto tem 30 dias de suporte, e dá pra contratar mais no configurador.</p></details>
+  </section>
+</main>
+
+<footer class="rodape">
+  <img src="/img/logo.png" alt="Ternura">
+  <p><span id="rodape-contato"></span></p>
+  <p class="peq">© <span id="ano"></span> Ternura · feito com carinho</p>
+</footer>
+<a id="whats" class="whats" target="_blank" rel="noopener" hidden aria-label="WhatsApp">💬</a>
 
 <script>
 document.getElementById('ano').textContent = new Date().getFullYear();
 fetch('/config.json').then(r => r.json()).then(c => {
-  document.querySelectorAll('[data-brand]').forEach(e => e.textContent = c.brand);
-  document.title = c.brand + ' · Sites e softwares sob medida';
-  const parts = [];
-  if (c.email) parts.push(`<a href="mailto:${c.email}">${c.email}</a>`);
+  const partes = [];
   if (c.whatsapp) {
-    const wa = document.getElementById('wa');
-    wa.href = 'https://wa.me/' + c.whatsapp; wa.hidden = false;
-    parts.push(`<a href="https://wa.me/${c.whatsapp}" target="_blank">WhatsApp</a>`);
+    const w = document.getElementById('whats'); w.href = 'https://wa.me/' + c.whatsapp; w.hidden = false;
+    partes.push(`<a href="https://wa.me/${c.whatsapp}" target="_blank" rel="noopener">WhatsApp</a>`);
   }
-  document.getElementById('contato').innerHTML = parts.length ? 'Ou fale direto: ' + parts.join(' · ') : '';
-  document.getElementById('foot-contato').innerHTML = parts.join(' · ');
+  if (c.instagram) partes.push(`<a href="https://instagram.com/${c.instagram}" target="_blank" rel="noopener">@${c.instagram}</a>`);
+  if (c.email) partes.push(`<a href="mailto:${c.email}">${c.email}</a>`);
+  document.getElementById('rodape-contato').innerHTML = partes.join(' · ');
+  document.getElementById('contato-direto').innerHTML = partes.length ? 'Ou fale direto: ' + partes.join(' · ') : '';
 }).catch(() => {});
 
 const form = document.getElementById('form'), msg = document.getElementById('msg');
@@ -112,8 +212,8 @@ form.addEventListener('submit', async e => {
     const d = await r.json();
     if (!d.ok) throw new Error(d.erro);
     form.reset(); msg.className = 'msg ok';
-    msg.textContent = 'Pedido enviado! ' + (d.id ? `Número #${d.id}. ` : '') + 'Logo você recebe o orçamento.';
-  } catch (err) { msg.className = 'msg err'; msg.textContent = err.message || 'Não foi possível enviar. Tente de novo.'; }
+    msg.textContent = 'Pedido enviado ♡ ' + (d.id ? `Número #${d.id}. ` : '') + 'Logo te mando a proposta.';
+  } catch (err) { msg.className = 'msg erro'; msg.textContent = err.message || 'Não deu pra enviar. Tenta de novo?'; }
   btn.disabled = false;
 });
 </script>

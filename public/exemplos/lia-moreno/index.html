@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lia Moreno · tattoo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Bungee+Shade&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root { --am:#FFE14D; --rosa:#FF4FA0; --roxo:#6B3FF2; --verde:#21E6A1; --preto:#141018; --branco:#FFFDF6; }
+* { box-sizing:border-box; } body { margin:0; background:var(--am); color:var(--preto); font:17px/1.55 'Space Grotesk',sans-serif; overflow-x:hidden; }
+.w { max-width:1180px; margin:0 auto; padding:0 20px; }
+nav { display:flex; justify-content:space-between; align-items:center; padding:18px 0; }
+.logo { font:26px 'Bungee'; } .logo span { color:var(--rosa); }
+nav a.bx { font:16px 'Bungee'; background:var(--preto); color:var(--am); padding:10px 18px; text-decoration:none; border:3px solid var(--preto); box-shadow:5px 5px 0 var(--rosa); }
+.hero { position:relative; padding:30px 0 80px; }
+.hero h1 { font:clamp(3.6rem,13vw,10.5rem)/.82 'Bungee'; margin:0; letter-spacing:-.02em; position:relative; z-index:2; }
+.hero h1 .l2 { color:var(--rosa); -webkit-text-stroke:3px var(--preto); text-shadow:8px 8px 0 var(--preto); display:block; }
+.hero .linha { display:flex; flex-wrap:wrap; gap:20px; align-items:center; margin-top:30px; position:relative; z-index:2; }
+.hero p { max-width:420px; font-size:1.2rem; font-weight:700; margin:0; }
+.bt { display:inline-block; font:18px 'Bungee'; background:var(--rosa); color:var(--preto); padding:16px 26px; border:3px solid var(--preto); box-shadow:6px 6px 0 var(--preto); text-decoration:none; transform:rotate(-2deg); transition:transform .15s; }
+.bt:hover { transform:rotate(1deg) scale(1.04); }
+.sol { position:absolute; right:2%; top:10px; width:340px; height:340px; border-radius:50%; background:repeating-conic-gradient(var(--roxo) 0 10deg, var(--rosa) 10deg 20deg); border:4px solid var(--preto); animation:gira 30s linear infinite; z-index:1; }
+.sol::after { content:'LIA'; position:absolute; inset:70px; border-radius:50%; background:var(--verde); border:4px solid var(--preto); display:grid; place-items:center; font:54px 'Bungee'; animation:gira 30s linear infinite reverse; }
+@keyframes gira { to { transform:rotate(360deg); } }
+@media (max-width:860px) { .sol { width:200px; height:200px; right:-30px; top:-20px; opacity:.9; } .sol::after { inset:44px; font-size:32px; } }
+.adesivo { position:absolute; font:15px 'Bungee'; padding:8px 14px; border:3px solid var(--preto); z-index:3; }
+.faixa { background:var(--preto); color:var(--am); padding:16px 0; transform:rotate(-2deg); margin:0 -20px; overflow:hidden; white-space:nowrap; font:26px 'Bungee'; border-block:4px solid var(--rosa); }
+.faixa div { display:inline-block; animation:corre 22s linear infinite; } .faixa span { margin:0 20px; } .faixa span:nth-child(3n) { color:var(--verde); } .faixa span:nth-child(3n+1) { color:var(--rosa); }
+@keyframes corre { to { transform:translateX(-50%); } }
+section { padding:90px 0 20px; }
+h2 { font:clamp(2.4rem,6vw,4.4rem)/.9 'Bungee Shade'; margin:0 0 30px; }
+.flash { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:22px; }
+.tat { background:var(--branco); border:4px solid var(--preto); box-shadow:8px 8px 0 var(--preto); padding:18px; text-align:center; transition:transform .15s; }
+.tat:nth-child(odd) { transform:rotate(-2deg); } .tat:nth-child(even) { transform:rotate(2deg); } .tat:hover { transform:rotate(0) scale(1.05); }
+.tat .art { aspect-ratio:1; display:grid; place-items:center; font-size:5rem; border:3px dashed var(--preto); margin-bottom:12px; }
+.tat b { font:18px 'Bungee'; display:block; } .tat span { font-weight:700; color:var(--roxo); }
+.sobre { display:grid; grid-template-columns:.9fr 1.1fr; gap:40px; align-items:center; background:var(--roxo); color:var(--branco); border:4px solid var(--preto); box-shadow:12px 12px 0 var(--preto); padding:40px; }
+@media (max-width:860px) { .sobre { grid-template-columns:1fr; padding:26px; } }
+.sobre h2 { color:var(--am); }
+.retrato { aspect-ratio:4/5; background:radial-gradient(circle at 50% 36%, var(--am) 0 22%, transparent 23%), radial-gradient(ellipse at 50% 100%, var(--am) 0 45%, transparent 46%), var(--rosa); border:4px solid var(--preto); position:relative; }
+.retrato::after { content:'✦ desde 2016 ✦'; position:absolute; bottom:-18px; left:50%; transform:translateX(-50%) rotate(-3deg); background:var(--verde); color:var(--preto); font:15px 'Bungee'; padding:6px 14px; border:3px solid var(--preto); white-space:nowrap; }
+.nums { display:flex; gap:30px; flex-wrap:wrap; margin-top:20px; } .nums b { font:40px 'Bungee'; color:var(--verde); display:block; line-height:1; }
+.agenda { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; }
+.dia { background:var(--branco); border:3px solid var(--preto); padding:14px; font-weight:700; } .dia b { font:22px 'Bungee'; display:block; }
+.dia.ok { background:var(--verde); } .dia.x { background:var(--preto); color:#666; text-decoration:line-through; }
+footer { padding:70px 0 50px; text-align:center; font:20px 'Bungee'; }
+.feito { position:fixed; left:14px; bottom:14px; background:#FFFEEF; color:#7E412A; font:700 12px system-ui; padding:6px 12px; border-radius:999px; text-decoration:none; border:2px solid #7E412A; z-index:9; }
+</style>
+</head>
+<body>
+<div class="w">
+  <nav><span class="logo">LIA<span>✦</span>MORENO</span><a class="bx" href="#agenda">Agendar</a></nav>
+  <header class="hero">
+    <div class="sol"></div>
+    <h1>Tattoo<span class="l2">colorida</span>sem medo</h1>
+    <div class="linha"><p>Old school, neo trad e flash autoral em São Paulo. Traço grosso, cor que não desbota e sessão leve.</p><a class="bt" href="#agenda">Quero tatuar →</a></div>
+    <span class="adesivo" style="background:var(--verde);right:30%;bottom:20px;transform:rotate(6deg)">★ 4.9 no Google</span>
+  </header>
+</div>
+<div class="faixa"><div><span>flash day</span><span>neo trad</span><span>old school</span><span>fine line colorido</span><span>cover-up</span><span>flash day</span><span>neo trad</span><span>old school</span><span>fine line colorido</span><span>cover-up</span><span>flash day</span><span>neo trad</span></div></div>
+<div class="w">
+  <section>
+    <h2>Flash disponível</h2>
+    <div class="flash">
+      <div class="tat"><div class="art" style="background:#FFD1E6">🐍</div><b>Serpente rosa</b><span>a partir de R$ 450</span></div>
+      <div class="tat"><div class="art" style="background:#D8F9EC">🍒</div><b>Cerejinha</b><span>a partir de R$ 250</span></div>
+      <div class="tat"><div class="art" style="background:#E6DDFF">🌙</div><b>Lua mística</b><span>a partir de R$ 380</span></div>
+      <div class="tat"><div class="art" style="background:#FFF3B8">🐯</div><b>Tigre neo trad</b><span>a partir de R$ 890</span></div>
+    </div>
+  </section>
+  <section>
+    <div class="sobre"><div class="retrato"></div>
+      <div><h2>Oi, eu sou a Lia</h2><p>Tatuo há quase 10 anos e acredito que tattoo é sobre se sentir em casa no próprio corpo. Estúdio privado, playlist sua e café sempre passado.</p>
+        <div class="nums"><div><b>3.2k</b>tattoos</div><div><b>48k</b>seguidores</div><div><b>100%</b>vegano</div></div></div></div>
+  </section>
+  <section id="agenda">
+    <h2>Agenda de dezembro</h2>
+    <div class="agenda">
+      <div class="dia x"><b>02</b>lotado</div><div class="dia ok"><b>05</b>2 horários</div><div class="dia"><b>09</b>flash day</div><div class="dia ok"><b>12</b>1 horário</div><div class="dia x"><b>16</b>lotado</div><div class="dia ok"><b>19</b>3 horários</div>
+    </div>
+    <p style="margin-top:30px"><a class="bt" href="#">Reservar com sinal no Pix</a></p>
+  </section>
+  <footer>@liamoreno.tattoo · projeto conceito</footer>
+</div>
+<a class="feito" href="/" target="_top">feito por Ternura ♡</a>
+</body>
+</html>

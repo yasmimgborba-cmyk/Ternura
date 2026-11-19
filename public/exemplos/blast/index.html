@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Blast · Marketing no X no piloto automático</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root { --bg:#07080C; --bg2:#0E1017; --card:#12151E; --line:#1F2433; --tx:#E8ECF5; --mu:#8A93A8; --azul:#3B82F6; --ciano:#22D3EE; --rosa:#F472B6; --verde:#34D399; }
+* { box-sizing: border-box; } body { margin:0; background:var(--bg); color:var(--tx); font:16px/1.6 'Space Grotesk',system-ui,sans-serif; overflow-x:hidden; }
+a { color:inherit; } .w { max-width:1160px; margin:0 auto; padding:0 20px; }
+.brilho { position:absolute; inset:-200px 0 auto; height:700px; background:radial-gradient(600px 300px at 30% 30%, rgba(59,130,246,.28), transparent 70%), radial-gradient(500px 260px at 75% 20%, rgba(244,114,182,.18), transparent 70%); pointer-events:none; }
+nav { display:flex; justify-content:space-between; align-items:center; padding:20px 0; position:relative; }
+.logo { display:flex; align-items:center; gap:10px; font-weight:700; font-size:1.3rem; text-decoration:none; }
+.logo i { width:30px; height:30px; border-radius:9px; background:conic-gradient(from 200deg,var(--azul),var(--ciano),var(--rosa),var(--azul)); display:grid; place-items:center; font-style:normal; font-size:.9rem; }
+nav ul { display:flex; gap:26px; list-style:none; margin:0; padding:0; color:var(--mu); font-size:.95rem; } nav ul a { text-decoration:none; } nav ul a:hover { color:var(--tx); }
+.bt { display:inline-flex; align-items:center; gap:8px; padding:11px 20px; border-radius:10px; font-weight:700; text-decoration:none; background:var(--tx); color:var(--bg); border:1px solid var(--tx); }
+.bt.v { background:transparent; color:var(--tx); border-color:var(--line); }
+@media (max-width:760px) { nav ul { display:none; } }
+.hero { text-align:center; padding:70px 0 40px; position:relative; }
+.pill { display:inline-flex; gap:8px; align-items:center; border:1px solid var(--line); background:var(--bg2); border-radius:999px; padding:5px 14px; font-size:.82rem; color:var(--mu); }
+.pill b { color:var(--verde); }
+h1 { font-size:clamp(2.4rem,6vw,4.6rem); line-height:1.02; letter-spacing:-.04em; margin:22px auto 18px; max-width:900px; }
+h1 span { background:linear-gradient(90deg,var(--azul),var(--ciano),var(--rosa)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.hero p { color:var(--mu); font-size:1.15rem; max-width:620px; margin:0 auto 28px; }
+.hero .acoes { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+/* janela do app */
+.app { margin:56px auto 0; max-width:1040px; border:1px solid var(--line); border-radius:16px; overflow:hidden; background:var(--bg2); box-shadow:0 40px 120px rgba(59,130,246,.18); text-align:left; }
+.app .tb { display:flex; gap:6px; padding:10px 14px; border-bottom:1px solid var(--line); align-items:center; }
+.app .tb i { width:11px; height:11px; border-radius:50%; background:#2A3042; } .app .tb span { margin-left:10px; color:var(--mu); font:12px 'JetBrains Mono',monospace; }
+.app .corpo { display:grid; grid-template-columns:200px 1fr; min-height:380px; }
+.side { background:#000; padding:16px 12px; display:grid; align-content:start; gap:4px; font-size:.86rem; }
+.side b { padding:0 10px 12px; font-size:1rem; } .side span { padding:7px 10px; border-radius:8px; color:var(--mu); display:flex; justify-content:space-between; }
+.side span.on { background:var(--card); color:var(--tx); } .side em { font-style:normal; font-size:.7rem; color:var(--verde); }
+.main { padding:20px; display:grid; gap:16px; align-content:start; }
+.kpis { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+.kpi { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px; }
+.kpi small { color:var(--mu); font-size:.78rem; } .kpi b { display:block; font-size:1.6rem; letter-spacing:-.02em; } .kpi i { font-style:normal; font-size:.75rem; color:var(--verde); }
+.duo { display:grid; grid-template-columns:1.4fr 1fr; gap:12px; }
+.graf { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px; }
+.graf .barras { display:flex; align-items:flex-end; gap:6px; height:130px; margin-top:10px; }
+.graf .barras i { flex:1; border-radius:4px 4px 0 0; background:linear-gradient(var(--ciano),var(--azul)); }
+.log { background:#05060A; border:1px solid var(--line); border-radius:12px; padding:12px 14px; font:12px/1.8 'JetBrains Mono',monospace; color:var(--mu); }
+.log b { color:var(--verde); font-weight:400; } .log u { color:var(--ciano); text-decoration:none; } .log s { color:var(--rosa); text-decoration:none; }
+@media (max-width:800px) { .app .corpo { grid-template-columns:1fr; } .side { display:none; } .kpis { grid-template-columns:repeat(2,1fr); } .duo { grid-template-columns:1fr; } }
+section { padding:90px 0 20px; } h2 { font-size:clamp(1.8rem,4vw,2.8rem); letter-spacing:-.03em; margin:0 0 10px; } .sub { color:var(--mu); max-width:600px; margin:0 0 36px; }
+.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:16px; }
+.f { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:24px; transition:border-color .2s, transform .2s; }
+.f:hover { border-color:#2E3650; transform:translateY(-3px); }
+.f .ic { width:42px; height:42px; border-radius:10px; display:grid; place-items:center; font-size:1.2rem; background:rgba(59,130,246,.12); border:1px solid rgba(59,130,246,.3); margin-bottom:14px; }
+.f h3 { margin:0 0 6px; font-size:1.12rem; } .f p { margin:0; color:var(--mu); font-size:.95rem; }
+.ias { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; } .ias span { border:1px solid var(--line); border-radius:999px; padding:6px 14px; color:var(--mu); font-size:.88rem; background:var(--bg2); }
+.planos { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; }
+.plano { border:1px solid var(--line); border-radius:16px; padding:24px; background:var(--card); position:relative; }
+.plano.top { border-color:var(--azul); box-shadow:0 0 0 1px var(--azul), 0 20px 60px rgba(59,130,246,.2); }
+.plano.top::before { content:'mais escolhido'; position:absolute; top:-11px; left:20px; background:var(--azul); font-size:.72rem; font-weight:700; padding:2px 10px; border-radius:999px; }
+.plano .pr { font-size:2.4rem; font-weight:700; letter-spacing:-.03em; } .plano .pr small { font-size:.9rem; color:var(--mu); font-weight:400; }
+.plano ul { list-style:none; padding:0; margin:14px 0 20px; color:var(--mu); font-size:.92rem; display:grid; gap:6px; } .plano li::before { content:'✓  '; color:var(--verde); }
+.plano .bt { width:100%; justify-content:center; }
+.cta { margin:90px 0 40px; border:1px solid var(--line); border-radius:24px; padding:56px 30px; text-align:center; background:radial-gradient(500px 200px at 50% 0%, rgba(34,211,238,.18), transparent 70%), var(--bg2); }
+footer { color:var(--mu); font-size:.85rem; padding:30px 0 60px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; border-top:1px solid var(--line); }
+.feito { position:fixed; left:14px; bottom:14px; background:#FFFEEF; color:#7E412A; font:700 12px system-ui; padding:6px 12px; border-radius:999px; text-decoration:none; border:2px solid #7E412A; z-index:9; }
+</style>
+</head>
+<body>
+<div class="brilho"></div>
+<div class="w">
+  <nav><a class="logo" href="#"><i>✦</i>Blast</a>
+    <ul><li><a href="#recursos">Recursos</a></li><li><a href="#ia">IA</a></li><li><a href="#planos">Planos</a></li><li><a href="#faq">Dúvidas</a></li></ul>
+    <a class="bt" href="#planos">Começar</a></nav>
+
+  <header class="hero">
+    <span class="pill"><b>●</b> versão nova · português, inglês e espanhol</span>
+    <h1>Seu marketing no X <span>no piloto automático</span></h1>
+    <p>O Blast cuida da parte repetitiva: grupos, retweets, mensagens, respostas com IA e aquecimento de contas. Você foca no conteúdo, ele cuida do alcance.</p>
+    <div class="acoes"><a class="bt" href="#planos">Ver planos</a><a class="bt v" href="#recursos">Como funciona</a></div>
+
+    <div class="app">
+      <div class="tb"><i></i><i></i><i></i><span>Blast.exe · 5 perfis conectados</span></div>
+      <div class="corpo">
+        <div class="side"><b>✦ Blast</b>
+          <span class="on">Painel</span><span>Conexão e perfis <em>5 on</em></span><span>Chats (RT)</span><span>Mensagens</span><span>Grupos de RT</span><span>Comment bait</span><span>Aquecimento</span><span>Scraper</span><span>Telegram</span><span>Diário</span></div>
+        <div class="main">
+          <div class="kpis">
+            <div class="kpi"><small>Retweets hoje</small><b>1.248</b><i>▲ 18%</i></div>
+            <div class="kpi"><small>Grupos ativos</small><b>86</b><i>▲ 6</i></div>
+            <div class="kpi"><small>Respostas com IA</small><b>312</b><i>▲ 24%</i></div>
+            <div class="kpi"><small>Novos seguidores</small><b>+2.9k</b><i>▲ 31%</i></div>
+          </div>
+          <div class="duo">
+            <div class="graf"><small style="color:var(--mu)">Alcance nos últimos 14 dias</small>
+              <div class="barras"><i style="height:30%"></i><i style="height:38%"></i><i style="height:35%"></i><i style="height:48%"></i><i style="height:44%"></i><i style="height:57%"></i><i style="height:52%"></i><i style="height:63%"></i><i style="height:70%"></i><i style="height:66%"></i><i style="height:78%"></i><i style="height:84%"></i><i style="height:80%"></i><i style="height:96%"></i></div></div>
+            <div class="log">
+              <div><b>14:02</b> perfil_02 · <u>grupo 1/3 • 100k</u> · mensagem enviada</div>
+              <div><b>14:02</b> perfil_02 · RT em 3 pessoas</div>
+              <div><b>14:03</b> perfil_04 · resposta IA publicada</div>
+              <div><b>14:05</b> perfil_01 · aquecimento 12/40</div>
+              <div><b>14:06</b> perfil_05 · <s>pausa humana 90s</s></div>
+              <div><b>14:07</b> telegram · 38 grupos ✓</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="recursos">
+    <h2>Tudo que cansa, o Blast faz</h2>
+    <p class="sub">Um app de desktop que roda seus perfis com ritmo humano, limites seguros e relatório no fim do dia.</p>
+    <div class="grid">
+      <div class="f"><div class="ic">👥</div><h3>Vários perfis juntos</h3><p>Cada conta no seu navegador isolado, com pausas e limites próprios por hora e por dia.</p></div>
+      <div class="f"><div class="ic">🔁</div><h3>Grupos de engajamento</h3><p>Lê os grupos, manda sua mensagem e dá RT em quem veio antes. Do jeito que a comunidade espera.</p></div>
+      <div class="f"><div class="ic">✉️</div><h3>Mensagens em massa</h3><p>Para listas de pessoas ou links de grupo, sem reenviar quando algo falha.</p></div>
+      <div class="f"><div class="ic">🧲</div><h3>Scraper</h3><p>Exporta seguidores, membros de grupos e quem curtiu ou repostou um post.</p></div>
+      <div class="f"><div class="ic">🔥</div><h3>Aquecimento de contas</h3><p>Contas novas ganham atividade natural antes de começar a divulgar.</p></div>
+      <div class="f"><div class="ic">📈</div><h3>Painel e diário</h3><p>KPIs do dia, relatório em HTML e controle pelo celular quando você está fora.</p></div>
+    </div>
+  </section>
+
+  <section id="ia">
+    <h2>Respostas com IA que soam como você</h2>
+    <p class="sub">O comment bait escolhe posts relevantes e responde no seu tom. Se um provedor cair, troca sozinho pro reserva.</p>
+    <div class="ias"><span>Gemini</span><span>OpenAI</span><span>Claude</span><span>Grok</span><span>DeepSeek</span><span>OpenRouter</span><span>+ Telegram integrado</span></div>
+  </section>
+
+  <section id="planos">
+    <h2>Planos</h2>
+    <p class="sub">Licença mensal, ativada na hora depois do pagamento. Cancele quando quiser.</p>
+    <div class="planos">
+      <div class="plano"><h3>Starter</h3><div class="pr">$49<small>/mês</small></div><ul><li>3 perfis</li><li>Grupos e RT</li><li>Relatório diário</li></ul><a class="bt v" href="#">Assinar</a></div>
+      <div class="plano top"><h3>Standard</h3><div class="pr">$79<small>/mês</small></div><ul><li>5 perfis</li><li>Tudo do Starter</li><li>Comment bait com IA</li><li>Aquecimento</li></ul><a class="bt" href="#">Assinar</a></div>
+      <div class="plano"><h3>Pro</h3><div class="pr">$149<small>/mês</small></div><ul><li>12 perfis</li><li>Tudo do Standard</li><li>Scraper e mensagens</li><li>Telegram</li></ul><a class="bt v" href="#">Assinar</a></div>
+      <div class="plano"><h3>Agency</h3><div class="pr">$249<small>/mês</small></div><ul><li>25 perfis</li><li>Tudo liberado</li><li>Suporte prioritário</li></ul><a class="bt v" href="#">Assinar</a></div>
+    </div>
+  </section>
+
+  <div class="cta"><h2>Pronto pra crescer sem ficar o dia todo no X?</h2><p class="sub" style="margin:0 auto 24px">Instale, conecte seus perfis e deixe o Blast trabalhar.</p><a class="bt" href="#planos">Quero o Blast</a></div>
+
+  <footer id="faq"><span>© Blast · software de marketing para X/Twitter</span><span>Windows · licença via Stripe · PT / EN / ES</span></footer>
+</div>
+<a class="feito" href="/" target="_top">feito por Ternura ♡</a>
+</body>
+</html>

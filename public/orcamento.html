@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Monte seu orçamento · Ternura</title>
+<meta name="description" content="Escolha serviço, estilo e cores, veja a prévia do seu projeto e o preço na hora.">
+<link rel="icon" href="/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&family=Dancing+Script:wght@600;700&family=Inter:wght@300;400;600&family=Bungee&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Space+Grotesk:wght@400;600;700&family=Archivo+Black&family=Special+Elite&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/ternura.css">
+<link rel="stylesheet" href="/css/orcamento.css">
+</head>
+<body>
+<header class="topo">
+  <a class="marca" href="/"><img src="/img/logo.png" alt="Ternura"></a>
+  <nav class="menu"><a href="/#portfolio">Portfólio</a><a href="/#contato">Projeto planejado</a></nav>
+</header>
+
+<main class="wrap config">
+  <div class="config-intro">
+    <p class="sobretitulo">orçamento na hora</p>
+    <h1>Monte seu projeto <span class="script">♡</span></h1>
+    <p class="suave">Vá escolhendo e veja a prévia mudar. O preço aparece na hora, sem precisar esperar resposta.</p>
+  </div>
+
+  <div class="config-grade">
+    <form id="cfg" class="passos-cfg" autocomplete="off">
+      <fieldset class="etapa">
+        <legend><span class="num">1</span> O que você precisa?</legend>
+        <div class="opcoes servicos-cfg" data-campo="servico"></div>
+      </fieldset>
+
+      <fieldset class="etapa">
+        <legend><span class="num">2</span> Template ou do zero?</legend>
+        <div class="opcoes modelos-cfg" data-campo="modelo"></div>
+      </fieldset>
+
+      <fieldset class="etapa">
+        <legend><span class="num">3</span> Qual a vibe?</legend>
+        <div class="opcoes estilos-cfg" data-campo="estilo"></div>
+      </fieldset>
+
+      <fieldset class="etapa">
+        <legend><span class="num">4</span> Cores</legend>
+        <div class="opcoes paletas-cfg" data-campo="paleta"></div>
+        <div class="cores-livres">
+          <label>Principal<input type="color" id="c0"></label>
+          <label>Destaque<input type="color" id="c1"></label>
+          <label>Fundo<input type="color" id="c2"></label>
+          <label>Texto<input type="color" id="c3"></label>
+        </div>
+      </fieldset>
+
+      <fieldset class="etapa">
+        <legend><span class="num">5</span> Sua marca</legend>
+        <div class="duas">
+          <label class="campo">Nome do negócio<input id="negocio" maxlength="40" placeholder="Ex.: Doce Nuvem"></label>
+          <label class="campo">Frase curta (opcional)<input id="frase" maxlength="70" placeholder="Ex.: bolos que abraçam"></label>
+        </div>
+      </fieldset>
+
+      <fieldset class="etapa">
+        <legend><span class="num">6</span> Extras</legend>
+        <div class="extras-cfg" id="extras"></div>
+      </fieldset>
+
+      <fieldset class="etapa">
+        <legend><span class="num">7</span> Prazo e pagamento</legend>
+        <div class="opcoes duas-col" data-campo="urgencia"></div>
+        <div class="opcoes duas-col" data-campo="pagamento" id="op-pagamento"></div>
+      </fieldset>
+
+      <fieldset class="etapa" id="dados">
+        <legend><span class="num">8</span> Seus dados</legend>
+        <div class="duas">
+          <label class="campo">Nome*<input id="nome" required maxlength="120" autocomplete="name"></label>
+          <label class="campo">E-mail*<input id="email" type="email" required maxlength="160" autocomplete="email"></label>
+        </div>
+        <label class="campo">WhatsApp<input id="whatsapp" inputmode="tel" maxlength="40" placeholder="(11) 99999-9999" autocomplete="tel"></label>
+        <label class="campo">Alguma observação? (opcional)<textarea id="obs" rows="3" maxlength="3000" placeholder="Referências, links, o que não pode faltar..."></textarea></label>
+        <input id="site" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      </fieldset>
+    </form>
+
+    <aside class="lateral">
+      <div class="previa-caixa">
+        <div class="previa-topo"><span>Prévia</span><span class="suave peq" id="previa-nota"></span></div>
+        <div id="previa" class="previa"></div>
+      </div>
+      <div class="cartao resumo">
+        <h3 id="resumo-titulo">Seu orçamento</h3>
+        <ul class="itens" id="resumo-itens"></ul>
+        <div class="total"><span id="rot-total">Total</span><strong id="v-total">R$ 0,00</strong></div>
+        <div class="total agora" id="linha-agora"><span id="rot-agora">Pagar agora</span><strong id="v-agora">R$ 0,00</strong></div>
+        <p class="suave peq" id="prazo"></p>
+        <button class="btn largo" id="enviar" type="button">Ir para o pagamento</button>
+        <p class="msg" id="msg" role="status"></p>
+        <p class="suave peq centro">Pix ou cartão · pagamento seguro</p>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<div class="barra-fixa" id="barra-fixa"><span><small>Total</small><b id="v-total-m">R$ 0,00</b></span><a class="btn sm" href="#dados">Finalizar</a></div>
+
+<script src="/js/orcamento.js"></script>
+</body>
+</html>

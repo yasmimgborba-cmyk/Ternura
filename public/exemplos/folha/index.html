@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Folha &amp; Co. · identidade visual</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root { --verde:#2F4A3A; --oliva:#8A9A5B; --terra:#C0703F; --creme:#F3ECDF; --papel:#FBF8F2; --tx:#1E2A23; --mu:#6B6F64; }
+* { box-sizing:border-box; } body { margin:0; background:var(--papel); color:var(--tx); font:300 16px/1.7 'Inter',sans-serif; }
+.w { max-width:1160px; margin:0 auto; padding:0 24px; }
+.serif { font-family:'Playfair Display',serif; }
+header.capa { background:var(--verde); color:var(--creme); padding:26px 0 90px; position:relative; overflow:hidden; }
+header.capa::after { content:''; position:absolute; right:-120px; bottom:-160px; width:520px; height:520px; border-radius:50%; border:1px solid rgba(243,236,223,.25); box-shadow:0 0 0 60px rgba(243,236,223,.04), 0 0 0 120px rgba(243,236,223,.03); }
+.topo { display:flex; justify-content:space-between; font-size:.75rem; letter-spacing:.24em; text-transform:uppercase; opacity:.8; }
+.marca { text-align:center; margin-top:70px; position:relative; z-index:1; }
+.emblema { width:120px; height:120px; margin:0 auto 26px; border:1px solid var(--creme); border-radius:50%; display:grid; place-items:center; position:relative; }
+.emblema::before { content:''; width:46px; height:70px; background:var(--oliva); border-radius:0 100% 0 100%; transform:rotate(45deg); }
+.emblema::after { content:''; position:absolute; width:1px; height:56px; background:var(--verde); transform:rotate(45deg); }
+.marca h1 { font:400 clamp(3rem,9vw,6.4rem)/1 'Playfair Display'; margin:0; letter-spacing:-.01em; } .marca h1 i { color:var(--oliva); }
+.marca p { letter-spacing:.4em; text-transform:uppercase; font-size:.8rem; margin:18px 0 0; opacity:.8; }
+section { padding:90px 0; }
+.rot { font-size:.74rem; letter-spacing:.24em; text-transform:uppercase; color:var(--terra); margin:0 0 12px; font-weight:600; }
+h2 { font:400 clamp(2rem,4vw,3rem)/1.1 'Playfair Display'; margin:0 0 40px; }
+.paleta { display:grid; grid-template-columns:repeat(4,1fr); min-height:260px; } @media (max-width:700px) { .paleta { grid-template-columns:repeat(2,1fr); } }
+.paleta div { padding:20px; display:flex; flex-direction:column; justify-content:flex-end; font-size:.82rem; } .paleta b { font:400 1.3rem 'Playfair Display'; display:block; }
+.tipo { display:grid; grid-template-columns:1fr 1fr; gap:40px; } @media (max-width:760px) { .tipo { grid-template-columns:1fr; } }
+.tipo .aa { font:400 9rem/1 'Playfair Display'; color:var(--verde); } .tipo .aa2 { font:300 9rem/1 'Inter'; color:var(--oliva); }
+.tipo small { display:block; color:var(--mu); letter-spacing:.1em; text-transform:uppercase; font-size:.75rem; margin-top:8px; }
+.aplic { display:grid; grid-template-columns:1.1fr .9fr .9fr; gap:22px; align-items:stretch; } @media (max-width:860px) { .aplic { grid-template-columns:1fr; } }
+.cardapio { background:var(--creme); padding:34px; border:1px solid #E2D8C6; }
+.cardapio h3 { font:italic 400 1.8rem 'Playfair Display'; text-align:center; margin:0 0 20px; color:var(--verde); }
+.cardapio .it { display:flex; align-items:baseline; gap:8px; margin-bottom:12px; } .cardapio .it span:nth-child(2) { flex:1; border-bottom:1px dotted var(--mu); }
+.cardapio .it small { display:block; color:var(--mu); font-size:.8rem; }
+.copo { background:var(--verde); display:grid; place-items:center; padding:30px; }
+.copo div { width:150px; height:210px; background:var(--creme); clip-path:polygon(0 0,100% 0,88% 100%,12% 100%); display:grid; place-items:center; position:relative; }
+.copo div::before { content:''; width:34px; height:52px; background:var(--oliva); border-radius:0 100% 0 100%; transform:rotate(45deg); }
+.copo div::after { content:'Folha & Co.'; position:absolute; bottom:40px; font:italic 400 1rem 'Playfair Display'; color:var(--verde); }
+.cartao { display:grid; gap:16px; }
+.cartao div { flex:1; background:var(--terra); color:var(--creme); padding:22px; display:flex; flex-direction:column; justify-content:space-between; min-height:150px; }
+.cartao div:last-child { background:var(--creme); color:var(--verde); border:1px solid #E2D8C6; }
+.cartao b { font:400 1.4rem 'Playfair Display'; }
+footer { background:var(--verde); color:var(--creme); padding:40px 0; font-size:.85rem; letter-spacing:.1em; text-align:center; }
+.feito { position:fixed; left:14px; bottom:14px; background:#FFFEEF; color:#7E412A; font:700 12px system-ui; padding:6px 12px; border-radius:999px; text-decoration:none; border:2px solid #7E412A; z-index:9; }
+</style>
+</head>
+<body>
+<header class="capa"><div class="w">
+  <div class="topo"><span>Manual da marca</span><span>2026</span></div>
+  <div class="marca"><div class="emblema"></div><h1>Folha <i>&amp;</i> Co.</h1><p>café · plantas · encontros</p></div>
+</div></header>
+<div class="w">
+  <section><p class="rot">01 · Paleta</p><h2>Cores da terra e da folha</h2>
+    <div class="paleta">
+      <div style="background:var(--verde);color:var(--creme)"><b>Mata</b>#2F4A3A</div>
+      <div style="background:var(--oliva);color:var(--creme)"><b>Oliva</b>#8A9A5B</div>
+      <div style="background:var(--terra);color:var(--creme)"><b>Argila</b>#C0703F</div>
+      <div style="background:var(--creme)"><b>Linho</b>#F3ECDF</div>
+    </div></section>
+  <section><p class="rot">02 · Tipografia</p><h2>Clássica com um respiro moderno</h2>
+    <div class="tipo"><div><div class="aa">Aa</div><small>Playfair Display · títulos</small></div><div><div class="aa2">Aa</div><small>Inter Light · textos</small></div></div></section>
+  <section><p class="rot">03 · Aplicações</p><h2>A marca no dia a dia</h2>
+    <div class="aplic">
+      <div class="cardapio"><h3>Cardápio</h3>
+        <div class="it"><span>Espresso<small>blend da casa</small></span><span></span><span>9</span></div>
+        <div class="it"><span>Flat white<small>leite vaporizado</small></span><span></span><span>14</span></div>
+        <div class="it"><span>Chá de capim-limão<small>da nossa horta</small></span><span></span><span>11</span></div>
+        <div class="it"><span>Pão de queijo<small>receita mineira</small></span><span></span><span>8</span></div>
+        <div class="it"><span>Bolo de fubá<small>com goiabada</small></span><span></span><span>12</span></div></div>
+      <div class="copo"><div></div></div>
+      <div class="cartao"><div><b>Folha &amp; Co.</b><span>Rua das Palmeiras, 120<br>@folhaeco</span></div><div><b>Clube do café</b><span>10º café por nossa conta ♡</span></div></div>
+    </div></section>
+</div>
+<footer>FOLHA &amp; CO. · IDENTIDADE VISUAL · PROJETO CONCEITO</footer>
+<a class="feito" href="/" target="_top">feito por Ternura ♡</a>
+</body>
+</html>

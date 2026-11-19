@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Doce Nuvem · confeitaria artesanal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<style>
+:root { --ceu:#BFE3F5; --rosa:#FF9EB8; --rosa2:#FFD6E2; --creme:#FFF8EE; --choco:#5B3A2E; --lima:#C9E8A0; --amar:#FFE29A; }
+* { box-sizing:border-box; } body { margin:0; background:var(--creme); color:var(--choco); font:16px/1.6 'Nunito',sans-serif; overflow-x:hidden; }
+.w { max-width:1140px; margin:0 auto; padding:0 20px; }
+nav { display:flex; justify-content:space-between; align-items:center; padding:16px 0; }
+.logo { display:flex; align-items:center; gap:10px; font:700 1.6rem 'Fredoka'; }
+.nuvem { width:46px; height:28px; background:#fff; border-radius:20px; position:relative; border:2.5px solid var(--choco); }
+.nuvem::before { content:''; position:absolute; width:22px; height:22px; background:#fff; border:2.5px solid var(--choco); border-bottom:0; border-right-color:transparent; border-radius:50%; top:-12px; left:8px; transform:rotate(45deg); }
+nav ul { list-style:none; display:flex; gap:24px; margin:0; padding:0; font-weight:700; } nav a { color:inherit; text-decoration:none; }
+@media (max-width:760px) { nav ul { display:none; } }
+.bt { display:inline-block; background:var(--rosa); color:#fff; font:600 1rem 'Fredoka'; padding:12px 24px; border-radius:999px; border:2.5px solid var(--choco); box-shadow:0 4px 0 var(--choco); text-decoration:none; }
+.bt.b { background:#fff; color:var(--choco); }
+.hero { position:relative; background:var(--ceu); border-radius:40px; padding:60px 50px; display:grid; grid-template-columns:1.1fr .9fr; gap:30px; align-items:center; overflow:hidden; border:3px solid var(--choco); }
+@media (max-width:860px) { .hero { grid-template-columns:1fr; padding:40px 26px; text-align:center; } }
+.hero::before, .hero::after { content:''; position:absolute; background:#fff; border-radius:999px; opacity:.85; }
+.hero::before { width:180px; height:56px; top:30px; right:38%; box-shadow:60px -26px 0 -6px #fff; } .hero::after { width:140px; height:44px; bottom:40px; left:4%; box-shadow:40px -20px 0 -4px #fff; }
+.hero h1 { font:700 clamp(2.6rem,6vw,4.4rem)/1 'Fredoka'; margin:0 0 16px; position:relative; z-index:1; }
+.hero h1 em { font:600 1.1em 'Caveat'; color:#E25588; font-style:normal; }
+.hero p { font-size:1.15rem; max-width:440px; position:relative; z-index:1; } @media (max-width:860px) { .hero p { margin:0 auto 10px; } }
+.acoes { display:flex; gap:12px; margin-top:24px; flex-wrap:wrap; position:relative; z-index:1; } @media (max-width:860px) { .acoes { justify-content:center; } }
+/* bolo em CSS */
+.bolo { position:relative; width:300px; height:330px; margin:0 auto; z-index:1; }
+.prato { position:absolute; bottom:0; left:10px; width:280px; height:30px; background:#fff; border:3px solid var(--choco); border-radius:50%; }
+.camada { position:absolute; left:40px; width:220px; border:3px solid var(--choco); border-radius:20px; }
+.c1 { bottom:20px; height:90px; background:var(--rosa2); } .c2 { bottom:105px; height:80px; background:#fff; left:55px; width:190px; } .c3 { bottom:180px; height:60px; background:var(--rosa); left:75px; width:150px; }
+.calda { position:absolute; left:52px; bottom:160px; width:196px; height:30px; background:radial-gradient(circle at 10px 0, var(--rosa) 14px, transparent 15px) 0 0/28px 30px repeat-x; }
+.cereja { position:absolute; left:136px; bottom:236px; width:30px; height:30px; background:#E2365B; border:3px solid var(--choco); border-radius:50%; }
+.cereja::before { content:''; position:absolute; width:20px; height:24px; border:3px solid var(--choco); border-color:var(--choco) transparent transparent transparent; border-radius:50%; top:-20px; left:8px; transform:rotate(20deg); }
+.granulado { position:absolute; inset:0; background:
+  linear-gradient(60deg, transparent 47%, #fff 47% 53%, transparent 53%) 90px 140px/12px 12px no-repeat,
+  linear-gradient(-30deg, transparent 47%, var(--lima) 47% 53%, transparent 53%) 160px 130px/12px 12px no-repeat,
+  linear-gradient(10deg, transparent 47%, var(--amar) 47% 53%, transparent 53%) 120px 120px/12px 12px no-repeat; }
+.selo { position:absolute; top:-8px; right:-10px; width:96px; height:96px; border-radius:50%; background:var(--amar); border:3px solid var(--choco); display:grid; place-items:center; text-align:center; font:700 .85rem/1.1 'Fredoka'; transform:rotate(12deg); }
+section { padding:80px 0 10px; }
+h2 { font:700 clamp(2rem,4.5vw,3rem) 'Fredoka'; margin:0 0 8px; text-align:center; } .sub { text-align:center; margin:0 auto 34px; max-width:540px; }
+.cardapio { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px; }
+.doce { background:#fff; border:3px solid var(--choco); border-radius:26px; padding:20px; text-align:center; box-shadow:0 6px 0 var(--choco); transition:transform .15s; }
+.doce:hover { transform:translateY(-4px) rotate(-1deg); }
+.ilus { width:110px; height:110px; margin:0 auto 12px; border-radius:50%; display:grid; place-items:center; font-size:3.4rem; border:3px dashed var(--choco); }
+.doce h3 { font:600 1.25rem 'Fredoka'; margin:0; } .doce p { margin:4px 0 10px; font-size:.92rem; opacity:.8; } .doce b { font:700 1.2rem 'Fredoka'; color:#E25588; }
+.enc { display:grid; grid-template-columns:1fr 1fr; gap:30px; background:var(--rosa2); border:3px solid var(--choco); border-radius:36px; padding:40px; align-items:center; }
+@media (max-width:860px) { .enc { grid-template-columns:1fr; padding:26px; } }
+.enc ol { padding-left:20px; font-weight:700; } .enc li { margin-bottom:10px; }
+.form { background:#fff; border:3px solid var(--choco); border-radius:24px; padding:22px; display:grid; gap:12px; }
+.form label { display:grid; gap:4px; font-weight:700; font-size:.9rem; }
+.form input, .form select { font:inherit; padding:10px 14px; border-radius:14px; border:2px solid #EBD9C8; background:var(--creme); }
+/* feed instagram */
+.feed { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; max-width:720px; margin:0 auto; }
+.post { aspect-ratio:1; border-radius:18px; border:3px solid var(--choco); display:grid; place-items:center; text-align:center; padding:12px; font:700 1.1rem/1.15 'Fredoka'; overflow:hidden; position:relative; }
+.post .e { font-size:3rem; } .post small { display:block; font:600 1.1rem 'Caveat'; }
+.perfil { display:flex; gap:16px; align-items:center; justify-content:center; margin-bottom:22px; }
+.perfil .av { width:70px; height:70px; border-radius:50%; background:var(--ceu); border:3px solid var(--choco); outline:3px solid var(--rosa); outline-offset:3px; display:grid; place-items:center; font-size:2rem; }
+.perfil b { font:700 1.2rem 'Fredoka'; display:block; } .perfil span { font-size:.9rem; opacity:.75; }
+footer { text-align:center; padding:60px 0; font-weight:700; }
+.feito { position:fixed; left:14px; bottom:14px; background:#FFFEEF; color:#7E412A; font:700 12px system-ui; padding:6px 12px; border-radius:999px; text-decoration:none; border:2px solid #7E412A; z-index:9; }
+</style>
+</head>
+<body>
+<div class="w">
+  <nav><span class="logo"><span class="nuvem"></span>Doce Nuvem</span><ul><li><a href="#cardapio">Cardápio</a></li><li><a href="#encomendas">Encomendas</a></li><li><a href="#insta">Instagram</a></li></ul><a class="bt" href="#encomendas">Encomendar</a></nav>
+
+  <header class="hero">
+    <div><h1>Bolos que <em>abraçam</em> ♡</h1><p>Confeitaria artesanal com receitas de vó, ingredientes frescos e muito carinho em cada camada.</p>
+      <div class="acoes"><a class="bt" href="#encomendas">Fazer encomenda</a><a class="bt b" href="#cardapio">Ver cardápio</a></div></div>
+    <div class="bolo"><div class="prato"></div><div class="camada c1"></div><div class="camada c2"></div><div class="camada c3"></div><div class="calda"></div><div class="cereja"></div><div class="granulado"></div><div class="selo">feito<br>hoje ✦</div></div>
+  </header>
+
+  <section id="cardapio">
+    <h2>Cardápio da semana</h2><p class="sub">Tudo feito sob encomenda, com 48h de antecedência.</p>
+    <div class="cardapio">
+      <div class="doce"><div class="ilus" style="background:var(--rosa2)">🍓</div><h3>Ninho com morango</h3><p>Massa fofinha, creme de ninho e morangos frescos</p><b>R$ 89,90</b></div>
+      <div class="doce"><div class="ilus" style="background:#F0D9C8">🍫</div><h3>Brigadeirão</h3><p>Chocolate 50% cacau e granulado belga</p><b>R$ 94,90</b></div>
+      <div class="doce"><div class="ilus" style="background:var(--lima)">🍋</div><h3>Limão siciliano</h3><p>Massa cítrica com merengue maçaricado</p><b>R$ 84,90</b></div>
+      <div class="doce"><div class="ilus" style="background:var(--amar)">🧁</div><h3>Caixa de cupcakes</h3><p>6 sabores sortidos pra presentear</p><b>R$ 59,90</b></div>
+    </div>
+  </section>
+
+  <section id="encomendas">
+    <div class="enc">
+      <div><h2 style="text-align:left">Encomendar é fácil</h2>
+        <ol><li>Escolha o bolo e o tamanho</li><li>Marque o dia de retirada ou entrega</li><li>Pague no Pix e pronto ♡</li></ol>
+        <p>Entregamos em toda a cidade às sextas e sábados.</p></div>
+      <form class="form" onsubmit="event.preventDefault();this.querySelector('button').textContent='Pedido enviado ♡'">
+        <label>Seu nome<input placeholder="Como te chamamos?"></label>
+        <label>Bolo<select><option>Ninho com morango</option><option>Brigadeirão</option><option>Limão siciliano</option><option>Caixa de cupcakes</option></select></label>
+        <label>Data<input type="date"></label>
+        <button class="bt" type="submit">Enviar pedido</button>
+      </form>
+    </div>
+  </section>
+
+  <section id="insta">
+    <h2>No Instagram</h2><p class="sub">Social media com a mesma cara da marca: posts, stories e reels.</p>
+    <div class="perfil"><span class="av">☁️</span><div><b>@docenuvem</b><span>12,4 mil seguidores · bolos que abraçam</span></div></div>
+    <div class="feed">
+      <div class="post" style="background:var(--rosa)"><div><span class="e">🎂</span><small>bolo do mês</small></div></div>
+      <div class="post" style="background:#fff">“o segredo é o carinho”<small>— vó Cida</small></div>
+      <div class="post" style="background:var(--ceu)"><div>NOVO<br>sabor ✦<small>pistache</small></div></div>
+      <div class="post" style="background:var(--amar)"><div><span class="e">🧁</span><small>kit festa</small></div></div>
+      <div class="post" style="background:var(--choco);color:#fff">bastidores<small style="color:var(--rosa)">da cozinha</small></div>
+      <div class="post" style="background:var(--lima)"><div><span class="e">🍋</span><small>refrescante</small></div></div>
+      <div class="post" style="background:#fff"><div>3 dicas pra<br>bolo fofinho<small>salva aí!</small></div></div>
+      <div class="post" style="background:var(--rosa2)"><div><span class="e">💌</span><small>dia das mães</small></div></div>
+      <div class="post" style="background:var(--rosa);color:#fff">-15%<small>às terças</small></div>
+    </div>
+  </section>
+  <footer>Doce Nuvem · confeitaria artesanal · projeto conceito</footer>
+</div>
+<a class="feito" href="/" target="_top">feito por Ternura ♡</a>
+</body>
+</html>
