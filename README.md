@@ -39,5 +39,12 @@ Sem `MP_ACCESS_TOKEN`, o site usa a chave Pix estática (`PIX_KEY`) e você marc
 npm test
 ```
 
-## Hospedagem
-Os pedidos ficam em `data/db.json`. Use um servidor com disco persistente (Railway, Render com disco, VPS).
+## Colocar no ar (Render)
+1. Abra https://render.com/deploy?repo=https://github.com/yasmimgborba-cmyk/Ternura e entre com o GitHub.
+2. Preencha as chaves que ele pedir (Mercado Pago e Stripe). Pode deixar em branco e preencher depois em **Environment**.
+3. Clique em **Apply**. Em uns 3 minutos o site fica no ar num endereço `ternura.onrender.com`.
+4. A senha do `/admin` é gerada sozinha: veja em **Environment > ADMIN_PASSWORD**.
+5. Depois cadastre os webhooks do Mercado Pago e da Stripe com esse endereço.
+
+Custo: plano Starter com disco (cerca de US$ 7,25/mês). O disco guarda os pedidos entre reinícios.
+Domínio próprio: em **Settings > Custom Domains**.

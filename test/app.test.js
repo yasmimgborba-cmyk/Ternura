@@ -46,10 +46,10 @@ test('preços: template é mais barato, extras somam, entrada é 50%', () => {
   const p = precos.calcular({ servico: 'site', modelo: 'personalizado', estilo: 'minimalista' });
   assert.ok(t.total < p.total);
   const e = precos.calcular({ servico: 'site', modelo: 'template', estilo: 'minimalista', extras: { blog: 1, paginas: 2, push: 1 } });
-  assert.strictEqual(e.total, 490 + 290 + 300); // push não vale para site
+  assert.strictEqual(e.total, 290 + 190 + 180); // push não vale para site
   assert.strictEqual(e.agora, e.total / 2);
   const v = precos.calcular({ servico: 'site', modelo: 'template', estilo: 'minimalista', pagamento: 'total' });
-  assert.strictEqual(v.total, 490 - Math.round(490 * 0.05)); assert.strictEqual(v.agora, v.total);
+  assert.strictEqual(v.total, 290 - Math.round(290 * 0.05)); assert.strictEqual(v.agora, v.total);
   const s = precos.calcular({ servico: 'social', modelo: 'template', estilo: 'fofo', pagamento: 'entrada' });
   assert.strictEqual(s.agora, s.total); // mensal cobra o mês inteiro
   assert.throws(() => precos.calcular({ servico: 'nada' }));

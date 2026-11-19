@@ -9,10 +9,10 @@ const { buildPixPayload } = require('./src/pix');
 
 const cfg = {
   brand: process.env.BRAND_NAME || 'Ternura',
-  email: process.env.CONTACT_EMAIL || '',
-  whatsapp: (process.env.WHATSAPP || '').replace(/\D/g, ''),
-  instagram: (process.env.INSTAGRAM || '').replace(/^@/, ''),
-  baseUrl: (process.env.BASE_URL || 'http://localhost:3000').replace(/\/$/, ''),
+  email: process.env.CONTACT_EMAIL || 'yasmimgborba@gmail.com',
+  whatsapp: (process.env.WHATSAPP || '5562998778446').replace(/\D/g, ''),
+  instagram: (process.env.INSTAGRAM || 'ywwsmim').replace(/^@/, ''),
+  baseUrl: (process.env.BASE_URL || process.env.RENDER_EXTERNAL_URL || 'http://localhost:3000').replace(/\/$/, ''),
   adminPassword: process.env.ADMIN_PASSWORD || '',
   pixKey: process.env.PIX_KEY || '',
   pixName: process.env.PIX_NAME || '',
@@ -40,7 +40,7 @@ function page(title, body, { admin = false } = {}) {
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/ternura.css"></head>
-<body class="inner"><header class="topo"><div class="topo-in"><a class="marca" href="/"><i></i>${esc(cfg.brand)}</a>
+<body class="inner"><header class="topo"><div class="topo-in"><a class="marca" href="/"><img src="/img/logo.png" alt="${esc(cfg.brand)}"></a>
 ${admin ? '<nav class="menu"><a href="/admin">Pedidos</a></nav>' : '<nav class="menu"><a href="/#portfolio">Portfólio</a><a class="btn sm" href="/orcamento">Fazer orçamento</a></nav>'}</div></header>
 <main class="wrap estreito">${body}</main></body></html>`;
 }

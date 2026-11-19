@@ -3,13 +3,13 @@
 // SEMPRE é recalculado aqui no servidor.
 
 const servicos = {
-  site:     { nome: 'Site / landing page',      icone: '🌐', grupo: 'dev',    preview: 'site',     base: { template: 490,  personalizado: 1290, exclusivo: 2490 },  prazo: { template: '5 dias', personalizado: '2 a 3 semanas', exclusivo: '4 a 6 semanas' } },
-  loja:     { nome: 'Loja virtual',              icone: '🛍️', grupo: 'dev',    preview: 'loja',     base: { template: 1490, personalizado: 2990, exclusivo: 5490 },  prazo: { template: '10 dias', personalizado: '3 a 4 semanas', exclusivo: '6 a 8 semanas' } },
-  app:      { nome: 'App (Android e iPhone)',    icone: '📱', grupo: 'dev',    preview: 'app',      base: { template: 2990, personalizado: 5990, exclusivo: 11990 }, prazo: { template: '3 semanas', personalizado: '6 a 8 semanas', exclusivo: '10 a 14 semanas' } },
-  software: { nome: 'Sistema / software',        icone: '⚙️', grupo: 'dev',    preview: 'software', base: { template: 2490, personalizado: 5990, exclusivo: 12990 }, prazo: { template: '3 semanas', personalizado: '6 a 10 semanas', exclusivo: '3 a 4 meses' } },
-  design:   { nome: 'Design gráfico',            icone: '🎨', grupo: 'design', preview: 'design',   base: { template: 290,  personalizado: 690,  exclusivo: 1290 },  prazo: { template: '3 dias', personalizado: '1 semana', exclusivo: '2 semanas' } },
-  social:   { nome: 'Social media (mensal)',     icone: '💌', grupo: 'design', preview: 'social',   base: { template: 390,  personalizado: 790,  exclusivo: 1490 },  prazo: { template: 'começa em 3 dias', personalizado: 'começa em 5 dias', exclusivo: 'começa em 7 dias' }, mensal: true },
-  brand:    { nome: 'Personal brand',            icone: '✨', grupo: 'design', preview: 'brand',    base: { template: 890,  personalizado: 1890, exclusivo: 3490 },  prazo: { template: '1 semana', personalizado: '2 a 3 semanas', exclusivo: '4 semanas' } },
+  site:     { nome: 'Site / landing page',      icone: '🌐', grupo: 'dev',    preview: 'site',     base: { template: 290,  personalizado: 790, exclusivo: 1490 },  prazo: { template: '5 dias', personalizado: '2 a 3 semanas', exclusivo: '4 a 6 semanas' } },
+  loja:     { nome: 'Loja virtual',              icone: '🛍️', grupo: 'dev',    preview: 'loja',     base: { template: 890, personalizado: 1790, exclusivo: 3490 },  prazo: { template: '10 dias', personalizado: '3 a 4 semanas', exclusivo: '6 a 8 semanas' } },
+  app:      { nome: 'App (Android e iPhone)',    icone: '📱', grupo: 'dev',    preview: 'app',      base: { template: 1990, personalizado: 3990, exclusivo: 7990 }, prazo: { template: '3 semanas', personalizado: '6 a 8 semanas', exclusivo: '10 a 14 semanas' } },
+  software: { nome: 'Sistema / software',        icone: '⚙️', grupo: 'dev',    preview: 'software', base: { template: 1490, personalizado: 3490, exclusivo: 7990 }, prazo: { template: '3 semanas', personalizado: '6 a 10 semanas', exclusivo: '3 a 4 meses' } },
+  design:   { nome: 'Design gráfico',            icone: '🎨', grupo: 'design', preview: 'design',   base: { template: 190,  personalizado: 450,  exclusivo: 890 },  prazo: { template: '3 dias', personalizado: '1 semana', exclusivo: '2 semanas' } },
+  social:   { nome: 'Social media (mensal)',     icone: '💌', grupo: 'design', preview: 'social',   base: { template: 290,  personalizado: 590,  exclusivo: 990 },  prazo: { template: 'começa em 3 dias', personalizado: 'começa em 5 dias', exclusivo: 'começa em 7 dias' }, mensal: true },
+  brand:    { nome: 'Personal brand',            icone: '✨', grupo: 'design', preview: 'brand',    base: { template: 590,  personalizado: 1290, exclusivo: 2490 },  prazo: { template: '1 semana', personalizado: '2 a 3 semanas', exclusivo: '4 semanas' } },
 };
 
 const modelos = {
@@ -37,33 +37,33 @@ const paletas = {
 };
 
 const extras = [
-  { id: 'paginas',     nome: 'Páginas extras',                preco: 150, qtd: true, max: 20, para: ['site', 'loja'] },
-  { id: 'blog',        nome: 'Blog',                          preco: 290, para: ['site', 'loja', 'brand'] },
-  { id: 'agenda',      nome: 'Agendamento online',            preco: 490, para: ['site', 'app', 'software'] },
-  { id: 'login',       nome: 'Área de membros / login',       preco: 690, para: ['site', 'app', 'software'] },
-  { id: 'pagamento',   nome: 'Pagamento Pix e cartão',        preco: 590, para: ['site', 'app', 'software'] },
-  { id: 'idiomas',     nome: 'Versão em inglês/espanhol',     preco: 390, para: ['site', 'loja', 'app', 'software'] },
-  { id: 'seo',         nome: 'SEO (aparecer no Google)',      preco: 290, para: ['site', 'loja', 'brand'] },
-  { id: 'textos',      nome: 'Textos prontos (copywriting)',  preco: 290, para: ['site', 'loja', 'brand', 'app'] },
-  { id: 'logo',        nome: 'Logo simples',                  preco: 190, para: ['site', 'loja', 'app', 'software', 'social'] },
-  { id: 'dominio',     nome: 'Domínio + hospedagem (1 ano)',  preco: 240, para: ['site', 'loja', 'brand'] },
-  { id: 'admin',       nome: 'Painel administrativo',         preco: 890, para: ['app', 'software', 'loja'] },
-  { id: 'push',        nome: 'Notificações no celular',       preco: 390, para: ['app'] },
-  { id: 'lojas',       nome: 'Publicação na Play Store e App Store', preco: 490, para: ['app'] },
-  { id: 'relatorios',  nome: 'Relatórios e gráficos',         preco: 590, para: ['software', 'app'] },
-  { id: 'manual',      nome: 'Manual da marca',               preco: 290, para: ['design', 'brand'] },
-  { id: 'papelaria',   nome: 'Cartão de visita + papelaria',  preco: 190, para: ['design', 'brand'] },
-  { id: 'kitposts',    nome: 'Kit com 12 templates de post',  preco: 290, para: ['design', 'brand'] },
-  { id: 'reels',       nome: 'Reels (4 por mês)',             preco: 290, para: ['social', 'brand'] },
-  { id: 'stories',     nome: 'Stories diários',               preco: 190, para: ['social'] },
-  { id: 'anuncios',    nome: 'Gestão de anúncios',            preco: 390, para: ['social'] },
-  { id: 'biolink',     nome: 'Página de links na bio',        preco: 190, para: ['social', 'brand', 'design'] },
-  { id: 'suporte',     nome: '3 meses de suporte extra',      preco: 290, para: ['site', 'loja', 'app', 'software'] },
+  { id: 'paginas',     nome: 'Páginas extras',                preco: 90, qtd: true, max: 20, para: ['site', 'loja'] },
+  { id: 'blog',        nome: 'Blog',                          preco: 190, para: ['site', 'loja', 'brand'] },
+  { id: 'agenda',      nome: 'Agendamento online',            preco: 290, para: ['site', 'app', 'software'] },
+  { id: 'login',       nome: 'Área de membros / login',       preco: 490, para: ['site', 'app', 'software'] },
+  { id: 'pagamento',   nome: 'Pagamento Pix e cartão',        preco: 390, para: ['site', 'app', 'software'] },
+  { id: 'idiomas',     nome: 'Versão em inglês/espanhol',     preco: 250, para: ['site', 'loja', 'app', 'software'] },
+  { id: 'seo',         nome: 'SEO (aparecer no Google)',      preco: 190, para: ['site', 'loja', 'brand'] },
+  { id: 'textos',      nome: 'Textos prontos (copywriting)',  preco: 190, para: ['site', 'loja', 'brand', 'app'] },
+  { id: 'logo',        nome: 'Logo simples',                  preco: 120, para: ['site', 'loja', 'app', 'software', 'social'] },
+  { id: 'dominio',     nome: 'Domínio + hospedagem (1 ano)',  preco: 180, para: ['site', 'loja', 'brand'] },
+  { id: 'admin',       nome: 'Painel administrativo',         preco: 590, para: ['app', 'software', 'loja'] },
+  { id: 'push',        nome: 'Notificações no celular',       preco: 290, para: ['app'] },
+  { id: 'lojas',       nome: 'Publicação na Play Store e App Store', preco: 350, para: ['app'] },
+  { id: 'relatorios',  nome: 'Relatórios e gráficos',         preco: 390, para: ['software', 'app'] },
+  { id: 'manual',      nome: 'Manual da marca',               preco: 190, para: ['design', 'brand'] },
+  { id: 'papelaria',   nome: 'Cartão de visita + papelaria',  preco: 120, para: ['design', 'brand'] },
+  { id: 'kitposts',    nome: 'Kit com 12 templates de post',  preco: 190, para: ['design', 'brand'] },
+  { id: 'reels',       nome: 'Reels (4 por mês)',             preco: 190, para: ['social', 'brand'] },
+  { id: 'stories',     nome: 'Stories diários',               preco: 120, para: ['social'] },
+  { id: 'anuncios',    nome: 'Gestão de anúncios',            preco: 290, para: ['social'] },
+  { id: 'biolink',     nome: 'Página de links na bio',        preco: 90, para: ['social', 'brand', 'design'] },
+  { id: 'suporte',     nome: '3 meses de suporte extra',      preco: 190, para: ['site', 'loja', 'app', 'software'] },
 ];
 
 const urgencias = {
   normal: { nome: 'Prazo normal', fator: 1 },
-  rapido: { nome: 'Urgente (prioridade na fila)', fator: 1.3 },
+  rapido: { nome: 'Urgente (prioridade na fila)', fator: 1.25 },
 };
 
 const pagamentos = {

@@ -35,7 +35,7 @@
 .modelos-cfg .valor { font-size: 1.5rem; font-weight: 800; color: var(--ink); letter-spacing: -.02em; margin: 6px 0 2px; }
 .modelos-cfg .valor small { font-size: .8rem; color: var(--suave); font-weight: 600; }
 .modelos-cfg .prazo-op { font-size: .8rem; font-weight: 700; color: var(--menta-escuro); }
-.modelos-cfg .selo-op { align-self: flex-start; font-size: .68rem; font-weight: 800; padding: 2px 8px; border-radius: 999px; background: #EFEBE7; color: var(--suave); margin-bottom: 6px; }
+.modelos-cfg .selo-op { align-self: flex-start; font-size: .68rem; font-weight: 800; padding: 2px 8px; border-radius: 999px; background: #F8F1EC; color: var(--suave); margin-bottom: 6px; }
 
 /* 3. estilos: miniaturas visuais */
 .estilos-cfg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
@@ -89,7 +89,7 @@
 .qtd output { min-width: 22px; text-align: center; font-weight: 700; font-size: .9rem; }
 
 /* 7. prazo e pagamento: seletor segmentado */
-.segmento { display: grid; grid-template-columns: 1fr 1fr; gap: 0; background: #EFEBE7; padding: 4px; border-radius: 12px; margin-bottom: 12px; }
+.segmento { display: grid; grid-template-columns: 1fr 1fr; gap: 0; background: #F8F1EC; padding: 4px; border-radius: 12px; margin-bottom: 12px; }
 .segmento .op { border: 0; background: transparent; padding: 12px 14px; border-radius: 9px; box-shadow: none; }
 .segmento .op[aria-pressed="true"] { background: var(--surface); box-shadow: 0 1px 3px rgba(36,23,15,.12); }
 .segmento .op[aria-pressed="true"]::after { display: none; }
@@ -116,7 +116,7 @@
 
 /* ============ PRÉVIA ============ */
 .previa { --p: #8AD0BB; --a: #E66684; --f: #FFFEEF; --t: #4A2616; --raio-p: 12px; --fonte-t: 'Inter'; --fonte-c: 'Inter';
-  background: #EFEBE7; padding: 18px; min-height: 340px; display: grid; place-items: center; }
+  background: #F8F1EC; padding: 18px; min-height: 340px; display: grid; place-items: center; }
 .pv-browser { width: 100%; background: var(--f); color: var(--t); border-radius: 10px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,.14); font-family: var(--fonte-c), sans-serif; font-size: 11px; line-height: 1.4; }
 .pv-browser .pv-barra { display: flex; gap: 4px; align-items: center; padding: 6px 8px; background: #ddd7cf; }
 .pv-browser .pv-barra i { width: 7px; height: 7px; border-radius: 50%; background: #fff; opacity: .8; }
