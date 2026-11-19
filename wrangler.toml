@@ -1,0 +1,20 @@
+# Cloudflare Pages (endereço ternura.pages.dev). Publicar: ./publicar.sh
+name = "ternura"
+pages_build_output_dir = "./dist"
+compatibility_date = "2026-06-01"
+
+[vars]
+BRAND_NAME = "Ternura"
+CONTACT_EMAIL = "yasmimgborba@gmail.com"
+WHATSAPP = "5562998778446"
+INSTAGRAM = "ywwsmim"
+STRIPE_METHODS = "card"
+STRIPE_PARCELAS = "0"
+
+# Segredos (npx wrangler pages secret put NOME --project-name ternura):
+# ADMIN_PASSWORD, MP_ACCESS_TOKEN, MP_WEBHOOK_SECRET, STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET
+
+[[d1_databases]]
+binding = "DB"
+database_name = "ternura"
+database_id = "f58c64ad-9bed-41a7-b5c6-1cca6c02990b"

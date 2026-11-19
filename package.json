@@ -1,19 +1,13 @@
 {
-  "name": "ternura-studio",
-  "version": "1.0.0",
-  "description": "Site para vender sites e softwares sob orçamento, com pagamento via Stripe e Pix",
-  "main": "server.js",
-  "type": "commonjs",
+  "name": "ternura",
+  "version": "2.0.0",
+  "description": "Site para vender sites, apps, software e design, com orçamento na hora e pagamento por Pix (Mercado Pago) e Stripe. Roda no Cloudflare Workers.",
+  "type": "module",
+  "private": true,
   "scripts": {
-    "start": "node server.js",
-    "dev": "node --watch server.js",
-    "test": "node --test"
+    "dev": "node --no-warnings local/dev.mjs",
+    "test": "node --no-warnings --test",
+    "deploy": "npx wrangler@4 deploy"
   },
-  "engines": { "node": ">=18" },
-  "dependencies": {
-    "dotenv": "^16.4.5",
-    "express": "^4.21.2",
-    "qrcode": "^1.5.4",
-    "stripe": "^17.5.0"
-  }
+  "engines": { "node": ">=22" }
 }

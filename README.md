@@ -14,37 +14,31 @@ O cliente monta o projeto, vê a prévia, recebe o preço na hora e paga com **P
 Tudo fica em `src/precos.js`: valor base por serviço e modelo (template, personalizado, exclusivo),
 acréscimo por estilo, extras, urgência (+30%) e desconto à vista (5%). Muda ali e o site inteiro acompanha.
 
-## Rodar
+## No ar
+**https://ternura.pages.dev** · Cloudflare Pages (grátis) + banco D1 `ternura`.
+
+Painel: `/admin` (usuário `admin`, senha no segredo `ADMIN_PASSWORD`).
+
+### Chaves (Cloudflare > Workers e Pages > ternura > Configurações > Variáveis e segredos)
+Adicione como **Segredo** e depois publique de novo:
+- `MP_ACCESS_TOKEN`: Access Token de produção do Mercado Pago (Suas integrações > Credenciais de produção).
+- `MP_WEBHOOK_SECRET`: assinatura secreta do webhook do Mercado Pago (opcional).
+- `STRIPE_SECRET_KEY`: chave secreta da Stripe (`sk_live_...`).
+- `STRIPE_WEBHOOK_SECRET`: segredo do webhook da Stripe (`whsec_...`).
+
+Webhooks: Mercado Pago → `https://ternura.pages.dev/webhook/mercadopago` (evento Pagamentos);
+Stripe → `https://ternura.pages.dev/webhook/stripe` (`checkout.session.completed`, `checkout.session.async_payment_succeeded`).
+Mesmo sem webhook o pagamento é confirmado: o Pix é consultado enquanto a página está aberta e o cartão na volta do checkout.
+
+## Publicar
 ```bash
-npm install
-cp .env.example .env   # preencha seus dados
-npm start              # http://localhost:3000
+./publicar.sh
 ```
+Da nuvem do Claude o `wrangler pages deploy` falha (401 nos assets): o script embute `public/` no `_worker.js`
+e a publicação é feita pela API (`POST /pages/projects/ternura/deployments` com `manifest={}` e o `_worker.js`).
 
-## Mercado Pago (Pix)
-1. Em mercadopago.com.br/developers, abra **Suas integrações**, crie uma aplicação e copie o **Access Token de produção** para `MP_ACCESS_TOKEN`.
-2. Em **Webhooks**, cadastre `https://SEU_DOMINIO/webhook/mercadopago` com o evento **Pagamentos**. Copie a assinatura secreta para `MP_WEBHOOK_SECRET`.
-3. Pronto: cada pedido gera um Pix com o valor certo, válido por 24h. Quando o cliente paga, o pedido vira "Pago" sozinho.
-
-Sem `MP_ACCESS_TOKEN`, o site usa a chave Pix estática (`PIX_KEY`) e você marca como pago no painel.
-
-## Stripe (cartão)
-1. Em dashboard.stripe.com/apikeys, copie a **chave secreta** da sua conta para `STRIPE_SECRET_KEY`.
-2. Em **Webhooks**, cadastre `https://SEU_DOMINIO/webhook/stripe` com `checkout.session.completed` e
-   `checkout.session.async_payment_succeeded`, e copie o segredo para `STRIPE_WEBHOOK_SECRET`.
-3. Parcelamento: `STRIPE_PARCELAS=1` (só em conta Stripe do Brasil).
-
-## Testes
+## Rodar no computador
 ```bash
+npm run dev     # http://localhost:3000 (usa node:sqlite no lugar do D1)
 npm test
 ```
-
-## Colocar no ar (Render)
-1. Abra https://render.com/deploy?repo=https://github.com/yasmimgborba-cmyk/Ternura e entre com o GitHub.
-2. Preencha as chaves que ele pedir (Mercado Pago e Stripe). Pode deixar em branco e preencher depois em **Environment**.
-3. Clique em **Apply**. Em uns 3 minutos o site fica no ar num endereço `ternura.onrender.com`.
-4. A senha do `/admin` é gerada sozinha: veja em **Environment > ADMIN_PASSWORD**.
-5. Depois cadastre os webhooks do Mercado Pago e da Stripe com esse endereço.
-
-Custo: plano Starter com disco (cerca de US$ 7,25/mês). O disco guarda os pedidos entre reinícios.
-Domínio próprio: em **Settings > Custom Domains**.

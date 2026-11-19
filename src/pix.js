@@ -42,4 +42,4 @@ function buildPixPayload({ key, name, city, amount, txid }) {
   return payload + crc16(payload);
 }
 
-module.exports = { buildPixPayload, crc16 };
+export { buildPixPayload, crc16 };

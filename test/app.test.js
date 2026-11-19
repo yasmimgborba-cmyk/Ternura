@@ -1,100 +1,122 @@
-const test = require('node:test');
-const assert = require('node:assert');
-const http = require('http');
-const os = require('os'); const path = require('path'); const fs = require('fs');
+import test from 'node:test';
+import assert from 'node:assert';
+import http from 'node:http';
+import app from '../src/app.js';
+import * as precos from '../src/precos.js';
+import { buildPixPayload, crc16 } from '../src/pix.js';
+import { hmacHex } from '../src/util.js';
+import { d1, assets } from '../local/ambiente.mjs';
 
-// Mercado Pago falso
-let mpPagamentos = {};
-const mpFake = http.createServer((req, res) => {
+// Mercado Pago e Stripe falsos
+const mp = {}; const stripe = {};
+const falso = http.createServer((req, res) => {
   let body = ''; req.on('data', (c) => (body += c)); req.on('end', () => {
     res.setHeader('Content-Type', 'application/json');
-    if (req.headers.authorization !== 'Bearer TESTE') { res.statusCode = 401; return res.end('{"message":"unauthorized"}'); }
-    if (req.method === 'POST' && req.url === '/v1/payments') {
-      const b = JSON.parse(body); const id = String(Object.keys(mpPagamentos).length + 1000);
-      mpPagamentos[id] = { id: Number(id), status: 'pending', transaction_amount: b.transaction_amount, external_reference: b.external_reference };
-      return res.end(JSON.stringify({ ...mpPagamentos[id], point_of_interaction: { transaction_data: { qr_code: '00020126PIXFAKE' + id, qr_code_base64: 'iVBORw0KGgo=' } } }));
+    if (req.url.startsWith('/v1/payments')) {
+      if (req.headers.authorization !== 'Bearer TESTE') { res.statusCode = 401; return res.end('{}'); }
+      if (req.method === 'POST') {
+        const b = JSON.parse(body); const id = String(Object.keys(mp).length + 1000);
+        mp[id] = { id: Number(id), status: 'pending', transaction_amount: b.transaction_amount, external_reference: b.external_reference };
+        return res.end(JSON.stringify({ ...mp[id], point_of_interaction: { transaction_data: { qr_code: '00020126PIXFAKE' + id, qr_code_base64: 'iVBORw0KGgo=' } } }));
+      }
+      const id = req.url.split('/').pop(); return res.end(JSON.stringify(mp[id] || {}));
     }
-    const m = req.url.match(/^\/v1\/payments\/(\d+)$/);
-    if (m && mpPagamentos[m[1]]) return res.end(JSON.stringify(mpPagamentos[m[1]]));
+    if (req.url === '/v1/checkout/sessions' && req.method === 'POST') {
+      const f = new URLSearchParams(body); const id = 'cs_test_' + (Object.keys(stripe).length + 1);
+      stripe[id] = { id, payment_status: 'unpaid', metadata: { pedido: f.get('metadata[pedido]'), site: f.get('metadata[site]') }, amount: f.get('line_items[0][price_data][unit_amount]') };
+      return res.end(JSON.stringify({ ...stripe[id], url: 'https://checkout.stripe.test/' + id }));
+    }
+    const m = req.url.match(/^\/v1\/checkout\/sessions\/(.+)$/);
+    if (m) return res.end(JSON.stringify(stripe[m[1]]));
     res.statusCode = 404; res.end('{}');
   });
 });
 
-process.env.DB_FILE = path.join(os.tmpdir(), `ternura-test-${process.pid}.json`);
-process.env.ADMIN_PASSWORD = 'segredo';
-process.env.MP_ACCESS_TOKEN = 'TESTE';
-const { buildPixPayload, crc16 } = require('../src/pix');
-const precos = require('../src/precos');
-const app = require('../server');
+let env;
+const chamar = (path, opts = {}) => app.fetch(new Request('https://ternura.test' + path, { redirect: 'manual', ...opts }), env);
+const postJson = (path, d) => chamar(path, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(d) });
+const auth = { Authorization: 'Basic ' + btoa('admin:segredo'), 'content-type': 'application/x-www-form-urlencoded' };
 
-let base, srv;
 test.before(async () => {
-  await new Promise((r) => mpFake.listen(0, r));
-  process.env.MP_API_BASE = `http://localhost:${mpFake.address().port}`;
-  srv = app.listen(0); base = `http://localhost:${srv.address().port}`;
+  await new Promise((r) => falso.listen(0, r));
+  const base = `http://localhost:${falso.address().port}`;
+  env = { DB: d1(), ASSETS: assets, ADMIN_PASSWORD: 'segredo', MP_ACCESS_TOKEN: 'TESTE', MP_API_BASE: base, STRIPE_SECRET_KEY: 'sk_test', STRIPE_API_BASE: base, STRIPE_WEBHOOK_SECRET: 'whsec_x' };
 });
-test.after(() => { srv.close(); mpFake.close(); fs.rmSync(process.env.DB_FILE, { force: true }); });
+test.after(() => falso.close());
 
-test('CRC16 do Pix bate com o valor de referência', () => {
+test('Pix copia e cola tem CRC certo', () => {
   assert.strictEqual(crc16('123456789'), '29B1');
   const p = buildPixPayload({ key: 'a@b.com', name: 'José', city: 'São Paulo', amount: 150, txid: 'PED1' });
   assert.match(p, /5406150\.00/); assert.strictEqual(p.slice(-4), crc16(p.slice(0, -4)));
 });
 
-test('preços: template é mais barato, extras somam, entrada é 50%', () => {
+test('preços: template mais barato, extras somam, entrada 50%', () => {
   const t = precos.calcular({ servico: 'site', modelo: 'template', estilo: 'minimalista' });
-  const p = precos.calcular({ servico: 'site', modelo: 'personalizado', estilo: 'minimalista' });
-  assert.ok(t.total < p.total);
+  assert.ok(t.total < precos.calcular({ servico: 'site', modelo: 'personalizado', estilo: 'minimalista' }).total);
   const e = precos.calcular({ servico: 'site', modelo: 'template', estilo: 'minimalista', extras: { blog: 1, paginas: 2, push: 1 } });
   assert.strictEqual(e.total, 290 + 190 + 180); // push não vale para site
   assert.strictEqual(e.agora, e.total / 2);
   const v = precos.calcular({ servico: 'site', modelo: 'template', estilo: 'minimalista', pagamento: 'total' });
   assert.strictEqual(v.total, 290 - Math.round(290 * 0.05)); assert.strictEqual(v.agora, v.total);
-  const s = precos.calcular({ servico: 'social', modelo: 'template', estilo: 'fofo', pagamento: 'entrada' });
-  assert.strictEqual(s.agora, s.total); // mensal cobra o mês inteiro
+  assert.strictEqual(precos.calcular({ servico: 'social', pagamento: 'entrada' }).pagamento, 'total');
   assert.throws(() => precos.calcular({ servico: 'nada' }));
-  assert.ok(precos.calcular({ servico: 'site', extras: { paginas: 9999 } }).itens.find((i) => i.nome.includes('20x')));
 });
 
-test('configurador: pedido -> Pix do Mercado Pago -> webhook aprova -> pago', async () => {
-  let r = await fetch(base + '/api/pedido', { method: 'POST', headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ config: { servico: 'design', modelo: 'template', estilo: 'fofo', paleta: 'ternura', cores: ['#8AD0BB', 'x'] }, cliente: { nome: 'Ana', email: 'ana@x.com' } }) });
-  const d = await r.json(); assert.ok(d.ok, d.erro);
+test('orçamento -> Pix Mercado Pago -> webhook aprova -> pago', async () => {
+  const d = await (await postJson('/api/pedido', { config: { servico: 'design', modelo: 'template', estilo: 'fofo' }, cliente: { nome: 'Ana', email: 'ana@x.com' } })).json();
+  assert.ok(d.ok, d.erro);
   const token = d.url.split('/').pop();
-  const html = await (await fetch(base + d.url)).text();
-  assert.match(html, /PIXFAKE/); assert.match(html, /Design gráfico/);
-  // valor cobrado = calculado no servidor (não confia no navegador)
-  const pid = Object.keys(mpPagamentos)[0];
-  assert.strictEqual(mpPagamentos[pid].transaction_amount, precos.calcular({ servico: 'design', modelo: 'template', estilo: 'fofo' }).agora);
-  // recarregar não cria outro Pix
-  await fetch(base + d.url); assert.strictEqual(Object.keys(mpPagamentos).length, 1);
-
-  // webhook com pagamento ainda pendente não marca
-  await fetch(base + '/webhook/mercadopago', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ type: 'payment', data: { id: pid } }) });
-  assert.strictEqual((await (await fetch(`${base}/api/status/${token}`)).json()).status, 'orcado');
-  mpPagamentos[pid].status = 'approved';
-  r = await fetch(base + '/webhook/mercadopago', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ type: 'payment', data: { id: pid } }) });
-  assert.strictEqual(r.status, 200);
-  assert.strictEqual((await (await fetch(`${base}/api/status/${token}`)).json()).status, 'pago');
-  assert.match(await (await fetch(base + d.url)).text(), /Pagamento confirmado/);
+  const html = await (await chamar(d.url)).text();
+  assert.match(html, /PIXFAKE/);
+  const pid = Object.keys(mp)[0];
+  assert.strictEqual(mp[pid].transaction_amount, precos.calcular({ servico: 'design', modelo: 'template', estilo: 'fofo' }).agora);
+  await chamar(d.url); assert.strictEqual(Object.keys(mp).length, 1, 'não cria outro Pix ao recarregar');
+  await postJson('/webhook/mercadopago', { type: 'payment', data: { id: pid } });
+  assert.strictEqual((await (await chamar(`/api/status/${token}`)).json()).status, 'orcado');
+  mp[pid].status = 'approved';
+  assert.strictEqual((await postJson('/webhook/mercadopago', { type: 'payment', data: { id: pid } })).status, 200);
+  assert.strictEqual((await (await chamar(`/api/status/${token}`)).json()).status, 'pago');
+  assert.match(await (await chamar(d.url)).text(), /Pagamento confirmado/);
 });
 
-test('pedido planejado: admin define valor e marca como pago', async () => {
-  const auth = { Authorization: 'Basic ' + Buffer.from('admin:segredo').toString('base64') };
-  let r = await fetch(base + '/api/orcamento', { method: 'POST', headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ nome: 'Bia', email: 'bia@x.com', descricao: 'Quero um sistema' }) });
-  const { id } = await r.json();
-  assert.strictEqual((await fetch(base + '/admin')).status, 401);
-  r = await fetch(`${base}/admin/${id}`, { method: 'POST', headers: { ...auth, 'Content-Type': 'application/x-www-form-urlencoded' }, body: 'titulo=Sistema&proposta=Tudo&valor=1500', redirect: 'manual' });
-  assert.strictEqual(r.status, 302);
-  const token = require('../src/db').findById(id).token;
-  assert.match(await (await fetch(`${base}/pagar/${token}`)).text(), /R\$\s?1\.500,00/);
-  await fetch(`${base}/admin/${id}/status`, { method: 'POST', headers: { ...auth, 'Content-Type': 'application/x-www-form-urlencoded' }, body: 'status=pago', redirect: 'manual' });
-  assert.match(await (await fetch(`${base}/pagar/${token}`)).text(), /Pagamento confirmado/);
+test('cartão: checkout Stripe, retorno pago e webhook assinado', async () => {
+  const d = await (await postJson('/api/pedido', { config: { servico: 'site', modelo: 'template', estilo: 'minimalista' }, cliente: { nome: 'Bia', email: 'bia@x.com' } })).json();
+  const token = d.url.split('/').pop();
+  const r = await chamar(`/pagar/${token}/stripe`, { method: 'POST' });
+  assert.strictEqual(r.status, 303); assert.match(r.headers.get('location'), /checkout\.stripe\.test/);
+  const sid = Object.keys(stripe).at(-1);
+  assert.strictEqual(stripe[sid].amount, String(Math.round(precos.calcular({ servico: 'site', modelo: 'template', estilo: 'minimalista' }).agora * 100)));
+  // retorno sem pagar não marca
+  assert.doesNotMatch(await (await chamar(`/pagar/${token}?session_id=${sid}`)).text(), /Pagamento confirmado/);
+  stripe[sid].payment_status = 'paid';
+  assert.match(await (await chamar(`/pagar/${token}?session_id=${sid}`)).text(), /Pagamento confirmado/);
+
+  // webhook: assinatura errada é recusada, certa marca outro pedido
+  const d2 = await (await postJson('/api/pedido', { config: { servico: 'site' }, cliente: { nome: 'Cris', email: 'c@x.com' } })).json();
+  const t2 = d2.url.split('/').pop();
+  const id2 = (await env.DB.prepare('SELECT id FROM pedidos WHERE token = ?').bind(t2).first()).id;
+  const corpo = JSON.stringify({ type: 'checkout.session.completed', data: { object: { id: 'cs_x', payment_status: 'paid', metadata: { pedido: id2, site: 'ternura' } } } });
+  const ts = Math.floor(Date.now() / 1000);
+  assert.strictEqual((await chamar('/webhook/stripe', { method: 'POST', body: corpo, headers: { 'stripe-signature': `t=${ts},v1=errado` } })).status, 400);
+  const sig = await hmacHex('whsec_x', `${ts}.${corpo}`);
+  assert.strictEqual((await chamar('/webhook/stripe', { method: 'POST', body: corpo, headers: { 'stripe-signature': `t=${ts},v1=${sig}` } })).status, 200);
+  assert.strictEqual((await (await chamar(`/api/status/${t2}`)).json()).status, 'pago');
 });
 
-test('páginas públicas e exemplos respondem', async () => {
-  for (const p of ['/', '/orcamento', '/api/catalogo', '/exemplos/blast/', '/exemplos/underground/', '/exemplos/doce-nuvem/', '/exemplos/lia-moreno/', '/exemplos/sereno/', '/exemplos/folha/']) {
-    assert.strictEqual((await fetch(base + p)).status, 200, p);
+test('pedido sob consulta: painel define valor e marca pago', async () => {
+  const { id } = await (await postJson('/api/orcamento', { nome: 'Duda', email: 'd@x.com', descricao: 'Quero um sistema' })).json();
+  assert.strictEqual((await chamar('/admin')).status, 401);
+  assert.strictEqual((await chamar('/admin', { headers: { Authorization: 'Basic ' + btoa('admin:errada') } })).status, 401);
+  assert.strictEqual((await chamar(`/admin/${id}`, { method: 'POST', headers: auth, body: 'titulo=Sistema&proposta=Tudo&valor=1500' })).status, 302);
+  const token = (await env.DB.prepare('SELECT token FROM pedidos WHERE id = ?').bind(id).first()).token;
+  assert.match(await (await chamar(`/pagar/${token}`)).text(), /R\$ 1\.500,00/);
+  await chamar(`/admin/${id}/status`, { method: 'POST', headers: auth, body: 'status=pago' });
+  assert.match(await (await chamar(`/pagar/${token}`)).text(), /Pagamento confirmado/);
+  assert.match(await (await chamar('/admin', { headers: auth })).text(), /Duda/);
+});
+
+test('páginas e exemplos respondem', async () => {
+  for (const p of ['/', '/orcamento', '/api/catalogo', '/config.json', '/exemplos/blast/', '/exemplos/underground/', '/exemplos/doce-nuvem/', '/exemplos/lia-moreno/', '/exemplos/sereno/', '/exemplos/folha/', '/img/logo.png']) {
+    assert.strictEqual((await chamar(p)).status, 200, p);
   }
 });

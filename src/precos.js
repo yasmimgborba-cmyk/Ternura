@@ -121,4 +121,4 @@ function calcular(cfg = {}) {
   };
 }
 
-module.exports = { servicos, modelos, estilos, paletas, extras, urgencias, pagamentos, calcular };
+export { servicos, modelos, estilos, paletas, extras, urgencias, pagamentos, calcular };

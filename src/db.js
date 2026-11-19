@@ -1,53 +1,29 @@
-// Armazenamento simples em arquivo JSON (bom para começar; troque por um banco depois).
-const fs = require('fs');
-const path = require('path');
-const crypto = require('crypto');
+// Pedidos no Cloudflare D1. Cada pedido é uma linha com os dados em JSON.
+import { aleatorioHex } from './util.js';
 
-const FILE = process.env.DB_FILE || path.join(__dirname, '..', 'data', 'db.json');
+const linha = (r) => (r ? { ...JSON.parse(r.dados), id: r.id, token: r.token, status: r.status, criadoEm: r.criado_em } : null);
 
-function load() {
-  try {
-    return JSON.parse(fs.readFileSync(FILE, 'utf8'));
-  } catch {
-    return { pedidos: [] };
-  }
+export async function listar(DB) {
+  const { results } = await DB.prepare('SELECT * FROM pedidos ORDER BY criado_em DESC LIMIT 500').all();
+  return results.map(linha);
 }
 
-function save(db) {
-  fs.mkdirSync(path.dirname(FILE), { recursive: true });
-  const tmp = FILE + '.tmp';
-  fs.writeFileSync(tmp, JSON.stringify(db, null, 2));
-  fs.renameSync(tmp, FILE);
+export async function criar(DB, dados) {
+  const p = { id: aleatorioHex(4).toUpperCase(), token: aleatorioHex(16), status: dados.status || 'novo', criadoEm: new Date().toISOString() };
+  const { status, ...resto } = dados;
+  await DB.prepare('INSERT INTO pedidos (id, token, status, criado_em, dados) VALUES (?, ?, ?, ?, ?)')
+    .bind(p.id, p.token, p.status, p.criadoEm, JSON.stringify(resto)).run();
+  return { ...resto, ...p };
 }
 
-function list() {
-  return load().pedidos.sort((a, b) => b.criadoEm.localeCompare(a.criadoEm));
+export async function atualizar(DB, id, mudancas) {
+  const atual = await porId(DB, id);
+  if (!atual) return null;
+  const novo = { ...atual, ...mudancas, atualizadoEm: new Date().toISOString() };
+  const { id: _i, token: _t, status, criadoEm: _c, ...dados } = novo;
+  await DB.prepare('UPDATE pedidos SET status = ?, dados = ? WHERE id = ?').bind(status, JSON.stringify(dados), id).run();
+  return novo;
 }
 
-function create(data) {
-  const db = load();
-  const pedido = {
-    id: crypto.randomBytes(4).toString('hex').toUpperCase(),
-    token: crypto.randomBytes(16).toString('hex'),
-    status: 'novo', // novo -> orcado -> pago
-    criadoEm: new Date().toISOString(),
-    ...data,
-  };
-  db.pedidos.push(pedido);
-  save(db);
-  return pedido;
-}
-
-function update(id, changes) {
-  const db = load();
-  const p = db.pedidos.find((x) => x.id === id);
-  if (!p) return null;
-  Object.assign(p, changes, { atualizadoEm: new Date().toISOString() });
-  save(db);
-  return p;
-}
-
-const findById = (id) => load().pedidos.find((x) => x.id === id);
-const findByToken = (t) => load().pedidos.find((x) => x.token === t);
-
-module.exports = { list, create, update, findById, findByToken };
+export const porId = async (DB, id) => linha(await DB.prepare('SELECT * FROM pedidos WHERE id = ?').bind(id).first());
+export const porToken = async (DB, t) => linha(await DB.prepare('SELECT * FROM pedidos WHERE token = ?').bind(t).first());
