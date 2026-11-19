@@ -28,7 +28,7 @@ const estilos = {
 };
 
 const paletas = {
-  ternura: { nome: 'Ternura',        cores: ['#8AD0BB', '#E66684', '#FFFEEF', '#7E412A'] },
+  ternura: { nome: 'Ternura',        cores: ['#8AD0BB', '#E66684', '#FBF9F7', '#5A2E1E'] },
   nude:    { nome: 'Nude',           cores: ['#C8A288', '#8B5E4A', '#FAF5F0', '#3A2A22'] },
   oceano:  { nome: 'Oceano',         cores: ['#2B7A9B', '#F2B544', '#F4FAFB', '#0E2A36'] },
   lavanda: { nome: 'Lavanda',        cores: ['#A88BEB', '#F5A3C7', '#FBF8FF', '#2E2244'] },

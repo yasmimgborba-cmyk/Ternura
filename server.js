@@ -38,10 +38,10 @@ function page(title, body, { admin = false } = {}) {
 <title>${esc(title)} · ${esc(cfg.brand)}</title>
 <link rel="icon" href="/img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/ternura.css"></head>
-<body class="inner"><header class="topo"><a class="marca" href="/"><img src="/img/logo.png" alt="${esc(cfg.brand)}"></a>
-${admin ? '<nav class="menu"><a href="/admin">Pedidos</a></nav>' : '<nav class="menu"><a href="/#portfolio">Portfólio</a><a class="btn sm" href="/orcamento">Monte seu orçamento</a></nav>'}</header>
+<body class="inner"><header class="topo"><div class="topo-in"><a class="marca" href="/"><i></i>${esc(cfg.brand)}</a>
+${admin ? '<nav class="menu"><a href="/admin">Pedidos</a></nav>' : '<nav class="menu"><a href="/#portfolio">Portfólio</a><a class="btn sm" href="/orcamento">Fazer orçamento</a></nav>'}</div></header>
 <main class="wrap estreito">${body}</main></body></html>`;
 }
 
@@ -184,8 +184,8 @@ app.get('/pagar/:token', async (req, res) => {
     return res.status(404).send(page('Não encontrado', '<div class="cartao centro"><h1>Link inválido</h1><p>Esse orçamento não existe ou ainda não foi liberado.</p></div>'));
   }
   if (p.status === 'pago') {
-    return res.send(page('Pago', `<div class="cartao centro"><div class="icone-ok">♡</div><h1>Pagamento confirmado!</h1>
-      <p>Obrigada, ${esc(primeiroNome(p.nome))}! O pedido <b>#${p.id}</b> está pago. Em breve você recebe uma mensagem pra gente começar ✨</p>
+    return res.send(page('Pago', `<div class="cartao centro"><div class="icone-ok">✓</div><h1>Pagamento confirmado!</h1>
+      <p>Obrigada, ${esc(primeiroNome(p.nome))}! O pedido <b>#${p.id}</b> está pago. Em até 1 dia útil você recebe uma mensagem pra gente começar.</p>
       <a class="btn" href="/">Voltar ao site</a></div>`));
   }
 
@@ -198,7 +198,7 @@ app.get('/pagar/:token', async (req, res) => {
     blocoPix = `<div class="opcao-pag"><h3>Pix</h3><p class="suave">${pix.estatico ? 'Escaneie ou copie o código.' : 'Aprovação na hora, confirmado automaticamente.'}</p>
       <img class="qr" src="${qr}" alt="QR Code Pix">
       <textarea id="pix" readonly>${esc(pix.copiaECola)}</textarea>
-      <button class="btn contorno" type="button" onclick="navigator.clipboard.writeText(document.getElementById('pix').value);this.textContent='Copiado ♡'">Copiar Pix copia e cola</button>
+      <button class="btn contorno" type="button" onclick="navigator.clipboard.writeText(document.getElementById('pix').value);this.textContent='Copiado'">Copiar Pix copia e cola</button>
       ${pix.estatico
         ? `<p class="suave peq">Depois de pagar, mande o comprovante${cfg.whatsapp ? ` no <a href="https://wa.me/${cfg.whatsapp}?text=${encodeURIComponent('Comprovante do pedido #' + p.id)}">WhatsApp</a>` : ''}.</p>`
         : '<p class="suave peq" id="aguardando">Esperando o pagamento… esta página atualiza sozinha.</p>'}</div>`;

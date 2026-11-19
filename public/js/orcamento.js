@@ -10,7 +10,7 @@
   const estado = {
     servico: cat.servicos[url.get('servico')] ? url.get('servico') : 'site',
     modelo: cat.modelos[url.get('modelo')] ? url.get('modelo') : 'personalizado',
-    estilo: 'fofo',
+    estilo: 'minimalista',
     paleta: 'ternura',
     cores: [...cat.paletas.ternura.cores],
     extras: {},
@@ -18,34 +18,38 @@
     pagamento: 'entrada',
   };
 
-  const amostraEstilo = {
-    minimalista: 'font-family:Inter;font-weight:300;background:#fafafa;color:#222;letter-spacing:-.02em',
-    fofo: 'font-family:Fredoka;background:#FAD3DC;color:#7E412A;border:2px solid #7E412A',
-    exagerado: 'font-family:Bungee;background:repeating-linear-gradient(-45deg,#FFE14D 0 8px,#FF5FA2 8px 16px);color:#111;text-shadow:2px 2px 0 #fff',
-    elegante: 'font-family:"Playfair Display";font-style:italic;background:#F3EEE6;color:#3A2A22',
-    tech: 'font-family:"Space Grotesk";background:#0F0F14;color:#7CFF3B;box-shadow:inset 0 0 18px rgba(124,255,59,.4)',
-    zine: 'font-family:"Archivo Black";background:#F2EDE1 radial-gradient(rgba(0,0,0,.12) 1px,transparent 1.2px) 0 0/4px 4px;color:#0B0B0B;transform:rotate(-1deg)',
+  const icones = {
+    site: '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 6.5h.01M10 6.5h.01"/>',
+    loja: '<path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8a3 3 0 0 1 6 0"/>',
+    app: '<rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M10.5 18.5h3"/>',
+    software: '<path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/>',
+    design: '<circle cx="12" cy="12" r="9"/><circle cx="8.5" cy="10" r="1.2"/><circle cx="12" cy="7.5" r="1.2"/><circle cx="15.5" cy="10" r="1.2"/><path d="M12 21a2 2 0 0 1 0-4h2a3 3 0 0 0 3-3"/>',
+    social: '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.3 6.7h.01"/>',
+    brand: '<circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/>',
   };
+  const selosModelo = { template: 'mais barato', personalizado: 'mais escolhido', exclusivo: 'premium' };
 
   // ---------- montar opções ----------
+  const grupo = (g) => $(`[data-grupo=${g}]`);
   function botao(campo, valor, html) {
     return `<button type="button" class="op" data-campo="${campo}" data-valor="${valor}" aria-pressed="false">${html}</button>`;
   }
   function montarOpcoes() {
-    $('[data-campo=servico]').innerHTML = Object.entries(cat.servicos).map(([k, s]) =>
-      botao('servico', k, `<span class="ic">${s.icone}</span><strong>${esc(s.nome)}</strong><span class="preco-op">a partir de ${brl(s.base.template)}${s.mensal ? '/mês' : ''}</span>`)).join('');
     const s = cat.servicos[estado.servico];
-    $('[data-campo=modelo]').innerHTML = Object.entries(cat.modelos).map(([k, m]) =>
-      botao('modelo', k, `<strong>${esc(m.nome)}</strong><span>${esc(m.desc)}</span><span class="preco-op">${brl(s.base[k])}${s.mensal ? '/mês' : ''} · ${esc(s.prazo[k])}</span>`)).join('');
-    $('[data-campo=estilo]').innerHTML = Object.entries(cat.estilos).map(([k, e]) =>
-      botao('estilo', k, `<span class="amostra-estilo" style='${amostraEstilo[k]}'>Aa</span><strong>${esc(e.nome)}</strong><span>${esc(e.desc)}</span>`)).join('');
-    $('[data-campo=paleta]').innerHTML = Object.entries(cat.paletas).map(([k, p]) =>
-      botao('paleta', k, `<span class="bolas">${p.cores.map((c) => `<i style="background:${c}"></i>`).join('')}</span><strong>${esc(p.nome)}</strong>`)).join('')
-      + botao('paleta', 'personalizada', `<span class="bolas"><i style="background:conic-gradient(red,yellow,lime,cyan,blue,magenta,red)"></i></span><strong>Minhas cores</strong><span>use os seletores abaixo</span>`);
-    $('[data-campo=urgencia]').innerHTML = Object.entries(cat.urgencias).map(([k, u]) =>
-      botao('urgencia', k, `<strong>${esc(u.nome)}</strong><span>${u.fator > 1 ? `+${Math.round((u.fator - 1) * 100)}% no valor` : 'sem acréscimo'}</span>`)).join('');
-    $('[data-campo=pagamento]').innerHTML = Object.entries(cat.pagamentos).map(([k, p]) =>
-      botao('pagamento', k, `<strong>${esc(p.nome)}</strong><span>${p.desconto ? 'Pix ou cartão, valor total' : 'Pix ou cartão, metade agora'}</span>`)).join('');
+    const m = s.mensal ? '/mês' : '';
+    grupo('servico').innerHTML = Object.entries(cat.servicos).map(([k, x]) =>
+      botao('servico', k, `<span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">${icones[k]}</svg></span><strong>${esc(x.nome)}</strong><span>a partir de ${brl(x.base.template)}${x.mensal ? '/mês' : ''}</span>`)).join('');
+    grupo('modelo').innerHTML = Object.entries(cat.modelos).map(([k, x]) =>
+      botao('modelo', k, `<span class="selo-op">${selosModelo[k]}</span><strong>${esc(x.nome)}</strong><span>${esc(x.desc)}</span><span class="valor">${brl(s.base[k])}<small>${m}</small></span><span class="prazo-op">${esc(s.prazo[k])}</span>`)).join('');
+    grupo('estilo').innerHTML = Object.entries(cat.estilos).map(([k, x]) =>
+      botao('estilo', k, `<span class="mini m-${k}"><b>Sua marca</b><i>Saiba mais</i></span><strong>${esc(x.nome)}</strong><span>${esc(x.desc)}${x.fator > 1 ? ` +${Math.round((x.fator - 1) * 100)}%` : ''}</span>`)).join('');
+    grupo('paleta').innerHTML = Object.entries(cat.paletas).map(([k, x]) =>
+      botao('paleta', k, `<span class="faixas">${x.cores.map((c) => `<i style="background:${c}"></i>`).join('')}</span><strong>${esc(x.nome)}</strong>`)).join('')
+      + botao('paleta', 'personalizada', `<span class="faixas" id="faixas-livres"></span><strong>Minhas cores</strong>`);
+    grupo('urgencia').innerHTML = Object.entries(cat.urgencias).map(([k, x]) =>
+      botao('urgencia', k, `<strong>${k === 'normal' ? 'Prazo normal' : 'Urgente'}</strong><span>${x.fator > 1 ? `prioridade · +${Math.round((x.fator - 1) * 100)}%` : 'sem acréscimo'}</span>`)).join('');
+    grupo('pagamento').innerHTML = Object.entries(cat.pagamentos).map(([k, x]) =>
+      botao('pagamento', k, `<strong>${k === 'entrada' ? '50% de entrada' : 'À vista'}</strong><span>${x.desconto ? `${Math.round(x.desconto * 100)}% de desconto` : 'restante na entrega'}</span>`)).join('');
     $('#op-pagamento').hidden = !!s.mensal;
     montarExtras();
     marcar();
@@ -53,17 +57,31 @@
   function montarExtras() {
     const lista = cat.extras.filter((e) => e.para.includes(estado.servico));
     for (const id of Object.keys(estado.extras)) if (!lista.find((e) => e.id === id)) delete estado.extras[id];
-    $('#extras').innerHTML = lista.map((e) => e.qtd
-      ? `<label class="extra ${estado.extras[e.id] ? 'ativo' : ''}"><span class="nome">${esc(e.nome)}</span><input type="number" min="0" max="${e.max}" value="${estado.extras[e.id] || 0}" data-extra="${e.id}" aria-label="${esc(e.nome)}"><b>+${brl(e.preco)} cada</b></label>`
-      : `<label class="extra"><input type="checkbox" data-extra="${e.id}" ${estado.extras[e.id] ? 'checked' : ''}><span class="nome">${esc(e.nome)}</span><b>+${brl(e.preco)}</b></label>`).join('');
+    $('#extras').innerHTML = lista.map((e) => {
+      const q = estado.extras[e.id] || 0;
+      return e.qtd
+        ? `<div class="extra ${q ? 'ativo' : ''}"><span class="nome">${esc(e.nome)}</span><b>${brl(e.preco)} cada</b><span class="qtd"><button type="button" data-qtd="${e.id}" data-d="-1" aria-label="menos">−</button><output>${q}</output><button type="button" data-qtd="${e.id}" data-d="1" aria-label="mais">+</button></span></div>`
+        : `<label class="extra ${q ? 'ativo' : ''}"><span class="nome">${esc(e.nome)}</span><b>+${brl(e.preco)}</b><input type="checkbox" data-extra="${e.id}" ${q ? 'checked' : ''}></label>`;
+    }).join('');
   }
   function marcar() {
     document.querySelectorAll('.op').forEach((b) => b.setAttribute('aria-pressed', String(estado[b.dataset.campo] === b.dataset.valor)));
     estado.cores.forEach((c, i) => { $('#c' + i).value = c; });
+    const f = $('#faixas-livres');
+    if (f) f.innerHTML = estado.cores.map((c) => `<i style="background:${c}"></i>`).join('');
   }
 
   // ---------- eventos ----------
   document.addEventListener('click', (ev) => {
+    const q = ev.target.closest('[data-qtd]');
+    if (q) {
+      const e = cat.extras.find((x) => x.id === q.dataset.qtd);
+      const v = Math.max(0, Math.min(e.max, (estado.extras[e.id] || 0) + Number(q.dataset.d)));
+      if (v) estado.extras[e.id] = v; else delete estado.extras[e.id];
+      q.parentElement.querySelector('output').textContent = v;
+      q.closest('.extra').classList.toggle('ativo', !!v);
+      return atualizar();
+    }
     const b = ev.target.closest('.op');
     if (!b) return;
     const { campo, valor } = b.dataset;
@@ -75,12 +93,11 @@
   for (let i = 0; i < 4; i++) {
     $('#c' + i).addEventListener('input', (e) => { estado.cores[i] = e.target.value; estado.paleta = 'personalizada'; marcar(); renderPrevia(); });
   }
-  $('#extras').addEventListener('input', (e) => {
+  $('#extras').addEventListener('change', (e) => {
     const id = e.target.dataset.extra;
     if (!id) return;
-    const v = e.target.type === 'checkbox' ? (e.target.checked ? 1 : 0) : Math.max(0, Number(e.target.value) || 0);
-    if (v) estado.extras[id] = v; else delete estado.extras[id];
-    e.target.closest('.extra').classList.toggle('ativo', !!v);
+    if (e.target.checked) estado.extras[id] = 1; else delete estado.extras[id];
+    e.target.closest('.extra').classList.toggle('ativo', e.target.checked);
     atualizar();
   });
   ['#negocio', '#frase'].forEach((s) => $(s).addEventListener('input', renderPrevia));
@@ -150,7 +167,6 @@
     $('#v-total').textContent = brl(d.total);
     $('#v-total-m').textContent = brl(d.total);
     $('#linha-agora').hidden = d.agora === d.total;
-    $('#rot-agora').textContent = 'Entrada agora (50%)';
     $('#v-agora').textContent = brl(d.agora);
     $('#prazo').textContent = `Prazo estimado: ${d.prazo}${d.urgencia === 'rapido' ? ' (com prioridade)' : ''}.`;
     $('#enviar').textContent = `Pagar ${brl(d.agora)} e começar`;
