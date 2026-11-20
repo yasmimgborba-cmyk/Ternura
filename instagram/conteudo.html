@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&family=Caveat:wght@700&display=swap" rel="stylesheet">
+<style>
+/* paleta das referências da Yas */
+:root { --menta:#AFD4C0; --menta-e:#5E9C83; --choco:#88553E; --choco-e:#4E2A1A; --creme:#FAF6E6; --rosa:#F594A7; --rosa-e:#E2687F; }
+* { box-sizing:border-box; margin:0; }
+body { background:#bbb; display:flex; flex-wrap:wrap; gap:40px; padding:40px; font-family:Nunito, sans-serif; color:var(--choco-e); }
+.post { width:1080px; height:1440px; position:relative; overflow:hidden; background:var(--creme); }
+.a { position:absolute; }
+.foto { position:absolute; object-fit:cover; display:block; }
+.tit { font-family:Fredoka; font-weight:700; line-height:.9; color:var(--creme); -webkit-text-stroke:22px var(--choco-e); paint-order:stroke fill; text-shadow:0 10px 0 rgba(78,42,26,.55); letter-spacing:-.005em; }
+.tit.rosa { color:#FFE3EA; } .tit.menta { color:#E3F4EB; }
+.brilho { position:absolute; color:var(--creme); z-index:6; } .brilho svg { display:block; filter:drop-shadow(0 0 0 var(--choco-e)); }
+.sw { position:absolute; display:flex; flex-direction:column; align-items:center; padding-top:220px; font-weight:800; font-size:36px; letter-spacing:.02em; }
+.sw small { font-family:Caveat; font-size:54px; font-weight:700; margin-top:6px; letter-spacing:0; }
+.texto { font-weight:800; font-size:44px; line-height:1.35; }
+.texto b { color:var(--rosa-e); }
+.cartao { background:var(--creme); border:7px solid var(--choco-e); border-radius:46px; box-shadow:0 14px 0 var(--choco-e); padding:44px 50px; }
+.pagina { position:absolute; right:60px; bottom:50px; font-weight:900; font-size:30px; background:var(--choco-e); color:var(--creme); padding:10px 24px; border-radius:999px; z-index:9; }
+.marca { position:absolute; left:60px; bottom:46px; font-family:Fredoka; font-weight:700; font-size:40px; color:var(--choco-e); z-index:9; }
+.marca span { color:var(--rosa-e); }
+.lista { display:grid; gap:26px; }
+.lista div { display:flex; gap:26px; align-items:flex-start; font-weight:800; font-size:42px; line-height:1.25; }
+.lista i { flex:0 0 78px; height:78px; border-radius:50%; display:grid; place-items:center; font-style:normal; font-family:Fredoka; font-weight:700; font-size:44px; color:var(--creme); background:var(--rosa-e); border:5px solid var(--choco-e); }
+.bolinhas { background-color:var(--rosa); background-image:radial-gradient(var(--choco-e) 15px, transparent 16px); background-size:84px 84px; background-position:0 0; }
+.bolinhas-m { background-color:var(--menta); background-image:radial-gradient(var(--choco-e) 15px, transparent 16px); background-size:84px 84px; }
+.bolinhas-c { background-color:var(--choco-e); background-image:radial-gradient(var(--creme) 15px, transparent 16px); background-size:84px 84px; }
+.renda { position:absolute; left:0; right:0; height:40px; background:radial-gradient(circle at 20px 0, var(--creme) 19px, transparent 20px) 0 0/40px 40px repeat-x; }
+.listras { background:repeating-linear-gradient(90deg, var(--rosa) 0 70px, var(--creme) 70px 140px); }
+</style></head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs>
+  <symbol id="bri" viewBox="0 0 24 24"><path d="M12 1l2.6 8.4L23 12l-8.4 2.6L12 23l-2.6-8.4L1 12l8.4-2.6z" fill="currentColor" stroke="#4E2A1A" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+</defs></svg>
+
+<!-- ================= CARROSSEL · PALETA DE CORES ================= -->
+<!-- 1/5 capa -->
+<div class="post" id="p1">
+  <img class="foto" src="fotos/doces-topo.jpg" style="left:0;top:0;width:1080px;height:860px">
+  <div class="sw" style="left:0;top:860px;width:270px;height:580px;background:var(--menta);color:#4c7d68">#AFD4C0<small>menta</small></div>
+  <div class="sw" style="left:270px;top:860px;width:270px;height:580px;background:var(--choco);color:#F2E0D2">#88553E<small>chocolate</small></div>
+  <div class="sw" style="left:540px;top:860px;width:270px;height:580px;background:var(--creme);color:var(--choco)">#FAF6E6<small>creme</small></div>
+  <div class="sw" style="left:810px;top:860px;width:270px;height:580px;background:var(--rosa);color:#fff">#F594A7<small>rosa</small></div>
+  <h1 class="a tit" style="left:0;right:0;top:700px;text-align:center;font-size:112px;z-index:5">O que é uma<br>paleta de cores?</h1>
+  <svg class="brilho" style="left:40px;top:690px" width="90" height="90"><use href="#bri"/></svg>
+  <svg class="brilho" style="right:40px;top:800px" width="80" height="80"><use href="#bri"/></svg>
+  <span class="pagina">arrasta →</span>
+</div>
+
+<!-- 2/5 definição -->
+<div class="post bolinhas-m" id="p2">
+  <img class="foto" src="fotos/pote-tres.jpg" style="left:90px;top:90px;width:900px;height:640px;border-radius:50px;border:8px solid var(--choco-e);box-shadow:0 14px 0 var(--choco-e)">
+  <div class="a cartao" style="left:70px;right:70px;top:790px">
+    <h2 style="font-family:Fredoka;font-size:68px;line-height:1;margin-bottom:22px">É o “sabor” da sua marca 🍨</h2>
+    <p class="texto">Paleta é o conjunto de <b>3 a 5 cores</b> que aparecem em tudo: logo, site, posts e embalagem. É ela que faz alguém reconhecer você <b>antes de ler o nome</b>.</p>
+  </div>
+  <span class="marca">ter<span>♡</span>nura</span><span class="pagina">2/5</span>
+</div>
+
+<!-- 3/5 cores e emoções -->
+<div class="post" id="p3" style="background:var(--creme)">
+  <h1 class="a tit" style="left:60px;top:90px;font-size:112px;z-index:5">Cada cor<br>conta<br>algo ♡</h1>
+  <img class="foto" src="fotos/potes.jpg" style="right:60px;top:80px;width:460px;height:640px;border-radius:280px 280px 40px 40px;border:8px solid var(--choco-e)">
+  <div class="a lista" style="left:60px;top:800px;width:960px">
+    <div><i style="background:var(--rosa-e)">♡</i><span>Rosa: carinho, delicadeza e acolhimento</span></div>
+    <div><i style="background:var(--menta-e)">✦</i><span>Menta: frescor, calma e leveza</span></div>
+    <div><i style="background:var(--choco)">☕</i><span>Chocolate: conforto, confiança e aconchego</span></div>
+    <div><i style="background:#E8DFC6;color:var(--choco-e)">○</i><span>Creme: respiro, elegância e equilíbrio</span></div>
+  </div>
+  <span class="marca">ter<span>♡</span>nura</span><span class="pagina">3/5</span>
+</div>
+
+<!-- 4/5 como montar -->
+<div class="post bolinhas" id="p4">
+  <div class="a cartao" style="left:70px;right:70px;top:80px">
+    <h2 style="font-family:Fredoka;font-size:76px;line-height:1">Monte a sua em 4 cores</h2>
+  </div>
+  <img class="foto" src="fotos/canecas.jpg" style="right:70px;top:330px;width:420px;height:560px;border-radius:40px;border:8px solid var(--choco-e);transform:rotate(3deg)">
+  <div class="a cartao lista" style="left:70px;top:330px;width:500px;padding:36px">
+    <div style="font-size:36px"><i>1</i><span>uma <b style="color:var(--rosa-e)">principal</b>, a cara da marca</span></div>
+    <div style="font-size:36px"><i style="background:var(--menta-e)">2</i><span>uma de <b style="color:var(--menta-e)">destaque</b> pros botões</span></div>
+    <div style="font-size:36px"><i style="background:#D9C9A8;color:var(--choco-e)">3</i><span>uma <b>neutra</b> pro fundo</span></div>
+    <div style="font-size:36px"><i style="background:var(--choco-e)">4</i><span>uma escura pro <b>texto</b></span></div>
+  </div>
+  <div class="a cartao" style="left:70px;right:70px;top:990px;padding:34px 44px">
+    <p class="texto" style="font-size:40px">💡 Repare nas canecas: <b>mesmo padrão, cores diferentes</b>. Repetir o estilo é o que deixa a marca reconhecível.</p>
+  </div>
+  <span class="pagina">4/5</span>
+</div>
+
+<!-- 5/5 CTA -->
+<div class="post" id="p5" style="background:var(--menta)">
+  <div class="renda" style="top:0;transform:scaleY(-1)"></div>
+  <h1 class="a tit" style="left:60px;top:110px;font-size:122px">Quer uma paleta<br>com a sua cara?</h1>
+  <p class="a texto" style="left:66px;top:430px;width:560px;font-size:44px">Eu monto a identidade visual completa: <b>cores, fontes e logo</b>, pronta pra usar em tudo ♡</p>
+  <img class="a" src="arte/recortes/apontando.png" style="right:-40px;bottom:-30px;height:1000px;transform:scaleX(-1);filter:drop-shadow(0 18px 24px rgba(78,42,26,.25))">
+  <div class="a cartao" style="left:66px;top:820px;width:540px;text-align:center;padding:34px">
+    <p style="font-family:Fredoka;font-weight:700;font-size:56px;line-height:1.05">design a partir de<br><span style="color:var(--rosa-e);font-size:96px">R$ 190</span></p>
+  </div>
+  <div class="a" style="left:66px;top:1160px;background:var(--rosa-e);color:#fff;font-weight:900;font-size:40px;padding:20px 40px;border-radius:999px;border:6px solid var(--choco-e);box-shadow:0 10px 0 var(--choco-e)">orçamento no link da bio ♡</div>
+</div>
+
+<!-- ================= POSTS SOLTOS ================= -->
+<!-- moodboard -->
+<div class="post" id="s1" style="background:var(--choco-e)">
+  <h1 class="a tit rosa" style="left:0;right:0;top:80px;text-align:center;font-size:130px;-webkit-text-stroke-color:var(--creme);color:var(--choco-e);text-shadow:0 10px 0 rgba(0,0,0,.35)">Moodboard</h1>
+  <p class="a" style="left:0;right:0;top:230px;text-align:center;font-family:Caveat;font-size:66px;color:var(--rosa)">o primeiro passo de toda marca</p>
+  <div class="a" style="left:200px;top:330px;width:680px;padding:22px;background:var(--creme);border-radius:30px;box-shadow:0 0 0 10px var(--rosa), 0 20px 40px rgba(0,0,0,.4);transform:rotate(-1.5deg)">
+    <img src="fotos/moodboard.jpg" style="display:block;width:100%;border-radius:12px">
+    <p style="font-family:Caveat;font-size:46px;text-align:center;margin-top:6px;color:var(--choco)">sapatinho, cookie, esmalte... tudo conversa ♡</p>
+  </div>
+  <p class="a texto" style="left:90px;right:90px;bottom:110px;color:var(--creme);text-align:center;font-size:38px">Antes do logo, junte imagens que têm a <b style="color:var(--menta)">vibe</b> que você quer passar. Daí saem as cores, as fontes e o estilo.</p>
+  <span class="marca" style="color:var(--creme)">ter<span>♡</span>nura</span>
+</div>
+
+<!-- consistência (canecas) -->
+<div class="post bolinhas-c" id="s2">
+  <img class="foto" src="fotos/canecas.jpg" style="left:90px;top:90px;width:900px;height:900px;object-position:center 30%;border-radius:60px;border:10px solid var(--creme)">
+  <div class="a cartao" style="left:70px;right:70px;top:900px;transform:rotate(-1.5deg)">
+    <h2 style="font-family:Fredoka;font-size:80px;line-height:1">Consistência <span style="color:var(--rosa-e)">vende</span></h2>
+    <p class="texto" style="margin-top:18px">Você reconheceria essas canecas em qualquer lugar. Sua marca precisa disso: <b>o mesmo jeitinho em todo post</b>.</p>
+  </div>
+  <span class="pagina" style="bottom:40px;background:var(--rosa-e)">♡ ternura</span>
+</div>
+
+<!-- 3 sinais (bombons) -->
+<div class="post" id="s3">
+  <img class="foto" src="fotos/bombons.jpg" style="left:0;top:0;width:1080px;height:1440px;filter:saturate(1.05)">
+  <div class="a" style="inset:0;background:linear-gradient(transparent 30%, rgba(250,246,230,.0) 40%)"></div>
+  <div class="a cartao" style="left:70px;right:70px;top:80px;text-align:center">
+    <h2 style="font-family:Fredoka;font-size:74px;line-height:1">3 sinais de que sua marca<br>precisa de um <span style="color:var(--rosa-e)">carinho</span></h2>
+  </div>
+  <div class="a cartao lista" style="left:70px;right:70px;bottom:120px;padding:40px">
+    <div><i>1</i><span>Cada post tem uma cor e uma fonte diferente</span></div>
+    <div><i style="background:var(--menta-e)">2</i><span>Seu logo não aparece bem no celular</span></div>
+    <div><i style="background:var(--choco)">3</i><span>As pessoas não lembram do seu nome</span></div>
+  </div>
+  <span class="pagina" style="bottom:40px">♡ ternura</span>
+</div>
+
+<!-- textura (listras Pinterest) -->
+<div class="post" id="s4">
+  <img class="foto" src="fotos/texturas.jpg" style="left:0;top:0;width:1080px;height:1440px;object-position:center 60%">
+  <div class="a cartao" style="left:90px;right:90px;top:180px;text-align:center;transform:rotate(-2deg)">
+    <p style="font-family:Caveat;font-size:70px;color:var(--rosa-e);line-height:1">menta, morango e biscoito</p>
+    <h2 style="font-family:Fredoka;font-size:92px;line-height:1;margin-top:10px">Textura também comunica</h2>
+  </div>
+  <div class="a cartao" style="left:90px;right:90px;bottom:160px;transform:rotate(1.5deg)">
+    <p class="texto" style="font-size:42px">Fundo liso, granulado, bolinha ou listra: escolher <b>1 ou 2 texturas</b> e repetir sempre deixa seu feed com cara de marca, não de post solto.</p>
+  </div>
+  <span class="pagina" style="bottom:50px">♡ ternura</span>
+</div>
+
+<!-- engajamento (bola de sorvete) -->
+<div class="post listras" id="s5">
+  <div class="a cartao" style="left:70px;right:70px;top:80px;text-align:center">
+    <h2 style="font-family:Fredoka;font-size:84px;line-height:1">Se a sua marca fosse um <span style="color:var(--menta-e)">sorvete</span>, qual seria? 🍨</h2>
+  </div>
+  <img class="a" src="fotos/bola.png" style="left:50%;top:420px;width:620px;transform:translateX(-50%);filter:drop-shadow(0 24px 30px rgba(78,42,26,.3))">
+  <div class="a cartao" style="left:70px;right:70px;bottom:110px;display:grid;grid-template-columns:1fr 1fr;gap:16px 30px;padding:36px 44px">
+    <span class="texto" style="font-size:38px">🍓 morango: delicada</span><span class="texto" style="font-size:38px">🌿 menta: fresca</span>
+    <span class="texto" style="font-size:38px">🍫 chocolate: clássica</span><span class="texto" style="font-size:38px">🍦 creme: elegante</span>
+  </div>
+  <div class="a" style="right:70px;top:1020px;background:var(--choco-e);color:var(--creme);font-weight:900;font-size:34px;padding:14px 30px;border-radius:999px;transform:rotate(-4deg)">conta nos comentários ↓</div>
+</div>
+</body></html>

@@ -161,3 +161,80 @@ monte seu orçamento no link da bio.
 - Carrossel "5 erros que deixam seu site com cara de amador".
 - Stories com enquete: "qual estilo combina com a sua marca?" usando as miniaturas do orçamento.
 - Depoimentos dos primeiros clientes no destaque "Portfólio".
+
+---
+
+## Posts de conteúdo (marketing e design)
+
+Use entre os posts de venda, por exemplo: 1 de conteúdo a cada 2 de venda. Conteúdo gera salvamentos e compartilhamentos, e é isso que faz o perfil aparecer pra gente nova.
+
+### Carrossel · O que é uma paleta de cores? (paleta-1 a paleta-5, nessa ordem)
+```
+o que é uma paleta de cores? 🍨
+
+é o "sabor" da sua marca: as 3 a 5 cores que aparecem em tudo, do logo ao story. arrasta pra entender como escolher a sua ✦
+
+salva pra consultar depois e manda pra amiga que tá criando a marca dela ♡
+
+#paletadecores #identidadevisual #branding #designgrafico #marketingdigital #empreendedorismofeminino
+```
+
+### Moodboard
+```
+antes do logo, vem o moodboard ✦
+
+é uma colagem de imagens que têm a vibe que você quer passar. sapatinho, cookie, esmalte, tecido... tudo conversa entre si. é daí que saem as cores, as fontes e o estilo da marca.
+
+já fez o moodboard da sua? ♡
+
+#moodboard #branding #identidadevisual #inspiracao #designgrafico
+```
+
+### Consistência vende
+```
+você reconheceria essas canecas em qualquer lugar, né?
+
+mesmo padrão, cores diferentes. é isso que deixa uma marca memorável: o mesmo jeitinho em todo post, todo story, todo produto.
+
+consistência > perfeição ♡
+
+#branding #marketingdigital #consistencia #identidadevisual #dicasdemarketing
+```
+
+### 3 sinais de que sua marca precisa de um carinho
+```
+3 sinais de que sua marca precisa de um carinho:
+
+1. cada post tem uma cor e uma fonte diferente
+2. seu logo não aparece bem no celular
+3. as pessoas não lembram do seu nome
+
+se você se identificou com 2 ou mais, me chama que a gente resolve ♡ link na bio
+
+#rebranding #identidadevisual #marketingdigital #pequenosnegocios #designgrafico
+```
+
+### Textura também comunica
+```
+menta, morango e biscoito 🍪
+
+fundo liso, granulado, bolinha ou listra: escolher 1 ou 2 texturas e repetir sempre deixa o feed com cara de marca, não de post solto.
+
+qual textura combina com a sua marca?
+
+#feedorganizado #instagramestetico #branding #socialmedia #dicasdeinstagram
+```
+
+### Se a sua marca fosse um sorvete
+```
+se a sua marca fosse um sorvete, qual seria? 🍨
+
+🍓 morango: delicada
+🌿 menta: fresca
+🍫 chocolate: clássica
+🍦 creme: elegante
+
+conta nos comentários ↓ (a minha é menta com chocolate, óbvio ♡)
+
+#branding #marketingdigital #identidadevisual #empreendedorismo
+```
