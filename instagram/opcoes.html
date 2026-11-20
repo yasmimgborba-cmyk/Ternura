@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@700;800;900&family=Caveat:wght@600;700&family=Manrope:wght@500;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root { --choco:#7E412A; --choco-e:#4A2616; --creme:#FFFBEA; --menta:#8AD0BB; --menta-c:#DDF2EA; --menta-e:#4E9E86; --rosa:#E66684; --rosa-c:#F294AE; --rosa-cc:#FBE6EB; }
+* { box-sizing:border-box; margin:0; }
+body { background:#bbb; display:flex; flex-wrap:wrap; gap:40px; padding:40px; font-family:Nunito, sans-serif; color:var(--choco-e); }
+.post { width:1080px; height:1440px; position:relative; overflow:hidden; }
+.a { position:absolute; }
+img.recorte { filter:drop-shadow(0 18px 24px rgba(74,38,22,.25)); }
+
+/* ============ B · CADERNINHO ============ */
+.b { background:#FFF9EF; background-image:linear-gradient(rgba(138,208,187,.35) 2px, transparent 2px), linear-gradient(90deg, rgba(138,208,187,.35) 2px, transparent 2px); background-size:54px 54px; }
+.b::before { content:''; position:absolute; left:110px; top:0; bottom:0; width:4px; background:rgba(230,102,132,.45); }
+.b .mao { font-family:Caveat; font-weight:700; color:var(--choco-e); line-height:.9; }
+.b .grosso { font-family:Fredoka; font-weight:700; color:var(--choco-e); line-height:.95; }
+.fita { position:absolute; height:64px; width:230px; opacity:.85; z-index:6; box-shadow:0 2px 4px rgba(0,0,0,.08);
+  background:repeating-linear-gradient(45deg, var(--rosa-c) 0 16px, #FFD5E0 16px 32px); }
+.fita.m { background:repeating-linear-gradient(-45deg, var(--menta) 0 16px, #C7EBDD 16px 32px); }
+.fita.p { background:radial-gradient(#fff 5px, transparent 6px) 0 0/26px 26px, #F6C863; }
+.polaroid { position:absolute; background:#fff; padding:22px 22px 90px; box-shadow:0 18px 30px rgba(74,38,22,.18); z-index:4; }
+.polaroid img { display:block; width:100%; height:100%; object-fit:cover; object-position:top; }
+.polaroid .leg { position:absolute; left:0; right:0; bottom:18px; text-align:center; font-family:Caveat; font-weight:700; font-size:48px; color:var(--choco-e); }
+.risco { position:absolute; z-index:7; }
+.marca-texto { background:linear-gradient(transparent 55%, rgba(242,148,174,.6) 55%); padding:0 8px; }
+.marca-texto.m { background:linear-gradient(transparent 55%, rgba(138,208,187,.75) 55%); }
+.nota { position:absolute; background:#FFF6C9; padding:50px 60px; box-shadow:0 16px 28px rgba(74,38,22,.18); z-index:4; }
+.nota li { list-style:none; font-family:Caveat; font-weight:700; font-size:60px; line-height:1.25; display:flex; justify-content:space-between; gap:30px; border-bottom:3px dashed rgba(126,65,42,.25); padding:8px 0; }
+.nota li b { color:var(--rosa); }
+.nota li::before { content:'☐'; color:var(--menta-e); margin-right:16px; font-family:Nunito; font-size:44px; }
+.nota li.ok::before { content:'☑'; }
+
+/* ============ C · CLEAN PASTEL ============ */
+.c { font-family:Manrope; color:var(--choco-e); padding:100px 90px; }
+.c.m { background:var(--menta-c); } .c.r { background:var(--rosa-cc); } .c.k { background:#FFFDF8; }
+.c .rot { font-weight:800; font-size:28px; letter-spacing:.2em; text-transform:uppercase; color:var(--menta-e); }
+.c h1 { font-weight:800; font-size:120px; line-height:.98; letter-spacing:-.04em; margin-top:26px; }
+.c h1 em { font-family:'Instrument Serif'; font-weight:400; font-style:italic; color:var(--rosa); letter-spacing:-.01em; }
+.c p.t { font-size:40px; line-height:1.4; font-weight:500; color:#6E4636; margin-top:26px; }
+.c .linha { position:absolute; left:90px; right:90px; bottom:150px; height:3px; background:var(--choco-e); opacity:.15; }
+.c .pe { position:absolute; left:90px; right:90px; bottom:80px; display:flex; justify-content:space-between; align-items:center; font-weight:800; font-size:30px; }
+.c .pe img { height:70px; }
+.c .circ { position:absolute; border-radius:50%; overflow:hidden; background:#fff; border:10px solid #fff; box-shadow:0 0 0 4px var(--menta), 0 30px 60px rgba(74,38,22,.15); }
+.c .circ img { width:100%; height:100%; object-fit:cover; object-position:top; }
+.c .tela { position:absolute; background:#fff; border-radius:26px; overflow:hidden; box-shadow:0 30px 60px rgba(74,38,22,.16); }
+.c .tela img { display:block; width:100%; height:100%; object-fit:cover; object-position:top; }
+.c .cap { position:absolute; font-weight:800; font-size:30px; } .c .cap span { display:block; font-weight:500; font-size:26px; color:#8a6a5c; }
+.c .tabela { margin-top:60px; }
+.c .tabela div { display:flex; justify-content:space-between; align-items:baseline; padding:30px 0; border-bottom:3px solid rgba(74,38,22,.12); font-size:44px; font-weight:700; }
+.c .tabela b { font-size:64px; font-weight:800; letter-spacing:-.03em; } .c .tabela small { font-size:28px; color:#8a6a5c; font-weight:600; }
+
+/* ============ D · MENU DE JOGUINHO ============ */
+.d { background:linear-gradient(170deg, #CFF3E6 0%, #F9DCE6 100%); }
+.d::before { content:''; position:absolute; inset:0; background-image:radial-gradient(rgba(255,255,255,.75) 4px, transparent 4.5px); background-size:46px 46px; }
+.d .renda { position:absolute; left:0; right:0; height:48px; background:radial-gradient(circle at 24px 48px, #fff 22px, transparent 23px) 0 0/48px 48px repeat-x; z-index:2; }
+.d .renda.cima { top:0; transform:scaleY(-1); } .d .renda.baixo { bottom:0; }
+.d .faixa { position:absolute; left:0; right:0; top:0; height:58px; background:repeating-linear-gradient(90deg, var(--rosa) 0 30px, #F7A9BE 30px 60px); z-index:3; }
+.janela { position:absolute; background:#fff; border:6px solid var(--rosa); border-radius:34px; box-shadow:0 12px 0 rgba(230,102,132,.35); overflow:hidden; z-index:4; }
+.janela .tb { display:flex; align-items:center; gap:14px; padding:14px 22px; background:repeating-linear-gradient(90deg, #FDE3EA 0 18px, #fff 18px 36px); border-bottom:5px dashed var(--rosa-c); font-family:Fredoka; font-weight:600; font-size:38px; color:var(--rosa); }
+.janela .tb::before { content:'♡'; }
+.janela .tb i { margin-left:auto; display:flex; gap:10px; } .janela .tb i span { width:26px; height:26px; border-radius:50%; border:4px solid var(--rosa); background:#fff; display:block; }
+.janela .ct { padding:22px; }
+.janela img { display:block; width:100%; border-radius:18px; }
+.btn-j { display:flex; align-items:center; gap:20px; background:#fff; border:5px solid var(--rosa-c); border-radius:999px; padding:14px 30px 14px 14px; font-family:Fredoka; font-weight:600; font-size:42px; color:var(--choco-e);
+  background-image:radial-gradient(#FDE3EA 3px, transparent 3.5px); background-size:22px 22px; }
+.btn-j .bt-ic { flex:0 0 78px; height:78px; border-radius:22px; background:var(--menta-c); border:4px dashed var(--menta-e); display:grid; place-items:center; font-size:40px; }
+.dialogo { position:absolute; background:linear-gradient(#fff, #FFF2F6); border:6px solid var(--menta); border-radius:36px; padding:52px 48px 40px; z-index:6; font-family:Fredoka; font-weight:500; font-size:46px; color:#9b6b78; text-align:center; box-shadow:0 12px 0 rgba(78,158,134,.3); }
+.dialogo .nome { position:absolute; top:-40px; left:40px; background:var(--menta-c); border:5px solid var(--menta-e); border-radius:20px; padding:4px 26px; font-weight:700; font-size:40px; color:var(--menta-e); transform:rotate(-4deg); }
+.botao-coracao { position:absolute; width:150px; height:150px; border-radius:50%; background:var(--rosa); border:8px solid #fff; box-shadow:0 0 0 5px var(--rosa), 0 10px 0 rgba(0,0,0,.1); display:grid; place-items:center; font-size:76px; color:#fff; z-index:6; }
+.loja { position:absolute; z-index:5; display:grid; grid-template-columns:1fr 1fr; gap:26px; }
+.item { background:#fff; border:6px solid var(--rosa-c); border-radius:34px; padding:26px; text-align:center; box-shadow:0 10px 0 rgba(230,102,132,.3); }
+.item .ic { width:120px; height:120px; margin:0 auto 12px; border-radius:30px; background:var(--menta-c); border:5px dashed var(--menta-e); display:grid; place-items:center; font-size:64px; }
+.item b { font-family:Fredoka; font-weight:700; font-size:44px; display:block; color:var(--choco-e); }
+.item .preco { display:inline-flex; align-items:center; gap:10px; margin-top:12px; background:#FFF0C2; border:4px solid #E0A93B; border-radius:999px; padding:6px 22px; font-family:Fredoka; font-weight:700; font-size:40px; color:#8a5a10; }
+.item .preco::before { content:'✦'; color:#E0A93B; }
+.titulo-j { position:absolute; z-index:5; font-family:Fredoka; font-weight:700; color:#fff; -webkit-text-stroke:16px var(--rosa); paint-order:stroke fill; text-shadow:0 10px 0 rgba(230,102,132,.35); line-height:.95; }
+#d3 .item { padding:18px; } #d3 .item .ic { width:100px; height:100px; font-size:54px; }
+</style></head>
+<body>
+
+<!-- ====================== B · CADERNINHO ====================== -->
+<div class="post b" id="b1">
+  <p class="a mao" style="left:150px;top:110px;font-size:120px">seu projeto</p>
+  <p class="a grosso" style="left:150px;top:230px;font-size:170px"><span class="marca-texto">digital</span></p>
+  <p class="a mao" style="left:150px;top:410px;font-size:120px">feito com</p>
+  <img class="a" src="arte/logo.png" style="left:120px;top:520px;width:600px;transform:rotate(-5deg);z-index:5">
+  <div class="polaroid" style="left:150px;top:880px;width:420px;height:470px;transform:rotate(-6deg)"><img src="arte/print-site.png" style="object-position:left top"><span class="leg">o meu site ♡</span></div>
+  <div class="fita" style="left:280px;top:850px;transform:rotate(-10deg)"></div>
+  <img class="a recorte" src="arte/recortes/apontando.png" style="right:-30px;bottom:-30px;height:1100px;z-index:5">
+  <p class="a mao" style="left:150px;top:790px;font-size:56px;color:var(--rosa);transform:rotate(-6deg);z-index:7">olha só ↓</p>
+</div>
+
+<div class="post b" id="b2">
+  <p class="a grosso" style="left:150px;top:100px;font-size:150px">meus</p>
+  <p class="a mao" style="left:150px;top:240px;font-size:170px"><span class="marca-texto m">projetinhos</span> ♡</p>
+  <div class="polaroid" style="left:150px;top:470px;width:400px;height:560px;transform:rotate(-5deg)"><img src="arte/print-underground-cel.png"><span class="leg">Underground</span></div>
+  <div class="fita m" style="left:250px;top:440px;transform:rotate(6deg)"></div>
+  <div class="polaroid" style="left:580px;top:420px;width:420px;height:420px;transform:rotate(5deg)"><img src="arte/print-blast.png"><span class="leg">Blast</span></div>
+  <div class="fita" style="left:700px;top:395px;transform:rotate(-8deg)"></div>
+  <div class="polaroid" style="left:470px;top:930px;width:470px;height:380px;transform:rotate(-2deg)"><img src="arte/print-doce.png"><span class="leg">Doce Nuvem</span></div>
+  <div class="fita p" style="left:620px;top:905px;transform:rotate(4deg)"></div>
+  <img class="a recorte" src="arte/recortes/look3.png" style="left:150px;bottom:-20px;height:380px;z-index:5">
+  <p class="a mao" style="left:620px;top:1330px;font-size:52px;color:var(--rosa);transform:rotate(-3deg);z-index:7">link na bio ♡</p>
+</div>
+
+<div class="post b" id="b3">
+  <p class="a mao" style="left:150px;top:100px;font-size:120px">quanto custa?</p>
+  <p class="a grosso" style="left:150px;top:230px;font-size:118px">cabe no <span class="marca-texto">bolso</span></p>
+  <div class="nota" style="left:140px;top:470px;width:700px;transform:rotate(-2deg)">
+    <ul><li class="ok"><span>site</span><b>R$ 290</b></li><li class="ok"><span>logo</span><b>R$ 190</b></li><li><span>redes</span><b>R$ 290/mês</b></li><li><span>app</span><b>R$ 1.990</b></li></ul>
+    <p style="font-family:Caveat;font-weight:700;font-size:44px;margin-top:20px;color:var(--menta-e)">* a partir de · Pix ou cartão</p>
+  </div>
+  <div class="fita m" style="left:400px;top:440px;transform:rotate(-4deg)"></div>
+  <img class="a recorte" src="arte/recortes/ursinho.png" style="right:-10px;bottom:-20px;height:560px;z-index:5">
+  <p class="a mao" style="left:160px;top:1220px;font-size:58px;color:var(--rosa);transform:rotate(-3deg);z-index:7">template pronto sai<br>mais barato ✦</p>
+</div>
+
+<!-- ====================== C · CLEAN PASTEL ====================== -->
+<div class="post c m" id="c1">
+  <p class="rot">Ternura · estúdio digital</p>
+  <h1>Seu projeto digital, <em>feito com ternura.</em></h1>
+  <p class="t" style="max-width:560px">Sites, apps, design e social media com cara de marca grande.</p>
+  <div class="circ" style="right:80px;top:700px;width:460px;height:460px"><img src="arte/recortes/apontando.png" style="object-position:30% 0;transform:scale(1.25) translate(-6%, 8%)"></div>
+  <div class="a" style="left:90px;top:920px;display:grid;gap:14px;font-weight:800;font-size:34px">
+    <span>✦ prévia antes de fechar</span><span>✦ preço na hora</span><span>✦ Pix ou cartão</span></div>
+  <div class="linha"></div>
+  <div class="pe"><img src="arte/logo.png"><span>link na bio →</span></div>
+</div>
+
+<div class="post c k" id="c2">
+  <p class="rot">Portfólio</p>
+  <h1>Projetos <em>selecionados</em></h1>
+  <div class="tela" style="left:90px;top:440px;width:900px;height:450px"><img src="arte/print-blast.png"></div>
+  <p class="cap" style="left:90px;top:910px">Blast<span>software de marketing pro X</span></p>
+  <div class="tela" style="left:90px;top:1010px;width:430px;height:240px"><img src="arte/print-underground.png"></div>
+  <div class="tela" style="left:560px;top:1010px;width:430px;height:240px"><img src="arte/print-folha.png"></div>
+  <div class="pe" style="bottom:70px"><span style="font-size:28px">Underground GYN · app</span><span style="font-size:28px">Folha &amp; Co. · identidade</span></div>
+</div>
+
+<div class="post c r" id="c3">
+  <p class="rot">Investimento</p>
+  <h1>Preços <em>que cabem no bolso</em></h1>
+  <div class="tabela">
+    <div><span>Sites</span><b><small>a partir de </small>R$ 290</b></div>
+    <div><span>Design gráfico</span><b><small>a partir de </small>R$ 190</b></div>
+    <div><span>Social media</span><b>R$ 290<small>/mês</small></b></div>
+    <div><span>Apps</span><b><small>a partir de </small>R$ 1.990</b></div>
+  </div>
+  <div class="circ" style="right:90px;top:1090px;width:170px;height:170px;box-shadow:0 0 0 4px var(--rosa), 0 20px 40px rgba(74,38,22,.15)"><img src="arte/recortes/pirulito.png"></div>
+  <div class="linha"></div>
+  <div class="pe"><img src="arte/logo.png"><span>orçamento no link da bio</span></div>
+</div>
+
+<!-- ====================== D · MENU DE JOGUINHO ====================== -->
+<div class="post d" id="d1">
+  <div class="faixa"></div><div class="renda baixo"></div>
+  <img class="a recorte" src="arte/recortes/corpo.png" style="left:-40px;top:140px;height:1180px;z-index:4">
+  <div class="janela" style="right:60px;top:160px;width:560px">
+    <div class="tb">Conteúdos<i><span></span><span></span></i></div>
+    <div class="ct" style="display:grid;gap:18px">
+      <div class="btn-j"><span class="bt-ic">💻</span>Sites</div>
+      <div class="btn-j"><span class="bt-ic">📱</span>Apps</div>
+      <div class="btn-j"><span class="bt-ic">🎨</span>Design</div>
+      <div class="btn-j"><span class="bt-ic">💌</span>Social media</div>
+      <div class="btn-j"><span class="bt-ic">✨</span>Personal brand</div>
+    </div>
+  </div>
+  <div class="dialogo" style="left:60px;right:60px;bottom:110px"><span class="nome">Ternura</span>Mal posso esperar pra te mostrar meus trabalhos ♪<br><span style="font-size:34px;color:var(--rosa)">▶ toque no link da bio</span></div>
+  <div class="botao-coracao" style="right:70px;bottom:330px">♥</div>
+</div>
+
+<div class="post d" id="d2">
+  <div class="faixa"></div><div class="renda baixo"></div>
+  <h1 class="titulo-j" style="left:70px;top:110px;font-size:140px">Portfólio</h1>
+  <div class="janela" style="left:60px;top:300px;width:600px;transform:rotate(-2deg)"><div class="tb">Blast.exe<i><span></span><span></span></i></div><div class="ct"><img src="arte/print-blast.png"></div></div>
+  <div class="janela" style="right:50px;top:330px;width:320px;transform:rotate(3deg)"><div class="tb" style="font-size:30px">App<i><span></span></i></div><div class="ct" style="padding:14px"><img src="arte/print-underground-cel.png" style="height:440px;object-fit:cover;object-position:top"></div></div>
+  <div class="janela" style="left:80px;top:760px;width:520px;transform:rotate(2deg)"><div class="tb">Doce Nuvem<i><span></span><span></span></i></div><div class="ct"><img src="arte/print-doce.png"></div></div>
+  <img class="a recorte" src="arte/recortes/look2.png" style="right:60px;bottom:40px;height:500px;z-index:5">
+  <div class="dialogo" style="left:60px;bottom:80px;width:580px;font-size:40px;padding:44px 36px 30px"><span class="nome">Ternura</span>Escolhe um pra abrir ♡</div>
+</div>
+
+<div class="post d" id="d3">
+  <div class="faixa"></div><div class="renda baixo"></div>
+  <h1 class="titulo-j" style="left:70px;top:110px;font-size:140px">Lojinha</h1>
+  <div class="a" style="right:70px;top:140px;z-index:5"><span class="btn-j" style="font-size:34px;padding:10px 26px 10px 10px"><span class="bt-ic" style="flex-basis:60px;height:60px;font-size:30px">💳</span>Pix ou cartão</span></div>
+  <div class="loja" style="left:60px;top:340px;width:960px">
+    <div class="item"><div class="ic">💻</div><b>Site</b><span class="preco">R$ 290</span></div>
+    <div class="item"><div class="ic">🎨</div><b>Logo e identidade</b><span class="preco">R$ 190</span></div>
+    <div class="item"><div class="ic">💌</div><b>Social media</b><span class="preco">R$ 290/mês</span></div>
+    <div class="item"><div class="ic">📱</div><b>App</b><span class="preco">R$ 1.990</span></div>
+  </div>
+  <img class="a recorte" src="arte/recortes/look1.png" style="right:50px;bottom:40px;height:470px;z-index:6">
+  <div class="dialogo" style="left:60px;bottom:80px;width:640px;font-size:40px;padding:44px 36px 30px"><span class="nome">Ternura</span>Valores a partir de. Template pronto sai mais barato ✦</div>
+</div>
+</body></html>
