@@ -44,7 +44,13 @@ body { background:#ccc; display:flex; flex-wrap:wrap; gap:40px; padding:40px; fo
 .doce span { font-weight:800; font-size:28px; color:var(--choco); opacity:.85; }
 .num { font-family:Fredoka; font-weight:700; font-size:58px; color:#fff; background:var(--rosa); }
 .preco b { font-size:72px; letter-spacing:-.02em; }
-#lista-serv .doce { padding:14px 28px; border-radius:36px; box-shadow:0 9px 0 var(--choco); } #lista-serv .ic { flex-basis:80px; height:80px; } #lista-serv .ic svg { width:42px; height:42px; } #lista-serv b { font-size:40px; } #lista-serv span { font-size:25px; }
+.lista-compacta .doce { padding:14px 28px; border-radius:36px; box-shadow:0 9px 0 var(--choco); }
+.lista-compacta .ic { flex-basis:80px; height:80px; } .lista-compacta .ic svg { width:42px; height:42px; } .lista-compacta b { font-size:42px; } .lista-compacta span { font-size:26px; }
+.lista-mini .doce { padding:12px 22px; gap:18px; box-shadow:0 8px 0 var(--choco); } .lista-mini b { font-size:40px; }
+.precos-grade .doce { padding:16px 26px; } .precos-grade .ic { flex-basis:84px; height:84px; } .precos-grade b { font-size:64px; } .precos-grade span { font-size:26px; }
+.balao-doce { background:#fff; border:6px solid var(--choco); border-radius:50%; width:250px; height:250px; display:grid; place-items:center; text-align:center;
+  font-family:Fredoka; font-weight:700; font-size:44px; line-height:1.05; color:var(--rosa); box-shadow:0 10px 0 var(--choco); }
+.calda-auto { position:absolute; z-index:4; }
 </style></head>
 <body>
 
@@ -69,22 +75,21 @@ body { background:#ccc; display:flex; flex-wrap:wrap; gap:40px; padding:40px; fo
   <div class="z" style="left:70px;bottom:70px"><span class="pilula">sites • apps • design • social</span></div>
 </div>
 
-<!-- 02 · NOSSOS PROJETOS (versão caprichada) -->
+<!-- 02 · NOSSOS PROJETOS -->
 <div class="post rosa-bg" id="n02" data-fundo="rosa">
   <h1 class="tit z" style="left:70px;top:70px;font-size:200px">Nossos<br>projetos</h1>
-  <svg class="z" style="left:80px;top:430px" width="620" height="170" viewBox="0 0 620 170" data-calda></svg>
-  <div class="z tab" style="right:50px;top:520px;width:470px;transform:rotate(3deg)"><img src="arte/print-blast-tablet.png" style="height:560px;object-fit:cover;object-position:top"></div>
-  <div class="z cel" style="left:70px;top:640px;width:340px;transform:rotate(-5deg)"><img src="arte/print-underground-cel.png"></div>
-  <div class="z note" style="left:350px;top:960px;width:620px"><div class="tela"><img src="arte/print-site.png"></div><div class="base"></div></div>
-  <span class="z etq" style="left:80px;top:1290px;transform:rotate(-4deg)">Underground · app</span>
-  <span class="z etq" style="right:60px;top:450px;transform:rotate(4deg)">Blast · software</span>
-  <span class="z etq" style="right:120px;top:1320px;transform:rotate(2deg)">Ternura · site</span>
+  <div class="z tab" style="right:60px;top:520px;width:450px;transform:rotate(3deg)"><img src="arte/print-blast-tablet.png" style="height:520px;object-fit:cover;object-position:top"></div>
+  <div class="z cel" style="left:60px;top:560px;width:330px;transform:rotate(-5deg)"><img src="arte/print-underground-cel.png"></div>
+  <div class="z note" style="left:290px;top:1010px;width:560px"><div class="tela"><img src="arte/print-site.png"></div><div class="base"></div></div>
+  <span class="z etq" style="right:60px;top:440px;transform:rotate(4deg)">Blast · software</span>
+  <span class="z etq" style="left:50px;top:480px;transform:rotate(-5deg)">Underground · app</span>
+  <span class="z etq" style="right:50px;top:1180px;transform:rotate(5deg)">Ternura · site</span>
 </div>
 
 <!-- 03 · SERVIÇOS -->
 <div class="post menta-bg" id="n03" data-fundo="menta">
   <h1 class="cores z" style="left:70px;top:90px;font-size:150px"><span class="c1">O que</span> <span class="c3">eu</span><br><span class="c2">crio</span> <span class="c1">♡</span></h1>
-  <div class="z" style="left:70px;top:400px;width:620px;display:grid;gap:16px" id="lista-serv">
+  <div class="z lista-compacta" style="left:70px;top:400px;width:620px;display:grid;gap:16px">
     <div class="doce"><span class="ic" style="background:var(--menta)"><svg><use href="#i-site"/></svg></span><div><b>Sites e lojas</b><span>landing page e e-commerce</span></div></div>
     <div class="doce"><span class="ic" style="background:var(--rosa-c)"><svg><use href="#i-app"/></svg></span><div><b>Apps</b><span>Android e iPhone</span></div></div>
     <div class="doce"><span class="ic" style="background:#F4C95D"><svg><use href="#i-soft"/></svg></span><div><b>Software</b><span>sistemas, bots, automação</span></div></div>
@@ -98,136 +103,161 @@ body { background:#ccc; display:flex; flex-wrap:wrap; gap:40px; padding:40px; fo
 <!-- 04 · COMO FUNCIONA -->
 <div class="post rosa-bg" id="n04" data-fundo="rosa">
   <h1 class="tit z" style="left:70px;top:70px;font-size:150px">Como<br>funciona</h1>
-  <svg class="z" style="left:80px;top:360px" width="560" height="150" viewBox="0 0 620 170" data-calda></svg>
-  <div class="z" style="left:70px;top:520px;width:680px;display:grid;gap:26px">
+  <div class="z balao-doce" style="right:60px;top:110px;transform:rotate(5deg)">simples<br>assim ♡</div>
+  <div class="z lista-compacta" style="left:60px;top:470px;width:610px;display:grid;gap:22px">
     <div class="doce"><span class="ic num">1</span><div><b>Monte seu projeto</b><span>estilo, cores e extras no site</span></div></div>
     <div class="doce"><span class="ic num" style="background:var(--menta-e)">2</span><div><b>Veja a prévia</b><span>e o preço na hora</span></div></div>
     <div class="doce"><span class="ic num" style="background:#E0A93B">3</span><div><b>Pague no Pix</b><span>ou no cartão, direto no site</span></div></div>
     <div class="doce"><span class="ic num">4</span><div><b>A gente cria junto</b><span>e você acompanha tudo</span></div></div>
   </div>
-  <img class="z" src="arte/recortes/look3.png" style="right:-30px;bottom:-10px;height:1000px">
+  <div class="z" style="left:60px;top:1150px;display:flex;gap:14px;flex-wrap:wrap;width:620px">
+    <span class="pilula menta">sem esperar orçamento</span><span class="pilula">50% de entrada</span>
+  </div>
+  <img class="z" src="arte/recortes/look3.png" style="right:-10px;bottom:-10px;height:960px">
 </div>
 
 <!-- 05 · BLAST -->
 <div class="post choco-bg" id="n05" data-fundo="choco">
-  <h1 class="tit z" style="left:70px;top:80px;font-size:210px;-webkit-text-stroke-color:var(--rosa);text-shadow:0 12px 0 #2a150b">Blast</h1>
-  <p class="z sub" style="left:76px;top:330px;color:var(--creme);font-size:44px;max-width:900px">software de marketing pro X <span style="color:var(--menta)">no piloto automático</span></p>
-  <div class="z nav" style="left:70px;top:520px;width:940px;transform:rotate(-2deg);border-color:var(--rosa);box-shadow:0 14px 0 var(--rosa)"><div class="barra" style="border-color:var(--rosa)"><i></i><i></i><i></i></div><img src="arte/print-blast.png"></div>
-  <div class="z" style="left:70px;bottom:90px;display:flex;gap:16px;flex-wrap:wrap;max-width:940px">
-    <span class="pilula menta">vários perfis</span><span class="pilula">respostas com IA</span><span class="pilula rosa">relatório diário</span>
+  <h1 class="tit z" style="left:70px;top:90px;font-size:210px;-webkit-text-stroke-color:var(--rosa);text-shadow:0 12px 0 #2a150b">Blast</h1>
+  <span class="z etq" style="right:70px;top:150px;transform:rotate(6deg)">projeto real ♡</span>
+  <p class="z sub" style="left:76px;top:340px;color:var(--creme);font-size:44px;max-width:900px">software de marketing pro X <span style="color:var(--menta)">no piloto automático</span></p>
+  <div class="z nav" style="left:90px;top:480px;width:900px;transform:rotate(-2deg);border-color:var(--rosa);box-shadow:0 14px 0 var(--rosa)"><div class="barra" style="border-color:var(--rosa)"><i></i><i></i><i></i></div><img src="arte/print-blast.png"></div>
+  <div class="z" style="left:70px;top:1150px;display:grid;grid-template-columns:1fr 1fr;gap:18px;width:940px">
+    <span class="pilula menta">👥 vários perfis juntos</span><span class="pilula">✨ respostas com IA</span>
+    <span class="pilula rosa">📊 relatório do dia</span><span class="pilula menta">🔑 licença mensal</span>
   </div>
-  <span class="z etq" style="right:70px;top:110px;transform:rotate(6deg)">projeto real ♡</span>
 </div>
 
 <!-- 06 · UNDERGROUND -->
 <div class="post menta-bg" id="n06" data-fundo="menta">
   <h1 class="cores z" style="left:70px;top:90px;font-size:126px"><span class="c1">Under</span><span class="c3">ground</span><br><span class="c2">GYN</span></h1>
-  <p class="z sub" style="left:76px;top:360px;max-width:560px">app de rolês alternativos em Goiânia, com ingressos no Pix ♡</p>
-  <div class="z cel" style="left:110px;top:600px;width:380px;transform:rotate(-4deg)"><img src="arte/print-underground-cel.png"></div>
-  <img class="z" src="arte/recortes/look1.png" style="right:30px;bottom:-10px;height:1020px">
-  <span class="z etq" style="left:420px;top:1220px;transform:rotate(5deg)">projeto real ♡</span>
+  <p class="z sub" style="left:76px;top:360px;max-width:940px;font-size:38px">app de rolês alternativos em Goiânia ♡</p>
+  <div class="z" style="left:70px;top:440px;display:flex;gap:12px;flex-wrap:wrap;width:620px">
+    <span class="pilula">📅 agenda</span><span class="pilula rosa">💬 comunidade</span><span class="pilula menta">🎟️ ingressos no Pix</span>
+  </div>
+  <div class="z cel" style="left:120px;top:640px;width:380px;transform:rotate(-4deg)"><img src="arte/print-underground-cel.png"></div>
+  <img class="z" src="arte/recortes/look1.png" style="right:20px;bottom:-10px;height:1000px">
+  <span class="z etq" style="left:430px;top:1250px;transform:rotate(5deg)">projeto real ♡</span>
 </div>
 
 <!-- 07 · ORÇAMENTO -->
 <div class="post rosa-bg" id="n07" data-fundo="rosa">
   <h1 class="tit z" style="left:70px;top:70px;font-size:160px">Orçamento<br>na hora</h1>
-  <svg class="z" style="left:80px;top:380px" width="700" height="170" viewBox="0 0 620 170" data-calda></svg>
-  <p class="z sub" style="left:76px;top:560px;max-width:520px;font-size:42px">Escolha o estilo e as cores, veja a prévia do seu site e o preço em 2 minutinhos.</p>
-  <div class="z cel" style="right:90px;top:500px;width:400px;transform:rotate(4deg)"><img src="arte/print-orcamento-cel.png"></div>
-  <img class="z" src="arte/recortes/bone.png" style="left:40px;bottom:-10px;height:600px">
-  <div class="z" style="left:420px;bottom:90px"><span class="pilula rosa">link na bio ♡</span></div>
+  <div class="z cel" style="right:80px;top:470px;width:400px;transform:rotate(4deg)"><img src="arte/print-orcamento-cel.png"></div>
+  <div class="z lista-mini" style="left:70px;top:500px;width:480px;display:grid;gap:14px">
+    <div class="doce"><span class="ic num" style="width:64px;height:64px;flex-basis:64px;font-size:36px">1</span><b>escolha o estilo</b></div>
+    <div class="doce"><span class="ic num" style="width:64px;height:64px;flex-basis:64px;font-size:36px;background:var(--menta-e)">2</span><b>veja a prévia</b></div>
+    <div class="doce"><span class="ic num" style="width:64px;height:64px;flex-basis:64px;font-size:36px;background:#E0A93B">3</span><b>saiba o preço</b></div>
+  </div>
+  <img class="z" src="arte/recortes/apontando.png" style="left:110px;bottom:-20px;height:640px;transform:scaleX(-1)">
+  <div class="z" style="right:90px;bottom:80px"><span class="pilula rosa">link na bio ♡</span></div>
 </div>
 
 <!-- 08 · 3 VIBES -->
 <div class="post menta-bg" id="n08" data-fundo="menta">
   <h1 class="cores z" style="left:70px;top:90px;font-size:160px"><span class="c1">3 marcas</span><br><span class="c3">3 vibes</span></h1>
-  <div class="z nav" style="left:60px;top:470px;width:470px;transform:rotate(-4deg)"><div class="barra"><i></i><i></i><i></i></div><img src="arte/print-doce.png"></div>
-  <div class="z nav" style="left:430px;top:700px;width:470px;transform:rotate(3deg)"><div class="barra"><i></i><i></i><i></i></div><img src="arte/print-sereno.png"></div>
-  <div class="z nav" style="left:90px;top:960px;width:470px;transform:rotate(-2deg)"><div class="barra"><i></i><i></i><i></i></div><img src="arte/print-folha.png"></div>
-  <span class="z etq" style="left:80px;top:440px;transform:rotate(-6deg)">fofo</span>
-  <span class="z etq" style="left:470px;top:665px;transform:rotate(4deg)">minimalista</span>
-  <span class="z etq" style="left:110px;top:1260px;transform:rotate(-3deg)">elegante</span>
-  <img class="z" src="arte/recortes/corpo.png" style="right:-150px;bottom:-20px;height:760px">
+  <div class="z nav" style="left:60px;top:480px;width:430px;transform:rotate(-4deg)"><div class="barra"><i></i><i></i><i></i></div><img src="arte/print-doce.png"></div>
+  <div class="z nav" style="left:380px;top:700px;width:420px;transform:rotate(3deg)"><div class="barra"><i></i><i></i><i></i></div><img src="arte/print-sereno.png"></div>
+  <div class="z nav" style="left:80px;top:960px;width:430px;transform:rotate(-2deg)"><div class="barra"><i></i><i></i><i></i></div><img src="arte/print-folha.png"></div>
+  <span class="z etq" style="left:70px;top:440px;transform:rotate(-6deg)">🍓 fofo</span>
+  <span class="z etq" style="left:620px;top:660px;transform:rotate(5deg)">🌿 minimalista</span>
+  <span class="z etq" style="left:100px;top:1250px;transform:rotate(-3deg)">☕ elegante</span>
+  <div class="z balao-doce" style="right:50px;top:130px;transform:rotate(6deg)">qual é<br>a sua?</div>
+  <img class="z" src="arte/recortes/corpo.png" style="right:-40px;bottom:-20px;height:600px">
 </div>
 
 <!-- 09 · PREÇOS -->
 <div class="post rosa-bg" id="n09" data-fundo="rosa">
   <h1 class="tit z" style="left:70px;top:70px;font-size:170px">Cabe no<br>bolso</h1>
-  <svg class="z" style="left:80px;top:400px" width="600" height="160" viewBox="0 0 620 170" data-calda></svg>
-  <div class="z" style="left:70px;top:560px;width:600px;display:grid;gap:24px">
-    <div class="doce preco"><div><span>sites a partir de</span><b>R$ 290</b></div></div>
-    <div class="doce preco"><div><span>design a partir de</span><b>R$ 190</b></div></div>
-    <div class="doce preco"><div><span>social media</span><b>R$ 290<small style="font-size:34px">/mês</small></b></div></div>
-    <div class="doce preco"><div><span>apps a partir de</span><b>R$ 1.990</b></div></div>
+  <div class="z balao-doce" style="right:60px;top:120px;transform:rotate(6deg)">Pix ou<br>cartão ♡</div>
+  <div class="z precos-grade" style="left:60px;top:500px;width:520px;display:grid;gap:18px">
+    <div class="doce preco"><span class="ic" style="background:var(--menta)"><svg><use href="#i-site"/></svg></span><div><span>sites a partir de</span><b>R$ 290</b></div></div>
+    <div class="doce preco"><span class="ic" style="background:var(--rosa-c)"><svg><use href="#i-design"/></svg></span><div><span>design a partir de</span><b>R$ 190</b></div></div>
+    <div class="doce preco"><span class="ic" style="background:#F4C95D"><svg><use href="#i-social"/></svg></span><div><span>social media</span><b>R$ 290<small style="font-size:30px">/mês</small></b></div></div>
+    <div class="doce preco"><span class="ic" style="background:var(--menta)"><svg><use href="#i-app"/></svg></span><div><span>apps a partir de</span><b>R$ 1.990</b></div></div>
   </div>
-  <img class="z" src="arte/recortes/ursinho.png" style="right:0;bottom:-10px;height:820px">
-  <div class="z" style="right:70px;top:120px"><span class="pilula rosa" style="transform:rotate(6deg);display:inline-block">Pix ou cartão</span></div>
+  <img class="z" src="arte/recortes/ursinho.png" style="right:-10px;bottom:-10px;height:700px">
+  <div class="z" style="right:70px;top:520px;width:360px"><span class="pilula menta" style="display:block;text-align:center;font-size:30px">template pronto<br>sai mais barato ✦</span></div>
 </div>
 
 <script>
-// gerador simples e repetível de enfeites
-let s = 7; const rnd = () => (s = (s * 16807) % 2147483647) / 2147483647;
+let s = 11; const rnd = () => (s = (s * 16807) % 2147483647) / 2147483647;
 const NS = 'http://www.w3.org/2000/svg';
-function svgEl(tag, attrs) { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); return e; }
-
-function camadaRosa(post) {
-  const svg = svgEl('svg', { class: 'camada', viewBox: '0 0 1080 1440', width: 1080, height: 1440 });
-  const usados = [];
-  for (let i = 0; i < 70 && usados.length < 26; i++) {
-    const x = rnd() * 1080, y = rnd() * 1440;
-    if (usados.some(([a, b]) => Math.hypot(a - x, b - y) < 170)) continue;
-    usados.push([x, y]);
-    const t = 50 + rnd() * 34, r = rnd() * 360;
-    const u = svgEl('use', { href: '#gota', x: x - t / 2, y: y - t / 2, width: t, height: t, transform: `rotate(${r} ${x} ${y})` });
-    svg.appendChild(u);
+const el = (tag, at) => { const e = document.createElementNS(NS, tag); for (const k in at) e.setAttribute(k, at[k]); return e; };
+const CORES = ['#FFFBEA', '#8AD0BB', '#F294AE', '#F4C95D', '#FFFFFF'];
+function granulado(svg, x0, y0, w, h, n, op = 1, livre = () => true) {
+  for (let i = 0, k = 0; k < n && i < n * 20; i++) {
+    const x = x0 + rnd() * w, y = y0 + rnd() * h;
+    if (!livre(x, y, 20)) continue; k++;
+    svg.appendChild(el('rect', { x, y, width: 28, height: 9, rx: 4.5, fill: CORES[Math.floor(rnd() * CORES.length)], opacity: op, transform: `rotate(${rnd() * 180} ${x + 14} ${y + 4.5})` }));
   }
-  // calda e granulado no canto de baixo
-  const onda = svgEl('path', { d: 'M0 1180 C120 1150 160 1240 260 1250 C360 1260 360 1340 460 1360 C520 1372 560 1440 560 1440 L0 1440 Z', fill: '#7E412A' });
-  svg.appendChild(onda);
-  granulado(svg, 0, 1230, 420, 210, 26);
-  post.prepend(svg);
 }
-function camadaMenta(post) {
-  const svg = svgEl('svg', { class: 'camada', viewBox: '0 0 1080 1440', width: 1080, height: 1440 });
-  const fitas = [
-    ['M-60 260 C200 120 360 -40 620 -60', '#E66684', 70],
-    ['M520 -80 C620 300 1000 360 1160 200', '#9ED9C6', 90],
-    ['M-80 1180 C120 1060 260 1240 180 1360 C120 1460 380 1460 480 1520', '#E66684', 70],
-    ['M-80 1300 C160 1200 340 1320 300 1500', '#9ED9C6', 80],
-    ['M1160 760 C980 820 960 1000 1140 1080', '#E66684', 60],
-  ];
-  for (const [d, c, w] of fitas) svg.appendChild(svgEl('path', { d, stroke: c, 'stroke-width': w, fill: 'none', 'stroke-linecap': 'round', opacity: .9 }));
-  for (let i = 0; i < 16; i++) {
-    const x = 520 + rnd() * 540, y = rnd() * 1440, t = 34 + rnd() * 40, tipo = rnd();
-    const u = tipo < .4 ? svgEl('use', { href: '#coracao', x, y, width: t, height: t })
-      : svgEl('use', { href: tipo < .7 ? '#estrela4' : '#estrela5', x, y, width: t, height: t, color: tipo < .7 ? '#6FBFA6' : '#7E412A' });
-    svg.appendChild(u);
+// áreas ocupadas pelos elementos do post (pra não pôr enfeite em cima)
+function ocupado(post) {
+  const pr = post.getBoundingClientRect();
+  const rs = [...post.querySelectorAll('.z')].map((e) => { const r = e.getBoundingClientRect(); return [r.left - pr.left, r.top - pr.top, r.right - pr.left, r.bottom - pr.top]; });
+  return (x, y, m) => !rs.some(([a, b, c, d]) => x > a - m && x < c + m && y > b - m && y < d + m);
+}
+function camada(post) {
+  const svg = el('svg', { class: 'camada', viewBox: '0 0 1080 1440', width: 1080, height: 1440 });
+  post.prepend(svg); return svg;
+}
+function rosa(post) {
+  const svg = camada(post), livre = ocupado(post), pos = [];
+  for (let i = 0; i < 600 && pos.length < 22; i++) {
+    const x = 30 + rnd() * 1020, y = 30 + rnd() * 1380, t = 52 + rnd() * 30;
+    if (!livre(x, y, t * .6) || pos.some(([a, b]) => Math.hypot(a - x, b - y) < 150)) continue;
+    pos.push([x, y]);
+    svg.appendChild(el('use', { href: '#gota', x: x - t / 2, y: y - t / 2, width: t, height: t, transform: `rotate(${rnd() * 360} ${x} ${y})` }));
   }
-  post.prepend(svg);
+  svg.appendChild(el('path', { d: 'M0 1250 C110 1220 150 1300 240 1310 C330 1320 340 1390 420 1440 L0 1440 Z', fill: '#7E412A' }));
+  granulado(svg, 0, 1290, 360, 150, 16);
 }
-function camadaChoco(post) {
-  const svg = svgEl('svg', { class: 'camada', viewBox: '0 0 1080 1440', width: 1080, height: 1440 });
-  granulado(svg, 0, 0, 1080, 1440, 90, .55);
-  svg.appendChild(svgEl('path', { d: 'M0 0 H1080 V40 C1000 40 1000 140 960 140 C920 140 930 60 860 60 C780 60 800 190 740 190 C690 190 700 50 600 50 C520 50 540 110 480 110 C420 110 430 40 340 40 C270 40 280 160 220 160 C170 160 180 50 100 50 C40 50 40 90 0 90 Z', fill: '#E66684' }));
-  post.prepend(svg);
+function menta(post) {
+  const svg = camada(post), livre = ocupado(post);
+  for (const [d, c, w] of [['M-60 260 C200 120 360 -40 620 -60', '#E66684', 70], ['M520 -80 C620 300 1000 360 1160 200', '#9ED9C6', 90],
+    ['M-80 1180 C120 1060 260 1240 180 1360 C120 1460 380 1460 480 1520', '#E66684', 70], ['M-80 1300 C160 1200 340 1320 300 1500', '#9ED9C6', 80],
+    ['M1160 760 C980 820 960 1000 1140 1080', '#E66684', 60]])
+    svg.appendChild(el('path', { d, stroke: c, 'stroke-width': w, fill: 'none', 'stroke-linecap': 'round', opacity: .9 }));
+  for (let i = 0, k = 0; k < 18 && i < 800; i++) {
+    const x = 20 + rnd() * 1040, y = 20 + rnd() * 1400, t = 36 + rnd() * 34, tipo = rnd();
+    if (!livre(x + t / 2, y + t / 2, t * .7)) continue; k++;
+    svg.appendChild(tipo < .4 ? el('use', { href: '#coracao', x, y, width: t, height: t })
+      : el('use', { href: tipo < .7 ? '#estrela4' : '#estrela5', x, y, width: t, height: t, color: tipo < .7 ? '#5FB39A' : '#7E412A' }));
+  }
 }
-function granulado(svg, x0, y0, w, h, n, op = 1) {
-  const cores = ['#FFFBEA', '#8AD0BB', '#F294AE', '#F4C95D', '#FFFFFF'];
+function choco(post) {
+  const svg = camada(post), livre = ocupado(post);
+  granulado(svg, 0, 0, 1080, 1440, 70, .6, livre);
+  svg.appendChild(el('path', { d: 'M0 0 H1080 V40 C1000 40 1000 140 960 140 C920 140 930 60 860 60 C780 60 800 190 740 190 C690 190 700 50 600 50 C520 50 540 110 480 110 C420 110 430 40 340 40 C270 40 280 160 220 160 C170 160 180 50 100 50 C40 50 40 90 0 90 Z', fill: '#E66684' }));
+}
+// calda escorrendo do título (desenhada no tamanho real, sem distorcer)
+function calda(post, h1) {
+  const pr = post.getBoundingClientRect(), r = h1.getBoundingClientRect();
+  const W = Math.round(r.width * .92), x0 = r.left - pr.left + 6, y0 = r.bottom - pr.top - 38;
+  const svg = el('svg', { class: 'calda-auto', width: W, height: 140, viewBox: `0 0 ${W} 140`, style: `left:${x0}px;top:${y0}px` });
+  let d = `M0 18 Q0 0 18 0 H${W - 18} Q${W} 0 ${W} 18 V30`, x = W;
+  while (x > 30) {
+    const larg = 34 + rnd() * 30, comp = 50 + rnd() * 70, meio = x - larg / 2;
+    d += ` C${x} 40 ${meio + larg / 2} ${comp - 30} ${meio + larg / 2} ${comp - 12} A${larg / 2} ${larg / 2} 0 0 1 ${meio - larg / 2} ${comp - 12} C${meio - larg / 2} ${comp - 30} ${x - larg} 40 ${x - larg - 10} 34`;
+    x -= larg + 10 + rnd() * 30;
+  }
+  d += ` L0 34 Z`;
+  svg.appendChild(el('path', { d, fill: '#7E412A', stroke: '#5A2D1C', 'stroke-width': 4 }));
+  svg.appendChild(el('path', { d: `M24 14 H${W * .45}`, stroke: '#A0603F', 'stroke-width': 7, 'stroke-linecap': 'round' }));
+  const n = Math.round(W / 34);
   for (let i = 0; i < n; i++) {
-    const x = x0 + rnd() * w, y = y0 + rnd() * h, r = rnd() * 180;
-    svg.appendChild(svgEl('rect', { x, y, width: 30, height: 9, rx: 4.5, fill: cores[Math.floor(rnd() * cores.length)], opacity: op, transform: `rotate(${r} ${x + 15} ${y + 4.5})` }));
+    const sx = 16 + rnd() * (W - 50), sy = 6 + rnd() * 18;
+    svg.appendChild(el('rect', { x: sx, y: sy, width: 22, height: 7, rx: 3.5, fill: CORES[i % CORES.length], transform: `rotate(${rnd() * 180} ${sx + 11} ${sy + 3.5})` }));
   }
+  post.appendChild(svg);
 }
-function calda(svg) {
-  svg.innerHTML = '';
-  svg.appendChild(svgEl('path', { fill: '#7E412A', d: 'M10 0 H610 C612 30 600 40 590 40 C575 40 574 70 560 70 C545 70 548 34 530 34 C512 34 520 120 498 120 C478 120 486 44 466 44 C446 44 452 80 432 80 C414 80 418 38 398 38 C376 38 384 150 360 150 C336 150 346 46 322 46 C300 46 306 90 286 90 C266 90 272 40 250 40 C228 40 236 128 212 128 C190 128 198 50 176 50 C156 50 160 84 140 84 C120 84 126 40 104 40 C80 40 90 110 66 110 C44 110 52 40 30 40 C14 40 10 20 10 0 Z' }));
-  svg.appendChild(svgEl('path', { stroke: '#A0603F', 'stroke-width': 8, 'stroke-linecap': 'round', fill: 'none', d: 'M40 14 H200' }));
-  granulado(svg, 20, 4, 580, 26, 18);
-}
-document.querySelectorAll('.post').forEach((p) => {
-  const f = p.dataset.fundo;
-  if (f === 'rosa') camadaRosa(p); else if (f === 'menta') camadaMenta(p); else camadaChoco(p);
+document.fonts.ready.then(() => {
+  document.querySelectorAll('.post').forEach((p) => {
+    p.querySelectorAll('h1.tit').forEach((h) => { if (!p.classList.contains('choco-bg')) calda(p, h); });
+    const f = p.dataset.fundo; (f === 'rosa' ? rosa : f === 'menta' ? menta : choco)(p);
+  });
+  document.body.dataset.pronto = '1';
 });
-document.querySelectorAll('[data-calda]').forEach(calda);
 </script>
 </body></html>
