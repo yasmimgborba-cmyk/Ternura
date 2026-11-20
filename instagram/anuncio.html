@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@700;800;900&family=Caveat:wght@700&display=swap" rel="stylesheet">
+<style>
+:root { --menta:#AFD4C0; --menta-e:#5E9C83; --choco:#88553E; --choco-e:#4E2A1A; --creme:#FAF6E6; --rosa:#F594A7; --rosa-e:#E2687F; }
+* { box-sizing:border-box; margin:0; }
+body { background:#999; display:flex; gap:40px; padding:40px; align-items:flex-start; font-family:Nunito, sans-serif; color:var(--choco-e); }
+.ad { position:relative; overflow:hidden; width:1080px; }
+.a { position:absolute; }
+.tit { font-family:Fredoka; font-weight:700; line-height:.92; color:var(--creme); -webkit-text-stroke:22px var(--choco-e); paint-order:stroke fill; text-shadow:0 12px 0 rgba(78,42,26,.5); }
+.tit .r { color:var(--rosa); } .tit .m { color:var(--menta); }
+.preco { background:var(--rosa-e); color:#fff; border:8px solid var(--choco-e); border-radius:50%; display:grid; place-items:center; text-align:center; box-shadow:0 14px 0 var(--choco-e); font-family:Fredoka; font-weight:700; line-height:.95; }
+.preco small { display:block; font-size:.32em; font-weight:600; }
+.cta { display:inline-flex; align-items:center; gap:18px; background:var(--choco-e); color:var(--creme); font-family:Fredoka; font-weight:700; border-radius:999px; border:7px solid var(--creme); box-shadow:0 0 0 7px var(--choco-e), 0 16px 0 7px rgba(78,42,26,.35); }
+.selo { display:inline-flex; align-items:center; gap:12px; background:#fff; border:6px solid var(--choco-e); border-radius:999px; font-weight:900; color:var(--choco-e); box-shadow:0 8px 0 var(--choco-e); }
+.selo i { font-style:normal; width:46px; height:46px; border-radius:50%; display:grid; place-items:center; color:#fff; background:var(--menta-e); font-size:26px; }
+.cel { background:#161616; border-radius:62px; padding:16px; box-shadow:0 30px 60px rgba(78,42,26,.35); }
+.cel img { display:block; width:100%; border-radius:48px; }
+.bolinhas { background-color:var(--rosa); background-image:radial-gradient(var(--choco-e) 13px, transparent 14px); background-size:76px 76px; }
+.bolinhas-m { background-color:var(--menta); background-image:radial-gradient(rgba(255,255,255,.6) 11px, transparent 12px); background-size:70px 70px; }
+.bri { position:absolute; color:var(--creme); z-index:6; }
+.handle { font-weight:900; font-size:30px; background:var(--creme); color:var(--choco-e); border:5px solid var(--choco-e); border-radius:999px; padding:6px 22px; }
+</style></head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs>
+  <symbol id="bri" viewBox="0 0 24 24"><path d="M12 1l2.6 8.4L23 12l-8.4 2.6L12 23l-2.6-8.4L1 12l8.4-2.6z" fill="currentColor" stroke="#4E2A1A" stroke-width="1.5" stroke-linejoin="round"/></symbol>
+</defs></svg>
+
+<!-- A · FEED 4:5 · oferta -->
+<div class="ad bolinhas-m" id="a" style="height:1350px">
+  <span class="a handle" style="left:60px;top:50px;z-index:7">@ternvra</span>
+  <h1 class="a tit" style="left:55px;top:140px;font-size:150px;z-index:5">Seu site<br><span class="r">pronto</span> e<br><span style="color:#fff">lindo</span> ♡</h1>
+  <div class="a preco" style="left:70px;top:720px;width:340px;height:340px;font-size:116px;transform:rotate(-8deg);z-index:6"><div><small>a partir de</small>R$290</div></div>
+  <svg class="bri" style="left:640px;top:180px" width="90" height="90"><use href="#bri"/></svg>
+  <div class="a cel" style="left:440px;top:620px;width:300px;transform:rotate(5deg);z-index:3"><img src="arte/print-orcamento-template.png"></div>
+  <img class="a" src="arte/recortes/apontando.png" style="right:-70px;bottom:-20px;height:900px;z-index:4;filter:drop-shadow(0 18px 24px rgba(78,42,26,.3))">
+  <div class="a" style="left:70px;top:1110px;z-index:7"><span class="cta" style="font-size:52px;padding:22px 46px">monte o seu agora →</span></div>
+</div>
+
+<!-- B · FEED 4:5 · dor + benefício -->
+<div class="ad bolinhas" id="b" style="height:1350px">
+  <div class="a" style="left:60px;right:60px;top:60px;background:var(--creme);border:8px solid var(--choco-e);border-radius:56px;box-shadow:0 16px 0 var(--choco-e);padding:50px 56px 60px;z-index:4">
+    <p style="font-family:Caveat;font-size:66px;color:var(--rosa-e);line-height:1">cansou de esperar orçamento?</p>
+    <h1 class="tit" style="font-size:118px;margin-top:16px;-webkit-text-stroke-width:18px">Veja o preço<br><span class="m">na hora</span> ✦</h1>
+    <div style="display:grid;gap:18px;margin-top:40px">
+      <span class="selo" style="font-size:42px;padding:8px 30px 8px 8px"><i>✓</i>escolha estilo e cores</span>
+      <span class="selo" style="font-size:42px;padding:8px 30px 8px 8px"><i style="background:var(--rosa-e)">✓</i>veja a prévia do seu site</span>
+      <span class="selo" style="font-size:42px;padding:8px 30px 8px 8px"><i style="background:var(--choco)">✓</i>pague no Pix ou cartão</span>
+    </div>
+  </div>
+  <img class="a" src="arte/recortes/look3.png" style="right:30px;bottom:-20px;height:620px;z-index:5;filter:drop-shadow(0 16px 20px rgba(78,42,26,.35))">
+  <div class="a" style="left:60px;bottom:90px;z-index:6"><span class="cta" style="font-size:48px;padding:20px 40px">sites a partir de R$ 290 →</span></div>
+</div>
+
+<!-- C · STORY / REELS 9:16 -->
+<div class="ad" id="c" style="height:1920px;background:var(--choco-e)">
+  <div class="a" style="inset:0;background-image:radial-gradient(rgba(250,246,230,.08) 12px, transparent 13px);background-size:80px 80px"></div>
+  <div class="a" style="left:0;right:0;top:0;height:60px;background:radial-gradient(circle at 30px 0, var(--creme) 28px, transparent 29px) 0 0/60px 60px repeat-x"></div>
+  <span class="a handle" style="left:50%;top:150px;transform:translateX(-50%);z-index:7">@ternvra</span>
+  <h1 class="a tit" style="left:0;right:0;top:250px;text-align:center;font-size:160px;-webkit-text-stroke-color:var(--rosa-e);text-shadow:0 12px 0 rgba(0,0,0,.35);z-index:5">Sua marca<br>merece um<br><span class="m">site lindo</span></h1>
+  <div class="a cel" style="left:110px;top:820px;width:400px;transform:rotate(-6deg);z-index:3"><img src="arte/print-orcamento-template.png"></div>
+  <img class="a" src="arte/recortes/apontando.png" style="right:-60px;top:760px;height:960px;transform:scaleX(-1);z-index:4;filter:drop-shadow(0 18px 24px rgba(0,0,0,.35))">
+  <div class="a preco" style="left:380px;top:1330px;width:300px;height:300px;font-size:100px;transform:rotate(-8deg);z-index:6"><div><small>a partir de</small>R$290</div></div>
+  <svg class="bri" style="left:80px;top:760px" width="90" height="90"><use href="#bri"/></svg>
+  <svg class="bri" style="right:90px;top:700px;color:var(--rosa)" width="70" height="70"><use href="#bri"/></svg>
+  <div class="a" style="left:0;right:0;top:1710px;text-align:center;z-index:7"><span class="cta" style="font-size:56px;padding:24px 56px;background:var(--rosa-e);color:#fff">orçamento na hora ↑</span></div>
+</div>
+</body></html>
