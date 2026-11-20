@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Social media · Ternura</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Nunito:wght@600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
+<style>
+:root { --menta:#AFD4C0; --choco:#4E2A1A; --creme:#FAF6E6; --rosa:#F594A7; --rosa-e:#E2687F; }
+* { box-sizing:border-box; margin:0; }
+body { background:var(--creme); color:var(--choco); font:16px/1.5 Nunito, sans-serif; background-image:radial-gradient(rgba(175,212,192,.45) 3px, transparent 3.5px); background-size:34px 34px; }
+.w { max-width:1080px; margin:0 auto; padding:40px 16px 80px; }
+.perfil { display:flex; gap:28px; align-items:center; flex-wrap:wrap; background:#fff; border:5px solid var(--choco); border-radius:32px; box-shadow:0 10px 0 var(--choco); padding:26px 30px; }
+.perfil img { width:110px; height:110px; border-radius:50%; object-fit:cover; object-position:top; border:5px solid var(--menta); }
+.perfil h1 { font-family:Fredoka; font-size:clamp(1.6rem,4vw,2.3rem); line-height:1.05; }
+.perfil p { font-weight:700; color:#7a5a4c; }
+.tag { display:inline-block; background:var(--rosa); color:#fff; font-weight:800; font-size:.8rem; padding:3px 12px; border-radius:999px; margin-bottom:6px; }
+h2 { font-family:Caveat; font-size:2.4rem; color:var(--rosa-e); margin:40px 0 14px; }
+.grade { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; }
+@media (max-width:560px) { .grade { grid-template-columns:repeat(2,1fr); } }
+.grade a { display:block; aspect-ratio:3/4; overflow:hidden; border-radius:10px; background:#eee; }
+.grade img { width:100%; height:100%; object-fit:cover; transition:transform .25s; display:block; }
+.grade a:hover img { transform:scale(1.04); }
+.voltar { display:inline-block; margin-top:30px; background:var(--choco); color:var(--creme); text-decoration:none; font-weight:800; padding:12px 24px; border-radius:999px; }
+.feito { position:fixed; left:14px; bottom:14px; background:#FFFEEF; color:#7E412A; font:700 12px system-ui; padding:6px 12px; border-radius:999px; text-decoration:none; border:2px solid #7E412A; z-index:9; }
+dialog { border:0; padding:0; background:transparent; max-width:min(92vw,560px); }
+dialog img { width:100%; border-radius:16px; display:block; }
+dialog::backdrop { background:rgba(78,42,26,.75); }
+</style></head>
+<body>
+<div class="w">
+  <div class="perfil">
+    <img src="/img/avatar.jpg" alt="">
+    <div><span class="tag">projeto real · social media</span>
+      <h1>Instagram da Ternura</h1>
+      <p>Identidade, paleta e posts de conteúdo e venda. Tudo criado do zero.</p></div>
+  </div>
+
+  <h2>conteúdo ♡</h2>
+  <div class="grade" id="g1"></div>
+  <h2>carrossel: paleta de cores</h2>
+  <div class="grade" id="g2"></div>
+
+  <a class="voltar" href="/#portfolio">← voltar ao portfólio</a>
+</div>
+<dialog id="zoom" onclick="this.close()"><img alt=""></dialog>
+<a class="feito" href="/" target="_top">feito por Ternura ♡</a>
+<script>
+const g1 = [13, 1, 2, 3, 4, 5, 6, 7], g2 = [8, 9, 10, 11, 12];
+const pad = (n) => String(n).padStart(2, '0');
+for (const [id, l] of [['g1', g1], ['g2', g2]])
+  document.getElementById(id).innerHTML = l.map((n) => `<a href="img/${pad(n)}.jpg"><img src="img/${pad(n)}.jpg" loading="lazy" alt="post"></a>`).join('');
+const z = document.getElementById('zoom');
+document.addEventListener('click', (e) => { const a = e.target.closest('.grade a'); if (!a) return; e.preventDefault(); z.querySelector('img').src = a.href; z.showModal(); });
+</script>
+</body></html>

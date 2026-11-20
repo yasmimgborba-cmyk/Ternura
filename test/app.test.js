@@ -94,7 +94,7 @@ test('pedido sob consulta: painel define valor e marca pago', async () => {
 });
 
 test('páginas e exemplos respondem', async () => {
-  for (const p of ['/', '/orcamento', '/api/catalogo', '/config.json', '/exemplos/blast/', '/exemplos/underground/', '/exemplos/doce-nuvem/', '/exemplos/lia-moreno/', '/exemplos/sereno/', '/exemplos/folha/', '/img/logo.png']) {
+  for (const p of ['/', '/orcamento', '/api/catalogo', '/config.json', '/exemplos/blast/', '/exemplos/underground/', '/exemplos/doce-nuvem/', '/exemplos/social/', '/exemplos/social/img/01.jpg', '/exemplos/lia-moreno/', '/exemplos/sereno/', '/exemplos/folha/', '/img/logo.png']) {
     assert.strictEqual((await chamar(p)).status, 200, p);
   }
 });
