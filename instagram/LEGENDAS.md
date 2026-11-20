@@ -238,3 +238,120 @@ conta nos comentários ↓ (a minha é menta com chocolate, óbvio ♡)
 
 #branding #marketingdigital #identidadevisual #empreendedorismo
 ```
+
+---
+
+## Leva 2 de conteúdo (pasta conteudo2)
+
+### 01 · Você cuida do seu negócio, eu cuido da sua imagem
+```
+você cuida do seu negócio, eu cuido da sua imagem ♡
+
+enquanto você atende cliente, produz, entrega e resolve mil coisas, eu cuido de como a sua marca aparece: identidade visual, site, posts e tudo que faz alguém confiar em você antes mesmo de conversar.
+
+me chama no link da bio ✦
+
+#designestrategico #identidadevisual #branding #empreendedorismofeminino #marketingdigital
+```
+
+### 02 · Paleta docinha
+```
+paleta docinha pra marcas fofas 🍫🌿🍓
+
+#4E2A1A chocolate · #AFD4C0 menta · #F594A7 rosa
+
+combina com confeitaria, papelaria, moda, beleza e qualquer marca que quer passar carinho. salva pra usar ♡
+
+#paletadecores #designgrafico #identidadevisual #inspiracao
+```
+
+### 03 · Seu feed está sem cara de marca? (carrossel, 2 slides)
+```
+seu feed está sem cara de marca?
+
+5 ajustes simples que mudam tudo:
+1. só 2 fontes
+2. uma paleta fixa
+3. respiro nas bordas
+4. títulos curtos e grandes
+5. elementos que se repetem
+
+salva e aplica no próximo post ♡
+
+#feedorganizado #dicasdeinstagram #socialmedia #marketingdigital #designdeposts
+```
+
+### 04 · Identidade visual (brand board)
+```
+identidade visual não é só logo ✦
+
+é o conjunto: logo, cores, fontes, ilustração, cartão, embalagem. tudo conversando entre si. esse é o brand board da Ternura ♡
+
+quer o seu? link na bio
+
+#identidadevisual #brandboard #branding #logotipo #designgrafico
+```
+
+### 05 · Cartão fidelidade
+```
+um detalhe que faz o cliente voltar ♡
+
+cartão fidelidade, tag, embalagem, cartão de agradecimento... são pequenos, mas são marketing. o cliente guarda, mostra pras amigas e lembra de você.
+
+faço o seu com a cara da sua marca, link na bio ✦
+
+#fidelizacao #marketingdepequenosnegocios #papelaria #branding #empreendedorismo
+```
+
+### 06 · Um dia na vida de uma designer (carrossel, 3 slides)
+```
+um dia na vida de uma designer ♡
+
+8h café e referências
+10h criando os projetos
+14h fotos e conteúdo
+17h planejando a semana
+
+e no tempo livre: violão, bubble tea, plantinhas e uma corridinha 🌿
+
+e você, como é o seu dia? conta aqui ↓
+
+#diadeumadesigner #rotina #designer #bastidores #freelancer
+```
+
+### 07 · Marca boa é igual macaron
+```
+marca boa é igual macaron 🍬
+
+bonita por fora (visual que chama atenção) e recheada por dentro (conteúdo, atendimento, entrega).
+
+só uma das partes não sustenta. as duas juntas fazem o cliente voltar ♡
+
+#branding #marketingdigital #empreendedorismo #reflexao
+```
+
+### 08 · Menta + chocolate
+```
+a dupla do momento: menta + chocolate 🌿🍫
+
+tá no cabelo, na make, na moda e nos doces. doce + fresco passa uma sensação acolhedora e moderna, perfeita pra marcas fofas.
+
+usaria na sua marca?
+
+#tendencias #paletadecores #mintchocolate #inspiracao #identidadevisual
+```
+
+### 09 · Checklist antes de postar
+```
+checklist antes de postar ✓
+
+☐ tem um título que prende em 3 segundos?
+☐ dá pra ler no celular, sem zoom?
+☐ usa as cores da sua marca?
+☐ a legenda tem uma chamada pra ação?
+☐ você salvaria esse post?
+
+salva pra usar sempre ♡
+
+#checklist #dicasdeinstagram #socialmedia #marketingdigital #conteudo
+```
