@@ -1,4 +1,4 @@
-// Ternura · Cloudflare Worker: orçamento, pagamentos (Pix Mercado Pago + Stripe) e painel.
+// Ternura · Cloudflare Worker: orçamento, pagamento (Pix e cartão pela Stripe) e painel.
 import * as precos from './precos.js';
 import * as db from './db.js';
 import { stripeAtivo, criarCheckout, lerCheckout, eventoStripe } from './stripe.js';

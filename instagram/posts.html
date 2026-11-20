@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Instrument+Serif:ital@0;1&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<style>
+:root { --menta:#8AD0BB; --menta-s:#D9F1E8; --menta-e:#3E9A7F; --choco:#7E412A; --choco-e:#4A2616; --creme:#FFFEEF; --rosa:#E66684; --rosa-s:#FBDCE4; }
+* { box-sizing:border-box; margin:0; }
+body { background:#ddd; font-family:Manrope, sans-serif; color:var(--choco-e); display:flex; flex-wrap:wrap; gap:40px; padding:40px; }
+.post { width:1080px; height:1440px; position:relative; overflow:hidden; padding:96px 90px; display:flex; flex-direction:column; }
+.capa { width:1080px; height:1920px; position:relative; display:grid; place-items:center; }
+.creme { background:var(--creme); } .menta { background:var(--menta); } .rosa { background:var(--rosa-s); } .choco { background:var(--choco-e); color:var(--creme); }
+.pontos::before { content:''; position:absolute; inset:0; background-image:radial-gradient(rgba(126,65,42,.10) 3px, transparent 3.5px); background-size:44px 44px; pointer-events:none; }
+.choco.pontos::before { background-image:radial-gradient(rgba(255,254,239,.07) 3px, transparent 3.5px); }
+.menta.pontos::before { background-image:radial-gradient(rgba(255,255,255,.35) 3px, transparent 3.5px); }
+.tag { align-self:flex-start; font-weight:800; font-size:30px; letter-spacing:.14em; text-transform:uppercase; padding:12px 26px; border-radius:999px; background:var(--creme); color:var(--choco); border:3px solid var(--choco); position:relative; z-index:2; }
+.choco .tag { background:var(--menta); color:var(--choco-e); border-color:var(--menta); }
+h1 { font-weight:800; font-size:104px; line-height:1.02; letter-spacing:-.035em; margin-top:40px; position:relative; z-index:2; }
+h1 em { font-family:'Instrument Serif'; font-weight:400; font-style:italic; color:var(--rosa); letter-spacing:-.01em; }
+.choco h1 em { color:var(--menta); }
+.sub { font-size:40px; line-height:1.4; font-weight:600; margin-top:28px; opacity:.85; position:relative; z-index:2; }
+.rodape { position:absolute; left:90px; right:90px; bottom:70px; display:flex; justify-content:space-between; align-items:center; font-weight:800; font-size:30px; z-index:3; }
+.rodape img { height:82px; }
+.rodape .seta { background:var(--choco); color:var(--creme); padding:14px 28px; border-radius:999px; }
+.choco .rodape .seta { background:var(--rosa); }
+.arco { border:6px solid var(--choco); border-radius:600px 600px 50px 50px; overflow:hidden; box-shadow:22px 22px 0 var(--menta); background:var(--menta-s); }
+.arco img { width:100%; height:100%; object-fit:cover; object-position:top; display:block; }
+.balao { position:absolute; background:#fff; border:5px solid var(--choco); border-radius:36px; padding:26px 34px; font-weight:800; font-size:38px; line-height:1.3; color:var(--choco); box-shadow:0 10px 0 rgba(126,65,42,.15); z-index:4; }
+.balao b { display:inline-block; background:var(--menta); border:4px solid var(--choco); border-radius:18px; padding:0 18px; margin-bottom:6px; transform:rotate(-4deg); font-size:34px; }
+.ad { position:absolute; z-index:3; }
+.lista { display:grid; gap:16px; margin-top:34px; position:relative; z-index:2; }
+.item { display:flex; align-items:center; gap:28px; background:var(--creme); border:4px solid var(--choco); border-radius:999px 36px 36px 999px; padding:10px 36px 10px 10px; font-size:36px; font-weight:800; }
+.item i { flex:0 0 78px; height:78px; border-radius:50%; background:var(--menta-s); border:3px dashed var(--menta-e); display:grid; place-items:center; font-style:normal; color:var(--menta-e); }
+.item i svg { width:46px; height:46px; }
+.item span { font-weight:600; font-size:25px; display:block; opacity:.7; margin-top:2px; }
+.navegador { border-radius:26px; overflow:hidden; background:#fff; box-shadow:0 40px 80px rgba(0,0,0,.3); border:4px solid rgba(255,255,255,.2); }
+.navegador .barra { display:flex; gap:12px; padding:18px 22px; background:#F3EEE9; }
+.navegador .barra i { width:18px; height:18px; border-radius:50%; background:var(--rosa); } .navegador .barra i:nth-child(2) { background:#F4C95D; } .navegador .barra i:nth-child(3) { background:var(--menta); }
+.navegador img { display:block; width:100%; }
+.celular { border:16px solid #1d1d1f; border-radius:64px; overflow:hidden; background:#000; box-shadow:0 40px 80px rgba(0,0,0,.3); }
+.celular img { display:block; width:100%; }
+.passos { display:grid; gap:26px; margin-top:50px; position:relative; z-index:2; }
+.passo { display:flex; gap:30px; align-items:flex-start; background:#fff; border:4px solid var(--choco); border-radius:40px; padding:30px 36px; }
+.passo b.n { flex:0 0 84px; height:84px; border-radius:50%; background:var(--rosa); color:#fff; display:grid; place-items:center; font-size:42px; border:4px solid var(--choco); }
+.passo strong { font-size:42px; display:block; } .passo span { font-size:30px; font-weight:600; opacity:.75; }
+.precos { display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:50px; position:relative; z-index:2; }
+.preco { background:#fff; border:4px solid var(--choco); border-radius:40px; padding:34px 36px; }
+.preco small { font-size:28px; font-weight:700; opacity:.7; display:block; } .preco b { font-size:64px; letter-spacing:-.03em; display:block; color:var(--choco); } .preco span { font-size:32px; font-weight:800; }
+.trio { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:auto; margin-bottom:150px; position:relative; z-index:2; }
+.trio div { border-radius:24px; overflow:hidden; border:4px solid var(--choco); background:#fff; transform:rotate(-2deg); box-shadow:0 20px 40px rgba(0,0,0,.15); }
+.trio div:nth-child(2) { transform:rotate(1.5deg) translateY(-30px); } .trio div:nth-child(3) { transform:rotate(-1deg); }
+.trio img { display:block; width:100%; height:520px; object-fit:cover; object-position:top left; }
+.trio p { font-size:28px; font-weight:800; padding:14px 18px; text-align:center; }
+.citacao { font-family:'Instrument Serif'; font-style:italic; font-size:84px; line-height:1.12; position:relative; z-index:2; margin-top:44px; }
+.script { font-family:'Dancing Script'; color:var(--rosa); }
+/* capas dos destaques */
+.capa { background:var(--creme); }
+.capa .circ { width:640px; height:640px; border-radius:50%; background:var(--menta); border:14px solid var(--choco); display:grid; place-items:center; position:relative; box-shadow:0 0 0 30px var(--rosa-s); }
+.capa .circ svg { width:300px; height:300px; color:var(--choco-e); }
+.capa.r .circ { background:var(--rosa-s); box-shadow:0 0 0 30px var(--menta-s); }
+.capa .nome { position:absolute; bottom:420px; font-weight:800; font-size:64px; color:var(--choco); letter-spacing:.06em; text-transform:uppercase; }
+</style></head>
+<body>
+
+<!-- SVGs reutilizados -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="coracao" viewBox="0 0 24 22"><path d="M12 21s-9-5.6-9-12A5 5 0 0 1 12 6a5 5 0 0 1 9 3c0 6.4-9 12-9 12z" fill="#E66684" stroke="#7E412A" stroke-width="1.4"/></symbol>
+    <symbol id="estrela" viewBox="0 0 24 24"><path d="M12 1l2.6 8.4L23 12l-8.4 2.6L12 23l-2.6-8.4L1 12l8.4-2.6z" fill="#7E412A"/></symbol>
+    <symbol id="espiral" viewBox="0 0 40 40"><path fill="none" stroke="#7E412A" stroke-width="2.6" stroke-linecap="round" d="M20 20c0-2 2-3 3.5-2s1.6 4-.5 5.5-6 .8-7-2.2 1-8 5.5-8.5 9.5 2.6 9.5 7.6-4.5 10-10.5 10S8.5 27 8.5 21 13 9.5 20 9.5"/></symbol>
+    <symbol id="i-site" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 6.5h.01M10 6.5h.01"/></g></symbol>
+    <symbol id="i-app" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M10.5 18.5h3"/></g></symbol>
+    <symbol id="i-soft" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M8 8l-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/></symbol>
+    <symbol id="i-design" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><circle cx="8.5" cy="10" r="1.2"/><circle cx="12" cy="7.5" r="1.2"/><circle cx="15.5" cy="10" r="1.2"/><path d="M12 21a2 2 0 0 1 0-4h2a3 3 0 0 0 3-3"/></g></symbol>
+    <symbol id="i-social" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.3 6.7h.01"/></g></symbol>
+    <symbol id="i-brand" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></g></symbol>
+    <symbol id="i-cifrao" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 3v18M16.5 7.5c0-1.7-2-3-4.5-3s-4.5 1.3-4.5 3.2c0 4.3 9 2.3 9 6.8 0 1.9-2 3.2-4.5 3.2s-4.5-1.3-4.5-3"/></g></symbol>
+    <symbol id="i-passos" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 6h10M4 12h16M4 18h7"/><circle cx="18" cy="6" r="2"/><circle cx="15" cy="18" r="2"/></g></symbol>
+    <symbol id="i-duvida" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6M12 17h.01"/></g></symbol>
+    <symbol id="i-pasta" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M12 15.5s-3-1.8-3-3.8a1.6 1.6 0 0 1 3-.8 1.6 1.6 0 0 1 3 .8c0 2-3 3.8-3 3.8z"/></g></symbol>
+  </defs>
+</svg>
+
+<!-- 01 · Apresentação -->
+<div class="post creme pontos" id="post-01">
+  <span class="tag">prazer ♡</span>
+  <h1 style="max-width:520px">Oi! Eu sou a <em>Ternura</em></h1>
+  <p class="sub" style="max-width:450px">Sites, apps, design e social media feitos com carinho e estratégia.</p>
+  <div class="arco" style="position:absolute;right:70px;top:250px;width:440px;height:760px"><img src="arte/pirulito.jpg"></div>
+  <svg class="ad" style="right:40px;top:200px;width:110px;height:100px;transform:rotate(14deg)"><use href="#coracao"/></svg>
+  <svg class="ad" style="left:90px;top:760px;width:90px;height:90px"><use href="#espiral"/></svg>
+  <svg class="ad" style="right:30px;top:700px;width:70px;height:70px"><use href="#estrela"/></svg>
+  <div class="balao" style="left:90px;top:860px;transform:rotate(-3deg);max-width:560px"><b>oii!</b><br>Mal posso esperar pra te mostrar meus trabalhos ♪</div>
+  <div class="rodape"><img src="arte/logo.png"><span class="seta">segue pra ver mais ♡</span></div>
+</div>
+
+<!-- 02 · Serviços -->
+<div class="post menta pontos" id="post-02">
+  <span class="tag">serviços</span>
+  <h1 style="font-size:92px">O que eu <em style="color:var(--choco)">crio</em> pra você</h1>
+  <div class="lista">
+    <div class="item"><i><svg><use href="#i-site"/></svg></i><div>Sites e lojas<span>landing page, institucional, e-commerce</span></div></div>
+    <div class="item"><i><svg><use href="#i-app"/></svg></i><div>Apps<span>Android e iPhone</span></div></div>
+    <div class="item"><i><svg><use href="#i-soft"/></svg></i><div>Software e automação<span>sistemas, painéis, bots</span></div></div>
+    <div class="item"><i><svg><use href="#i-design"/></svg></i><div>Design gráfico<span>logo, identidade visual, peças</span></div></div>
+    <div class="item"><i><svg><use href="#i-social"/></svg></i><div>Social media<span>posts, reels e gestão mensal</span></div></div>
+    <div class="item"><i><svg><use href="#i-brand"/></svg></i><div>Personal brand<span>sua marca pessoal completa</span></div></div>
+  </div>
+  <div class="rodape"><img src="arte/logo.png"><span class="seta">orçamento no link da bio</span></div>
+</div>
+
+<!-- 03 · Portfólio Blast -->
+<div class="post choco pontos" id="post-03">
+  <span class="tag">portfólio · software</span>
+  <h1 style="font-size:96px">Blast: marketing no X <em>no piloto automático</em></h1>
+  <p class="sub" style="font-size:34px;max-width:860px">Software de desktop pra agências: vários perfis, respostas com IA, relatórios e licença por assinatura.</p>
+  <div class="navegador" style="margin-top:56px;transform:rotate(-1.5deg)"><div class="barra"><i></i><i></i><i></i></div><img src="arte/print-blast.png"></div>
+  <div class="rodape"><img src="arte/logo.png" style="filter:brightness(1.05)"><span class="seta">projeto real ♡</span></div>
+</div>
+
+<!-- 04 · Como funciona -->
+<div class="post rosa pontos" id="post-04">
+  <span class="tag">como funciona</span>
+  <h1>Do orçamento <em>ao lançamento</em></h1>
+  <div class="passos">
+    <div class="passo"><b class="n">1</b><div><strong>Monte seu projeto</strong><span>escolha serviço, estilo, cores e extras no site</span></div></div>
+    <div class="passo"><b class="n">2</b><div><strong>Veja prévia e preço</strong><span>tudo na hora, antes de qualquer conversa</span></div></div>
+    <div class="passo"><b class="n">3</b><div><strong>Pague no Pix ou cartão</strong><span>50% de entrada ou à vista com desconto</span></div></div>
+    <div class="passo"><b class="n">4</b><div><strong>A gente cria junto</strong><span>briefing, ajustes, entrega e suporte</span></div></div>
+  </div>
+  <div class="rodape"><img src="arte/logo.png"><span class="seta">ternura.pages.dev</span></div>
+</div>
+
+<!-- 05 · Frase com a bonequinha -->
+<div class="post creme pontos" id="post-05">
+  <span class="tag">bastidores</span>
+  <p class="citacao" style="max-width:500px;font-size:72px">“Cada projeto recebe o mesmo carinho que eu colocaria no meu.”</p>
+  <p class="sub" style="max-width:440px;font-size:32px">Por isso eu não faço nada no automático: cada detalhe é pensado pra sua marca.</p>
+  <div class="arco" style="position:absolute;right:60px;bottom:200px;width:440px;height:760px"><img src="arte/ursinho.jpg"></div>
+  <svg class="ad" style="right:40px;bottom:930px;width:100px;height:92px;transform:rotate(12deg)"><use href="#coracao"/></svg>
+  <svg class="ad" style="right:470px;bottom:300px;width:70px;height:70px"><use href="#estrela"/></svg>
+  <div class="rodape"><img src="arte/logo.png"><span class="seta">♡ ternura</span></div>
+</div>
+
+<!-- 06 · Portfólio Underground -->
+<div class="post menta pontos" id="post-06">
+  <span class="tag">portfólio · app</span>
+  <h1 style="font-size:96px">Underground GYN</h1>
+  <p class="sub" style="font-size:36px;max-width:560px">App de rolês alternativos em Goiânia: agenda, comunidade e venda de ingressos com Pix.</p>
+  <div class="navegador" style="position:absolute;left:90px;bottom:200px;width:700px;transform:rotate(-2deg)"><div class="barra"><i></i><i></i><i></i></div><img src="arte/print-underground.png"></div>
+  <div class="celular" style="position:absolute;right:80px;bottom:150px;width:330px;transform:rotate(4deg)"><img src="arte/print-underground-cel.png"></div>
+  <div class="rodape"><img src="arte/logo.png"><span class="seta">projeto real ♡</span></div>
+</div>
+
+<!-- 07 · Orçamento na hora -->
+<div class="post choco pontos" id="post-07">
+  <span class="tag">novidade</span>
+  <h1 style="max-width:560px;font-size:96px">Seu orçamento <em>em 2 minutos</em></h1>
+  <p class="sub" style="font-size:34px;max-width:480px">Escolha o estilo e as cores, veja a prévia do seu site e o preço na hora. Sem esperar resposta.</p>
+  <div class="celular" style="position:absolute;right:80px;top:420px;width:370px;transform:rotate(3deg)"><img src="arte/print-orcamento-cel.png"></div>
+  <div class="balao" style="left:90px;bottom:220px;transform:rotate(-3deg);max-width:500px"><b>Pix ou cartão</b><br>pagamento seguro, direto no site</div>
+  <div class="rodape"><img src="arte/logo.png"><span class="seta">link na bio →</span></div>
+</div>
+
+<!-- 08 · Três estilos -->
+<div class="post rosa pontos" id="post-08">
+  <span class="tag">portfólio · estilos</span>
+  <h1>3 marcas, <em>3 vibes</em></h1>
+  <p class="sub" style="font-size:36px">Fofo, minimalista ou elegante: o visual nasce da personalidade da marca.</p>
+  <div class="trio">
+    <div><img src="arte/print-doce.png"><p>Doce Nuvem · fofo</p></div>
+    <div><img src="arte/print-sereno.png"><p>Sereno · minimalista</p></div>
+    <div><img src="arte/print-folha.png"><p>Folha &amp; Co. · elegante</p></div>
+  </div>
+  <div class="rodape"><img src="arte/logo.png"><span class="seta">qual é a sua?</span></div>
+</div>
+
+<!-- 09 · Preços -->
+<div class="post creme pontos" id="post-09">
+  <span class="tag">preços</span>
+  <h1>Cabe no seu <em>bolso</em> ♡</h1>
+  <p class="sub" style="font-size:36px">Comece com um template pronto e cresça depois.</p>
+  <div class="precos">
+    <div class="preco"><small>Sites a partir de</small><b>R$ 290</b><span>template pronto</span></div>
+    <div class="preco"><small>Design a partir de</small><b>R$ 190</b><span>logo e identidade</span></div>
+    <div class="preco"><small>Social media</small><b>R$ 290</b><span>por mês</span></div>
+    <div class="preco"><small>Apps a partir de</small><b>R$ 1.990</b><span>Android e iPhone</span></div>
+  </div>
+  <svg class="ad" style="right:80px;top:110px;width:120px;height:110px;transform:rotate(12deg)"><use href="#coracao"/></svg>
+  <div class="rodape"><img src="arte/logo.png"><span class="seta">orçamento no link da bio</span></div>
+</div>
+
+<!-- Capas dos destaques -->
+<div class="capa" id="destaque-portfolio"><div class="circ"><svg><use href="#i-pasta"/></svg></div></div>
+<div class="capa r" id="destaque-servicos"><div class="circ"><svg><use href="#i-site"/></svg></div></div>
+<div class="capa" id="destaque-precos"><div class="circ"><svg><use href="#i-cifrao"/></svg></div></div>
+<div class="capa r" id="destaque-processo"><div class="circ"><svg><use href="#i-passos"/></svg></div></div>
+<div class="capa" id="destaque-duvidas"><div class="circ"><svg><use href="#i-duvida"/></svg></div></div>
+</body></html>
