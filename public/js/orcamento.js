@@ -177,9 +177,9 @@
   $('#enviar').addEventListener('click', async () => {
     const msg = $('#msg'), btn = $('#enviar');
     const cliente = { nome: $('#nome').value.trim(), email: $('#email').value.trim(), whatsapp: $('#whatsapp').value.trim(), negocio: $('#negocio').value.trim(), obs: [$('#frase').value.trim() && `Frase: ${$('#frase').value.trim()}`, $('#obs').value.trim()].filter(Boolean).join('\n') };
-    if (!cliente.nome || !cliente.email) {
-      msg.className = 'msg erro'; msg.textContent = 'Preencha seu nome e e-mail na etapa 8.';
-      $('#dados').scrollIntoView({ behavior: 'smooth', block: 'center' }); (cliente.nome ? $('#email') : $('#nome')).focus();
+    if (!cliente.nome || !cliente.email || !cliente.whatsapp) {
+      msg.className = 'msg erro'; msg.textContent = 'Preencha nome, e-mail e WhatsApp na etapa 8.';
+      $('#dados').scrollIntoView({ behavior: 'smooth', block: 'center' }); (!cliente.nome ? $('#nome') : !cliente.email ? $('#email') : $('#whatsapp')).focus();
       return;
     }
     btn.disabled = true; msg.className = 'msg'; msg.textContent = 'Gerando seu pedido...';

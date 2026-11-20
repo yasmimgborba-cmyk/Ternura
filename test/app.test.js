@@ -3,7 +3,6 @@ import assert from 'node:assert';
 import http from 'node:http';
 import app from '../src/app.js';
 import * as precos from '../src/precos.js';
-import { buildPixPayload, crc16 } from '../src/pix.js';
 import { hmacHex } from '../src/util.js';
 import { d1, assets } from '../local/ambiente.mjs';
 
@@ -23,6 +22,7 @@ const falso = http.createServer((req, res) => {
     }
     if (req.url === '/v1/checkout/sessions' && req.method === 'POST') {
       const f = new URLSearchParams(body); const id = 'cs_test_' + (Object.keys(stripe).length + 1);
+      if (stripe.pixOff && [...f.values()].includes('pix')) { res.statusCode = 400; return res.end('{"error":{"message":"pix not activated"}}'); }
       stripe[id] = { id, payment_status: 'unpaid', metadata: { pedido: f.get('metadata[pedido]'), site: f.get('metadata[site]') }, amount: f.get('line_items[0][price_data][unit_amount]') };
       return res.end(JSON.stringify({ ...stripe[id], url: 'https://checkout.stripe.test/' + id }));
     }
@@ -40,15 +40,9 @@ const auth = { Authorization: 'Basic ' + btoa('admin:segredo'), 'content-type': 
 test.before(async () => {
   await new Promise((r) => falso.listen(0, r));
   const base = `http://localhost:${falso.address().port}`;
-  env = { DB: d1(), ASSETS: assets, ADMIN_PASSWORD: 'segredo', MP_ACCESS_TOKEN: 'TESTE', MP_API_BASE: base, STRIPE_SECRET_KEY: 'sk_test', STRIPE_API_BASE: base, STRIPE_WEBHOOK_SECRET: 'whsec_x' };
+  env = { DB: d1(), ASSETS: assets, ADMIN_PASSWORD: 'segredo', STRIPE_METHODS: 'card,pix', STRIPE_SECRET_KEY: 'sk_test', STRIPE_API_BASE: base, STRIPE_WEBHOOK_SECRET: 'whsec_x' };
 });
 test.after(() => falso.close());
-
-test('Pix copia e cola tem CRC certo', () => {
-  assert.strictEqual(crc16('123456789'), '29B1');
-  const p = buildPixPayload({ key: 'a@b.com', name: 'José', city: 'São Paulo', amount: 150, txid: 'PED1' });
-  assert.match(p, /5406150\.00/); assert.strictEqual(p.slice(-4), crc16(p.slice(0, -4)));
-});
 
 test('preços: template mais barato, extras somam, entrada 50%', () => {
   const t = precos.calcular({ servico: 'site', modelo: 'template', estilo: 'minimalista' });
@@ -62,26 +56,10 @@ test('preços: template mais barato, extras somam, entrada 50%', () => {
   assert.throws(() => precos.calcular({ servico: 'nada' }));
 });
 
-test('orçamento -> Pix Mercado Pago -> webhook aprova -> pago', async () => {
-  const d = await (await postJson('/api/pedido', { config: { servico: 'design', modelo: 'template', estilo: 'fofo' }, cliente: { nome: 'Ana', email: 'ana@x.com' } })).json();
-  assert.ok(d.ok, d.erro);
-  const token = d.url.split('/').pop();
-  const html = await (await chamar(d.url)).text();
-  assert.match(html, /PIXFAKE/);
-  const pid = Object.keys(mp)[0];
-  assert.strictEqual(mp[pid].transaction_amount, precos.calcular({ servico: 'design', modelo: 'template', estilo: 'fofo' }).agora);
-  await chamar(d.url); assert.strictEqual(Object.keys(mp).length, 1, 'não cria outro Pix ao recarregar');
-  await postJson('/webhook/mercadopago', { type: 'payment', data: { id: pid } });
-  assert.strictEqual((await (await chamar(`/api/status/${token}`)).json()).status, 'orcado');
-  mp[pid].status = 'approved';
-  assert.strictEqual((await postJson('/webhook/mercadopago', { type: 'payment', data: { id: pid } })).status, 200);
-  assert.strictEqual((await (await chamar(`/api/status/${token}`)).json()).status, 'pago');
-  assert.match(await (await chamar(d.url)).text(), /Pagamento confirmado/);
-});
-
 test('cartão: checkout Stripe, retorno pago e webhook assinado', async () => {
-  const d = await (await postJson('/api/pedido', { config: { servico: 'site', modelo: 'template', estilo: 'minimalista' }, cliente: { nome: 'Bia', email: 'bia@x.com' } })).json();
+  const d = await (await postJson('/api/pedido', { config: { servico: 'site', modelo: 'template', estilo: 'minimalista' }, cliente: { nome: 'Bia', email: 'bia@x.com', whatsapp: '62999990000' } })).json();
   const token = d.url.split('/').pop();
+  assert.match(await (await chamar(`/pagar/${token}`)).text(), /Pix ou cartão/);
   const r = await chamar(`/pagar/${token}/stripe`, { method: 'POST' });
   assert.strictEqual(r.status, 303); assert.match(r.headers.get('location'), /checkout\.stripe\.test/);
   const sid = Object.keys(stripe).at(-1);
@@ -92,7 +70,7 @@ test('cartão: checkout Stripe, retorno pago e webhook assinado', async () => {
   assert.match(await (await chamar(`/pagar/${token}?session_id=${sid}`)).text(), /Pagamento confirmado/);
 
   // webhook: assinatura errada é recusada, certa marca outro pedido
-  const d2 = await (await postJson('/api/pedido', { config: { servico: 'site' }, cliente: { nome: 'Cris', email: 'c@x.com' } })).json();
+  const d2 = await (await postJson('/api/pedido', { config: { servico: 'site' }, cliente: { nome: 'Cris', email: 'c@x.com', whatsapp: '62999990000' } })).json();
   const t2 = d2.url.split('/').pop();
   const id2 = (await env.DB.prepare('SELECT id FROM pedidos WHERE token = ?').bind(t2).first()).id;
   const corpo = JSON.stringify({ type: 'checkout.session.completed', data: { object: { id: 'cs_x', payment_status: 'paid', metadata: { pedido: id2, site: 'ternura' } } } });
@@ -104,7 +82,7 @@ test('cartão: checkout Stripe, retorno pago e webhook assinado', async () => {
 });
 
 test('pedido sob consulta: painel define valor e marca pago', async () => {
-  const { id } = await (await postJson('/api/orcamento', { nome: 'Duda', email: 'd@x.com', descricao: 'Quero um sistema' })).json();
+  const { id } = await (await postJson('/api/orcamento', { nome: 'Duda', email: 'd@x.com', whatsapp: '(62) 99999-0000', descricao: 'Quero um sistema' })).json();
   assert.strictEqual((await chamar('/admin')).status, 401);
   assert.strictEqual((await chamar('/admin', { headers: { Authorization: 'Basic ' + btoa('admin:errada') } })).status, 401);
   assert.strictEqual((await chamar(`/admin/${id}`, { method: 'POST', headers: auth, body: 'titulo=Sistema&proposta=Tudo&valor=1500' })).status, 302);
@@ -119,4 +97,15 @@ test('páginas e exemplos respondem', async () => {
   for (const p of ['/', '/orcamento', '/api/catalogo', '/config.json', '/exemplos/blast/', '/exemplos/underground/', '/exemplos/doce-nuvem/', '/exemplos/lia-moreno/', '/exemplos/sereno/', '/exemplos/folha/', '/img/logo.png']) {
     assert.strictEqual((await chamar(p)).status, 200, p);
   }
+});
+
+test('sem WhatsApp o pedido é recusado; Pix desativado cai pro cartão', async () => {
+  assert.strictEqual((await postJson('/api/pedido', { config: { servico: 'site' }, cliente: { nome: 'E', email: 'e@x.com' } })).status, 400);
+  const d = await (await postJson('/api/pedido', { config: { servico: 'site' }, cliente: { nome: 'E', email: 'e@x.com', whatsapp: '62999990000' } })).json();
+  Object.defineProperty(stripe, 'pixOff', { value: true, enumerable: false, configurable: true });
+  const r = await chamar(`/pagar/${d.url.split('/').pop()}/stripe`, { method: 'POST' });
+  delete stripe.pixOff;
+  assert.strictEqual(r.status, 303); assert.match(r.headers.get('location'), /checkout\.stripe\.test/);
+  const html = await (await chamar('/')).text();
+  assert.doesNotMatch(html, /wa\.me|ywwsmim|yasmimgborba/);
 });

@@ -5,14 +5,11 @@ compatibility_date = "2026-06-01"
 
 [vars]
 BRAND_NAME = "Ternura"
-CONTACT_EMAIL = "yasmimgborba@gmail.com"
-WHATSAPP = "5562998778446"
-INSTAGRAM = "ywwsmim"
-STRIPE_METHODS = "card"
-STRIPE_PARCELAS = "0"
+STRIPE_METHODS = "card,pix"
+STRIPE_PARCELAS = "1"
 
 # Segredos (npx wrangler pages secret put NOME --project-name ternura):
-# ADMIN_PASSWORD, MP_ACCESS_TOKEN, MP_WEBHOOK_SECRET, STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET
+# ADMIN_PASSWORD, STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET
 
 [[d1_databases]]
 binding = "DB"

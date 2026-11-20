@@ -138,8 +138,7 @@
       <div>
         <p class="sobretitulo">Projeto sob consulta</p>
         <h2>Prefere conversar antes?</h2>
-        <p class="suave">Se o seu projeto é grande ou foge do que tem no orçamento, me conta aqui. Eu respondo com uma proposta e o link de pagamento.</p>
-        <p class="suave" id="contato-direto"></p>
+        <p class="suave">Se o seu projeto é grande ou foge do que tem no orçamento, me conta aqui. Eu te chamo no WhatsApp com uma proposta e o link de pagamento.</p>
       </div>
       <form id="form" class="cartao formulario">
         <div class="duas">
@@ -147,7 +146,7 @@
           <label>E-mail*<input name="email" type="email" required maxlength="160" autocomplete="email"></label>
         </div>
         <div class="duas">
-          <label>WhatsApp<input name="whatsapp" inputmode="tel" placeholder="(11) 99999-9999" maxlength="40"></label>
+          <label>WhatsApp*<input name="whatsapp" inputmode="tel" placeholder="(11) 99999-9999" maxlength="40" required autocomplete="tel"></label>
           <label>O que você precisa?
             <select name="tipo"><option>Site</option><option>Loja virtual</option><option>App</option><option>Software / sistema</option><option>Design gráfico</option><option>Social media</option><option>Personal brand</option><option>Outro</option></select>
           </label>
@@ -173,31 +172,18 @@
     <details><summary>O preço do orçamento é o final?</summary><p>Sim, para o que você escolheu. Se depois quiser algo a mais, eu passo o valor antes de fazer.</p></details>
     <details><summary>Qual a diferença entre template e personalizado?</summary><p>O template é um modelo pronto que eu adapto com sua marca, cores e textos. O personalizado é desenhado para você no estilo escolhido.</p></details>
     <details><summary>Quais formas de pagamento?</summary><p>Pix com aprovação na hora ou cartão de crédito. Você pode pagar 50% de entrada e 50% na entrega, ou tudo à vista com 5% de desconto.</p></details>
-    <details><summary>O que acontece depois de pagar?</summary><p>Eu entro em contato em até 1 dia útil para fazer o briefing e começar.</p></details>
+    <details><summary>O que acontece depois de pagar?</summary><p>Eu te chamo no WhatsApp em até 1 dia útil para fazer o briefing e começar.</p></details>
     <details><summary>Tem suporte depois da entrega?</summary><p>Sim. Todo projeto tem 30 dias de suporte, e dá para contratar mais no orçamento.</p></details>
   </section>
 </main>
 
 <footer class="rodape"><div class="wrap">
   <a class="marca" href="/"><img src="/img/logo.png" alt="Ternura"></a>
-  <span id="rodape-contato"></span>
   <span>© <span id="ano"></span> Ternura</span>
 </div></footer>
-<a id="whats" class="whats" target="_blank" rel="noopener" hidden aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.2z"/></svg></a>
 
 <script>
 document.getElementById('ano').textContent = new Date().getFullYear();
-fetch('/config.json').then(r => r.json()).then(c => {
-  const partes = [];
-  if (c.whatsapp) {
-    const w = document.getElementById('whats'); w.href = 'https://wa.me/' + c.whatsapp; w.hidden = false;
-    partes.push(`<a href="https://wa.me/${c.whatsapp}" target="_blank" rel="noopener">WhatsApp</a>`);
-  }
-  if (c.instagram) partes.push(`<a href="https://instagram.com/${c.instagram}" target="_blank" rel="noopener">@${c.instagram}</a>`);
-  if (c.email) partes.push(`<a href="mailto:${c.email}">${c.email}</a>`);
-  document.getElementById('rodape-contato').innerHTML = partes.join(' · ');
-  document.getElementById('contato-direto').innerHTML = partes.length ? 'Ou fale direto: ' + partes.join(' · ') : '';
-}).catch(() => {});
 
 const form = document.getElementById('form'), msg = document.getElementById('msg');
 form.addEventListener('submit', async e => {

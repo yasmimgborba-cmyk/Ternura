@@ -1,8 +1,6 @@
 // Ternura · Cloudflare Worker: orçamento, pagamentos (Pix Mercado Pago + Stripe) e painel.
 import * as precos from './precos.js';
 import * as db from './db.js';
-import { buildPixPayload } from './pix.js';
-import { mpAtivo, criarPix, consultarPix, assinaturaMpValida } from './mercadopago.js';
 import { stripeAtivo, criarCheckout, lerCheckout, eventoStripe } from './stripe.js';
 import { esc, brl, cut, iguais } from './util.js';
 
@@ -12,11 +10,8 @@ const primeiroNome = (n) => String(n || '').split(' ')[0];
 function config(env, url) {
   return {
     brand: env.BRAND_NAME || 'Ternura',
-    email: env.CONTACT_EMAIL ?? 'yasmimgborba@gmail.com',
-    whatsapp: String(env.WHATSAPP ?? '5562998778446').replace(/\D/g, ''),
-    instagram: String(env.INSTAGRAM ?? 'ywwsmim').replace(/^@/, ''),
     baseUrl: (env.BASE_URL || url.origin).replace(/\/$/, ''),
-    stripeMetodos: String(env.STRIPE_METHODS || 'card').split(',').map((s) => s.trim()).filter(Boolean),
+    stripeMetodos: String(env.STRIPE_METHODS || 'card,pix').split(',').map((s) => s.trim()).filter(Boolean),
   };
 }
 
@@ -51,7 +46,8 @@ async function marcarPago(env, id, extra) {
 }
 
 function validarCliente(c = {}) {
-  if (!c.nome || !c.email) return 'Preencha nome e e-mail.';
+  if (!c.nome || !c.email || !c.whatsapp) return 'Preencha nome, e-mail e WhatsApp.';
+  if (String(c.whatsapp).replace(/\D/g, '').length < 10) return 'WhatsApp inválido. Coloque com DDD.';
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.email)) return 'E-mail inválido.';
   return null;
 }
@@ -92,36 +88,18 @@ async function apiPedido(env, req) {
 async function apiStatus(env, token) {
   let p = await db.porToken(env.DB, token);
   if (!p) return json({ status: 'inexistente' }, 404);
-  // Sem webhook? Consulta o Mercado Pago de vez em quando.
-  if (p.status === 'orcado' && p.mp?.id && mpAtivo(env) && Date.now() - (p.mp.checado || 0) > 8000) {
-    p = await db.atualizar(env.DB, p.id, { mp: { ...p.mp, checado: Date.now() } });
+  // Sem webhook? Consulta a sessão da Stripe de vez em quando (Pix confirma em segundos).
+  if (p.status === 'orcado' && p.stripeSessao && stripeAtivo(env) && Date.now() - (p.checado || 0) > 8000) {
+    p = await db.atualizar(env.DB, p.id, { checado: Date.now() });
     try {
-      const pay = await consultarPix(env, p.mp.id);
-      if (pay.status === 'approved') p = await marcarPago(env, p.id, { pagoVia: 'pix-mercadopago', mpPagamento: String(pay.id) });
-    } catch (e) { console.error('Status MP:', e.message); }
+      const s = await lerCheckout(env, p.stripeSessao);
+      if (s.payment_status === 'paid') p = await marcarPago(env, p.id, { pagoVia: 'stripe', stripeSession: s.id });
+    } catch (e) { console.error('Status Stripe:', e.message); }
   }
   return json({ status: p.status });
 }
 
 // ---------- pagamento ----------
-async function pixDoPedido(env, cfg, p) {
-  if (mpAtivo(env)) {
-    const ok = p.mp && p.mp.valor === p.valor && new Date(p.mp.expira) - Date.now() > 30 * 60 * 1000;
-    if (ok) return p.mp;
-    const pix = await criarPix(env, {
-      pedido: p.id, valor: p.valor, descricao: `${cfg.brand} · pedido #${p.id}`, email: p.email, nome: p.nome,
-      notificationUrl: `${cfg.baseUrl}/webhook/mercadopago`,
-    });
-    const salvo = { ...pix, valor: p.valor };
-    await db.atualizar(env.DB, p.id, { mp: salvo });
-    return salvo;
-  }
-  if (env.PIX_KEY) {
-    return { copiaECola: buildPixPayload({ key: env.PIX_KEY, name: env.PIX_NAME, city: env.PIX_CITY, amount: p.valor, txid: 'PED' + p.id }), estatico: true };
-  }
-  return null;
-}
-
 async function paginaPagar(env, cfg, token, url) {
   let p = await db.porToken(env.DB, token);
   if (!p || p.status === 'novo' || p.status === 'cancelado') {
@@ -137,33 +115,17 @@ async function paginaPagar(env, cfg, token, url) {
   }
   if (p.status === 'pago') {
     return html(pagina(cfg, 'Pago', `<div class="cartao centro"><div class="icone-ok">✓</div><h1>Pagamento confirmado!</h1>
-      <p>Obrigada, ${esc(primeiroNome(p.nome))}! O pedido <b>#${p.id}</b> está pago. Em até 1 dia útil você recebe uma mensagem pra gente começar.</p>
+      <p>Obrigada, ${esc(primeiroNome(p.nome))}! O pedido <b>#${p.id}</b> está pago. Em até 1 dia útil eu te chamo no WhatsApp ou e-mail que você deixou pra gente começar.</p>
       <a class="btn" href="/">Voltar ao site</a></div>`));
   }
 
-  let pix = null, pixErro = false;
-  try { pix = await pixDoPedido(env, cfg, p); } catch (e) { console.error('Pix:', e.message); pixErro = true; }
-
-  let blocoPix = '';
-  if (pix) {
-    const qr = pix.qrBase64 ? `<img class="qr" src="data:image/png;base64,${esc(pix.qrBase64)}" alt="QR Code Pix">` : '<div class="qr" id="qr"></div>';
-    blocoPix = `<div class="opcao-pag"><h3>Pix</h3><p class="suave">${pix.estatico ? 'Escaneie ou copie o código.' : 'Aprovação na hora, confirmado automaticamente.'}</p>
-      ${qr}
-      <textarea id="pix" readonly>${esc(pix.copiaECola)}</textarea>
-      <button class="btn contorno" type="button" onclick="navigator.clipboard.writeText(document.getElementById('pix').value);this.textContent='Copiado'">Copiar Pix copia e cola</button>
-      ${pix.estatico
-        ? `<p class="suave peq">Depois de pagar, mande o comprovante${cfg.whatsapp ? ` no <a href="https://wa.me/${cfg.whatsapp}?text=${encodeURIComponent('Comprovante do pedido #' + p.id)}">WhatsApp</a>` : ''}.</p>
-           <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-           <script>new QRCode(document.getElementById('qr'), { text: document.getElementById('pix').value, width: 200, height: 200, correctLevel: QRCode.CorrectLevel.M });</script>`
-        : '<p class="suave peq">Esperando o pagamento… esta página atualiza sozinha.</p>'}</div>`;
-  } else if (pixErro) {
-    blocoPix = '<div class="opcao-pag"><h3>Pix</h3><p class="suave">O Pix está instável agora. Tente de novo em alguns minutos ou pague no cartão.</p></div>';
-  }
-  const blocoCartao = stripeAtivo(env)
-    ? `<div class="opcao-pag"><h3>Cartão de crédito</h3><p class="suave">Pagamento seguro pela Stripe.</p>
-      <form method="post" action="/pagar/${esc(p.token)}/stripe"><button class="btn">Pagar ${brl(p.valor)} no cartão</button></form></div>`
-    : '';
-
+  const metodos = cfg.stripeMetodos;
+  const nomeMetodos = metodos.includes('pix') && metodos.includes('card') ? 'Pix ou cartão' : metodos.includes('pix') ? 'Pix' : 'Cartão';
+  const blocoPag = stripeAtivo(env)
+    ? `<div class="opcao-pag"><h3>${nomeMetodos}</h3>
+      <p class="suave">Pagamento seguro pela Stripe.${metodos.includes('pix') ? ' No Pix a aprovação é na hora.' : ''}${env.STRIPE_PARCELAS === '1' ? ' No cartão dá pra parcelar.' : ''}</p>
+      <form method="post" action="/pagar/${esc(p.token)}/stripe"><button class="btn largo">Pagar ${brl(p.valor)}</button></form></div>`
+    : `<div class="opcao-pag"><h3>Pedido recebido</h3><p class="suave">Vou te chamar no WhatsApp ou e-mail que você informou pra combinar o pagamento.</p></div>`;
   const itens = (p.itens || []).map((i) => `<li><span>${esc(i.nome)}</span><b>${brl(i.valor)}</b></li>`).join('');
   const resumo = p.itens
     ? `<ul class="itens">${itens}</ul>
@@ -171,9 +133,6 @@ async function paginaPagar(env, cfg, token, url) {
        ${p.valor !== p.total ? `<div class="total agora"><span>Entrada agora (50%)</span><strong>${brl(p.valor)}</strong></div>` : ''}
        ${p.prazo ? `<p class="suave peq">Prazo estimado: ${esc(p.prazo)}, contado depois do pagamento e do briefing.</p>` : ''}`
     : `<p class="pre">${esc(p.proposta || '')}</p><div class="total"><span>Total</span><strong>${brl(p.valor)}</strong></div>`;
-  const contato = cfg.whatsapp
-    ? `<p class="suave peq centro">Dúvidas? <a href="https://wa.me/${cfg.whatsapp}?text=${encodeURIComponent('Oi! Tenho uma dúvida sobre o pedido #' + p.id)}">Fale comigo no WhatsApp</a></p>`
-    : cfg.email ? `<p class="suave peq centro">Dúvidas? <a href="mailto:${esc(cfg.email)}">${esc(cfg.email)}</a></p>` : '';
 
   return html(pagina(cfg, `Pedido #${p.id}`, `
     <p class="sobretitulo">Orçamento #${p.id}</p>
@@ -181,22 +140,29 @@ async function paginaPagar(env, cfg, token, url) {
     ${p.negocio ? `<p class="suave">Para <b>${esc(p.negocio)}</b></p>` : ''}
     <div class="cartao">${resumo}</div>
     <h2>Como você quer pagar?</h2>
-    <div class="grade-pag">${blocoPix}${blocoCartao}</div>
-    ${!blocoPix && !blocoCartao ? '<p>Formas de pagamento ainda não configuradas. Fale comigo pelo WhatsApp.</p>' : ''}
-    ${contato}
-    ${pix && !pix.estatico ? `<script>setInterval(async () => { try { const r = await fetch('/api/status/${p.token}'); const d = await r.json(); if (d.status === 'pago') location.reload(); } catch {} }, 5000);</script>` : ''}`));
+    <div class="grade-pag">${blocoPag}</div>
+    ${p.stripeSessao ? `<script>setInterval(async () => { try { const r = await fetch('/api/status/${p.token}'); const d = await r.json(); if (d.status === 'pago') location.reload(); } catch {} }, 5000);</script>` : ''}`));
 }
 
 async function pagarStripe(env, cfg, token) {
   const p = await db.porToken(env.DB, token);
   if (!p || p.status !== 'orcado' || !stripeAtivo(env)) return ir(`/pagar/${token}`, 303);
-  try {
-    const s = await criarCheckout(env, {
+  const abrir = (metodos) => criarCheckout(env, {
       pedido: p.id, valor: p.valor, nome: `${p.titulo || 'Projeto'} (#${p.id})`, email: p.email,
-      metodos: cfg.stripeMetodos, parcelas: env.STRIPE_PARCELAS === '1',
+      metodos, parcelas: env.STRIPE_PARCELAS === '1',
       sucesso: `${cfg.baseUrl}/pagar/${p.token}?session_id={CHECKOUT_SESSION_ID}`,
       cancelar: `${cfg.baseUrl}/pagar/${p.token}`,
     });
+  try {
+    let s;
+    try { s = await abrir(cfg.stripeMetodos); } catch (e) {
+      // Pix (ou parcelamento) ainda não ativado na Stripe: tenta só cartão.
+      if (cfg.stripeMetodos.length === 1 && env.STRIPE_PARCELAS !== '1') throw e;
+      console.error('Stripe, tentando só cartão:', e.message);
+      s = await criarCheckout(env, { pedido: p.id, valor: p.valor, nome: `${p.titulo || 'Projeto'} (#${p.id})`, email: p.email, metodos: ['card'], parcelas: false,
+        sucesso: `${cfg.baseUrl}/pagar/${p.token}?session_id={CHECKOUT_SESSION_ID}`, cancelar: `${cfg.baseUrl}/pagar/${p.token}` });
+    }
+    await db.atualizar(env.DB, p.id, { stripeSessao: s.id });
     return ir(s.url, 303);
   } catch (e) {
     console.error('Stripe:', e.message);
@@ -216,27 +182,6 @@ async function webhookStripe(env, req) {
     }
   }
   return json({ received: true });
-}
-
-async function webhookMp(env, req, url) {
-  const b = await req.json().catch(() => ({}));
-  const id = b?.data?.id || url.searchParams.get('data.id') || url.searchParams.get('id');
-  const tipo = b?.type || url.searchParams.get('type') || url.searchParams.get('topic');
-  if (!id || (tipo && tipo !== 'payment') || !mpAtivo(env)) return new Response('ok');
-  if (!(await assinaturaMpValida(env, req.headers, id))) return new Response('assinatura inválida', { status: 401 });
-  try {
-    const pay = await consultarPix(env, id); // nunca confia no corpo: consulta direto no Mercado Pago
-    if (pay.status === 'approved' && pay.external_reference) {
-      const p = await db.porId(env.DB, pay.external_reference);
-      if (p && Math.abs(Number(pay.transaction_amount) - Number(p.valor)) < 0.01) {
-        await marcarPago(env, p.id, { pagoVia: 'pix-mercadopago', mpPagamento: String(pay.id) });
-      }
-    }
-  } catch (e) {
-    console.error('Webhook MP:', e.message);
-    return new Response('erro', { status: 500 });
-  }
-  return new Response('ok');
 }
 
 // ---------- painel ----------
@@ -320,7 +265,7 @@ export default {
     const caminho = url.pathname;
     const m = req.method;
     try {
-      if (caminho === '/config.json') return json({ brand: cfg.brand, email: cfg.email, whatsapp: cfg.whatsapp, instagram: cfg.instagram });
+      if (caminho === '/config.json') return json({ brand: cfg.brand });
       if (caminho === '/api/catalogo') {
         const { servicos, modelos, estilos, paletas, extras, urgencias, pagamentos } = precos;
         return json({ servicos, modelos, estilos, paletas, extras, urgencias, pagamentos });
@@ -335,7 +280,6 @@ export default {
       r = caminho.match(/^\/pagar\/([0-9a-f]{32})(\/stripe)?$/);
       if (r) return r[2] ? (m === 'POST' ? pagarStripe(env, cfg, r[1]) : ir(`/pagar/${r[1]}`)) : paginaPagar(env, cfg, r[1], url);
       if (caminho === '/webhook/stripe' && m === 'POST') return webhookStripe(env, req);
-      if (caminho === '/webhook/mercadopago' && m === 'POST') return webhookMp(env, req, url);
       if (caminho === '/admin' || caminho.startsWith('/admin/')) return admin(env, cfg, req, caminho.split('/').slice(2).filter(Boolean));
       return env.ASSETS.fetch(req);
     } catch (e) {

@@ -1,7 +1,7 @@
 # Ternura
 
 Site para vender sites, apps, softwares, design gráfico, social media e personal brand.
-O cliente monta o projeto, vê a prévia, recebe o preço na hora e paga com **Pix (Mercado Pago)** ou **cartão (Stripe)**.
+O cliente monta o projeto, vê a prévia, recebe o preço na hora e paga com **Pix ou cartão (Stripe)**.
 
 ## Páginas
 - `/`: página principal (serviços, portfólio, Blast, como funciona, modelos, contato).
@@ -21,14 +21,14 @@ Painel: `/admin` (usuário `admin`, senha no segredo `ADMIN_PASSWORD`).
 
 ### Chaves (Cloudflare > Workers e Pages > ternura > Configurações > Variáveis e segredos)
 Adicione como **Segredo** e depois publique de novo:
-- `MP_ACCESS_TOKEN`: Access Token de produção do Mercado Pago (Suas integrações > Credenciais de produção).
-- `MP_WEBHOOK_SECRET`: assinatura secreta do webhook do Mercado Pago (opcional).
+
 - `STRIPE_SECRET_KEY`: chave secreta da Stripe (`sk_live_...`).
 - `STRIPE_WEBHOOK_SECRET`: segredo do webhook da Stripe (`whsec_...`).
 
-Webhooks: Mercado Pago → `https://ternura.pages.dev/webhook/mercadopago` (evento Pagamentos);
-Stripe → `https://ternura.pages.dev/webhook/stripe` (`checkout.session.completed`, `checkout.session.async_payment_succeeded`).
-Mesmo sem webhook o pagamento é confirmado: o Pix é consultado enquanto a página está aberta e o cartão na volta do checkout.
+Webhook da Stripe → `https://ternura.pages.dev/webhook/stripe` (`checkout.session.completed`, `checkout.session.async_payment_succeeded`).
+Pix e cartão são pela Stripe (`STRIPE_METHODS=card,pix`, parcelamento com `STRIPE_PARCELAS=1`). Se o Pix ainda não estiver ativo na Stripe, o checkout cai só pro cartão.
+Mesmo sem webhook o pagamento é confirmado na volta do checkout e enquanto a página do pedido está aberta.
+Sem `STRIPE_SECRET_KEY`, o cliente vê "Pedido recebido" e você chama ele pelo WhatsApp que ele deixou.
 
 ## Publicar
 ```bash
