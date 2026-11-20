@@ -31,7 +31,7 @@ Formato: 1080×1440 (3:4), o formato novo da grade do Instagram.
 
 ---
 
-### 01 · Apresentação
+### 01 · Capa: Seu projeto digital feito com Ternura
 ```
 oii, prazer! eu sou a Ternura ♡
 
@@ -44,7 +44,21 @@ segue o perfil que vem muita coisa bonita por aí ✦
 #webdesign #designgrafico #identidadevisual #sitesprofissionais #socialmedia #empreendedorismofeminino
 ```
 
-### 02 · Serviços
+### 02 · Nossos projetos
+```
+alguns dos meus projetos ✦
+
+📱 Underground GYN: app de rolês alternativos em Goiânia
+💻 Blast: software de marketing pro X
+🌐 o site da Ternura, onde você monta seu orçamento
+
+cada um com uma cara, mas todos feitos com o mesmo cuidado ♡
+quer ver o seu aqui? link na bio
+
+#portfolio #webdesign #desenvolvimentodeapps #software #criacaodesites
+```
+
+### 03 · Serviços
 ```
 o que eu posso criar pra você ♡
 
@@ -62,19 +76,6 @@ orçamento na hora no link da bio.
 #criacaodesites #lojavirtual #desenvolvimentodeapps #logotipo #marketingdigital #personalbranding
 ```
 
-### 03 · Portfólio: Blast
-```
-projeto real: Blast ✦
-
-um software de desktop pra agências que trabalham com o X (Twitter). ele roda vários perfis ao mesmo tempo, responde com IA, gera relatório do dia e funciona por assinatura.
-
-da interface ao sistema de licença, tudo feito aqui.
-
-precisa de um software sob medida? me chama ♡
-
-#software #automacao #inteligenciaartificial #saas #desenvolvimento #portfolio
-```
-
 ### 04 · Como funciona
 ```
 como funciona trabalhar comigo:
@@ -89,13 +90,17 @@ simples assim ♡ link na bio
 #orcamento #webdesigner #freelancer #designer #sitesprofissionais
 ```
 
-### 05 · Bastidores
+### 05 · Portfólio: Blast
 ```
-cada projeto que chega aqui recebe o mesmo carinho que eu colocaria no meu.
+projeto real: Blast ✦
 
-é por isso que o nome é Ternura: dá pra ser profissional e ainda assim cuidar de cada detalhe ♡
+um software de desktop pra agências que trabalham com o X (Twitter). ele roda vários perfis ao mesmo tempo, responde com IA, gera relatório do dia e funciona por assinatura.
 
-#bastidores #designer #empreendedora #criatividade #feitocomamor
+da interface ao sistema de licença, tudo feito aqui.
+
+precisa de um software sob medida? me chama ♡
+
+#software #automacao #inteligenciaartificial #saas #desenvolvimento #portfolio
 ```
 
 ### 06 · Portfólio: Underground GYN
