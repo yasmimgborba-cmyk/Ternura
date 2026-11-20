@@ -179,7 +179,7 @@ salva pra consultar depois e manda pra amiga que tá criando a marca dela ♡
 #paletadecores #identidadevisual #branding #designgrafico #marketingdigital #empreendedorismofeminino
 ```
 
-### Moodboard
+### Carrossel · Moodboard (moodboard-1 e moodboard-2)
 ```
 antes do logo, vem o moodboard ✦
 

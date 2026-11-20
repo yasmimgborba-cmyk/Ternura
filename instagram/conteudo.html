@@ -28,6 +28,14 @@ body { background:#bbb; display:flex; flex-wrap:wrap; gap:40px; padding:40px; fo
 .bolinhas-c { background-color:var(--choco-e); background-image:radial-gradient(var(--creme) 15px, transparent 16px); background-size:84px 84px; }
 .renda { position:absolute; left:0; right:0; height:40px; background:radial-gradient(circle at 20px 0, var(--creme) 19px, transparent 20px) 0 0/40px 40px repeat-x; }
 .listras { background:repeating-linear-gradient(90deg, var(--rosa) 0 70px, var(--creme) 70px 140px); }
+.pol { position:absolute; background:#fff; padding:16px 16px 70px; box-shadow:0 16px 28px rgba(78,42,26,.22); z-index:5; }
+.pol img { display:block; width:100%; aspect-ratio:1; object-fit:cover; }
+.pol span { position:absolute; left:0; right:0; bottom:10px; text-align:center; font-family:Caveat; font-weight:700; font-size:50px; color:var(--choco-e); }
+.fitinha { position:absolute; width:150px; height:46px; z-index:6; opacity:.88; background:repeating-linear-gradient(45deg, var(--rosa) 0 14px, #FFD3DD 14px 28px); }
+.fitinha.m { background:repeating-linear-gradient(-45deg, var(--menta) 0 14px, #DDF0E6 14px 28px); }
+.fitinha.a2 { background:radial-gradient(#fff 4px, transparent 5px) 0 0/22px 22px, #F2C46A; }
+.gota-cor { flex:1; height:150px; border-radius:26px; display:flex; flex-direction:column; justify-content:flex-end; padding:14px 16px; font-weight:800; font-size:24px; color:var(--choco-e); border:5px solid var(--choco-e); }
+.gota-cor b { font-family:Fredoka; font-size:34px; display:block; line-height:1; }
 </style></head>
 <body>
 <svg width="0" height="0" style="position:absolute"><defs>
@@ -102,16 +110,53 @@ body { background:#bbb; display:flex; flex-wrap:wrap; gap:40px; padding:40px; fo
 </div>
 
 <!-- ================= POSTS SOLTOS ================= -->
-<!-- moodboard -->
-<div class="post" id="s1" style="background:var(--choco-e)">
-  <h1 class="a tit rosa" style="left:0;right:0;top:80px;text-align:center;font-size:130px;-webkit-text-stroke-color:var(--creme);color:var(--choco-e);text-shadow:0 10px 0 rgba(0,0,0,.35)">Moodboard</h1>
-  <p class="a" style="left:0;right:0;top:230px;text-align:center;font-family:Caveat;font-size:66px;color:var(--rosa)">o primeiro passo de toda marca</p>
-  <div class="a" style="left:200px;top:330px;width:680px;padding:22px;background:var(--creme);border-radius:30px;box-shadow:0 0 0 10px var(--rosa), 0 20px 40px rgba(0,0,0,.4);transform:rotate(-1.5deg)">
-    <img src="fotos/moodboard.jpg" style="display:block;width:100%;border-radius:12px">
-    <p style="font-family:Caveat;font-size:46px;text-align:center;margin-top:6px;color:var(--choco)">sapatinho, cookie, esmalte... tudo conversa ♡</p>
+<!-- moodboard 1/2 · capa -->
+<div class="post" id="m1" style="background:#FFF9EF;background-image:linear-gradient(rgba(175,212,192,.45) 2px, transparent 2px), linear-gradient(90deg, rgba(175,212,192,.45) 2px, transparent 2px);background-size:54px 54px">
+  <h1 class="a tit" style="left:0;right:0;top:60px;text-align:center;font-size:150px;z-index:8">Moodboard</h1>
+  <p class="a" style="left:0;right:0;top:225px;text-align:center;font-family:Caveat;font-size:64px;color:var(--rosa-e);z-index:8">o primeiro passo de toda marca ✦</p>
+  <svg class="brilho" style="left:110px;top:70px" width="80" height="80"><use href="#bri"/></svg>
+  <svg class="brilho" style="right:110px;top:150px" width="64" height="64"><use href="#bri"/></svg>
+
+  <div class="pol" style="left:60px;top:330px;width:300px;transform:rotate(-7deg)"><img src="fotos/mood/sapatos.jpg"><span>detalhe</span></div>
+  <div class="fitinha r" style="left:150px;top:310px;transform:rotate(-14deg)"></div>
+  <div class="pol" style="left:390px;top:310px;width:300px;transform:rotate(3deg)"><img src="fotos/mood/sorvete.jpg"><span>textura</span></div>
+  <div class="fitinha m" style="left:480px;top:292px;transform:rotate(6deg)"></div>
+  <div class="pol" style="left:720px;top:345px;width:300px;transform:rotate(-3deg)"><img src="fotos/mood/gizes.jpg"><span>cores</span></div>
+  <div class="fitinha a2" style="left:810px;top:326px;transform:rotate(-4deg)"></div>
+
+  <div class="pol" style="left:90px;top:700px;width:280px;transform:rotate(4deg)"><img src="fotos/mood/cookies.jpg"><span>formas</span></div>
+  <div class="fitinha m" style="left:170px;top:682px;transform:rotate(8deg)"></div>
+  <div class="pol" style="left:400px;top:690px;width:280px;transform:rotate(-4deg)"><img src="fotos/mood/coracao-laco.jpg"><span>estampa</span></div>
+  <div class="fitinha r" style="left:480px;top:672px;transform:rotate(-6deg)"></div>
+  <div class="pol" style="left:710px;top:705px;width:280px;transform:rotate(5deg)"><img src="fotos/mood/espiral.jpg"><span>sabor</span></div>
+  <div class="fitinha a2" style="left:790px;top:688px;transform:rotate(3deg)"></div>
+
+  <div class="a" style="left:60px;right:60px;top:1080px;background:#fff;border:7px solid var(--choco-e);border-radius:40px;box-shadow:0 12px 0 var(--choco-e);padding:26px 34px 30px;z-index:7">
+    <p style="font-family:Caveat;font-size:54px;line-height:1;color:var(--choco)">a paleta que nasce daqui ↓</p>
+    <div style="display:flex;gap:22px;margin-top:14px">
+      <div class="gota-cor" style="background:var(--menta)"><b>menta</b>#AFD4C0</div>
+      <div class="gota-cor" style="background:var(--choco);color:#F2E0D2"><b>chocolate</b>#88553E</div>
+      <div class="gota-cor" style="background:var(--creme);box-shadow:inset 0 0 0 4px #E6DCC0"><b>creme</b>#FAF6E6</div>
+      <div class="gota-cor" style="background:var(--rosa);color:#fff"><b>rosa</b>#F594A7</div>
+    </div>
   </div>
-  <p class="a texto" style="left:90px;right:90px;bottom:110px;color:var(--creme);text-align:center;font-size:38px">Antes do logo, junte imagens que têm a <b style="color:var(--menta)">vibe</b> que você quer passar. Daí saem as cores, as fontes e o estilo.</p>
-  <span class="marca" style="color:var(--creme)">ter<span>♡</span>nura</span>
+  <svg class="a" style="left:430px;top:1010px;z-index:8" width="220" height="90" viewBox="0 0 220 90"><path d="M20 20 C70 80 150 80 200 30 M178 18 L202 30 L186 54" fill="none" stroke="#E2687F" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <span class="pagina" style="bottom:28px;right:60px">arrasta →</span>
+</div>
+
+<!-- moodboard 2/2 · explicação -->
+<div class="post" id="m2" style="background:var(--choco-e)">
+  <div class="renda" style="top:0;transform:scaleY(-1)"></div>
+  <h1 class="a tit" style="left:70px;top:100px;font-size:100px;-webkit-text-stroke-color:var(--rosa-e);text-shadow:0 10px 0 rgba(0,0,0,.35);z-index:5">Como<br>montar<br>o seu ✦</h1>
+  <img class="foto" src="fotos/moodboard.jpg" style="right:80px;top:100px;width:360px;height:370px;border-radius:24px;border:8px solid var(--creme);transform:rotate(4deg)">
+  <div class="a lista" style="left:70px;right:70px;top:530px">
+    <div style="color:var(--creme)"><i>1</i><span>Junte <b style="color:var(--rosa)">10 a 20 imagens</b> com a vibe que você quer passar: roupas, comidas, lugares, objetos.</span></div>
+    <div style="color:var(--creme)"><i style="background:var(--menta-e)">2</i><span>Procure o que se <b style="color:var(--menta)">repete</b>: cores, texturas, formas, detalhes.</span></div>
+    <div style="color:var(--creme)"><i style="background:var(--choco)">3</i><span>Tire dali a <b style="color:var(--rosa)">paleta</b>, as fontes e o estilo dos posts. Pronto: nasceu sua identidade ♡</span></div>
+  </div>
+  <div class="a" style="left:70px;bottom:150px;width:560px;background:var(--rosa-e);color:#fff;font-weight:900;font-size:38px;line-height:1.25;padding:22px 36px;border-radius:40px;border:6px solid var(--creme)">quer que eu monte o seu? link na bio ♡</div>
+  <img class="a" src="arte/recortes/look2.png" style="right:70px;bottom:-10px;height:420px;filter:drop-shadow(0 16px 20px rgba(0,0,0,.35))">
+  <span class="pagina" style="background:var(--creme);color:var(--choco-e)">2/2</span>
 </div>
 
 <!-- consistência (canecas) -->
