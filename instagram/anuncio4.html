@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@700;800;900&family=Caveat:wght@700&family=Playfair+Display:ital,wght@0,700;0,800;1,500;1,600&family=VT323&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+:root { --menta:#AFD4C0; --menta-e:#5E9C83; --choco:#88553E; --choco-e:#4E2A1A; --creme:#FAF6E6; --rosa:#F594A7; --rosa-e:#E2687F; --rosa-c:#FBE3EA; }
+* { box-sizing:border-box; margin:0; }
+body { background:#999; display:flex; flex-wrap:wrap; gap:40px; padding:40px; align-items:flex-start; font-family:Nunito, sans-serif; color:var(--choco-e); }
+.f { width:1080px; height:1350px; position:relative; overflow:hidden; }
+.s { width:1080px; height:1920px; position:relative; overflow:hidden; }
+.a { position:absolute; }
+.k { position:absolute; filter:drop-shadow(0 14px 16px rgba(78,42,26,.22)); }
+.tit { font-family:Fredoka; font-weight:700; line-height:.92; color:var(--creme); -webkit-text-stroke:20px var(--choco-e); paint-order:stroke fill; text-shadow:0 10px 0 rgba(78,42,26,.45); }
+.serif { font-family:'Playfair Display', serif; font-weight:800; } .it { font-family:'Playfair Display', serif; font-style:italic; font-weight:500; }
+.mao { font-family:Caveat; font-weight:700; }
+.cta { display:inline-flex; align-items:center; gap:16px; background:var(--choco-e); color:var(--creme); font-family:Fredoka; font-weight:700; border-radius:999px; border:6px solid var(--creme); box-shadow:0 0 0 6px var(--choco-e), 0 14px 0 6px rgba(78,42,26,.35); white-space:nowrap; }
+/* carta */
+.envelope { position:absolute; background:#F3E3D3; border-radius:18px; box-shadow:0 30px 50px rgba(78,42,26,.28); overflow:hidden; }
+.envelope::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg, transparent 49.6%, rgba(78,42,26,.12) 50%, transparent 50.6%), linear-gradient(225deg, transparent 49.6%, rgba(78,42,26,.12) 50%, transparent 50.6%); }
+.carta { position:absolute; background:#FFFDF7; border-radius:10px; box-shadow:0 10px 24px rgba(78,42,26,.18); background-image:repeating-linear-gradient(transparent 0 58px, rgba(226,104,127,.22) 58px 60px); padding:50px 56px; }
+.selo { position:absolute; width:170px; height:200px; background:var(--menta); border:10px dotted #fff; outline:3px solid #fff; display:grid; place-items:center; transform:rotate(8deg); box-shadow:0 6px 14px rgba(0,0,0,.15); }
+.lacre { position:absolute; width:170px; height:170px; border-radius:50%; background:radial-gradient(circle at 40% 35%, #F28AA2, var(--rosa-e) 60%, #B84A63); display:grid; place-items:center; color:#fff; font-size:80px; box-shadow:0 8px 16px rgba(0,0,0,.2); }
+.carimbo { position:absolute; border:6px solid var(--rosa-e); color:var(--rosa-e); border-radius:50%; display:grid; place-items:center; text-align:center; font-weight:900; letter-spacing:.06em; opacity:.85; transform:rotate(-14deg); }
+/* receita */
+.ficha { position:absolute; background:#FFFDF7; border-radius:14px; box-shadow:0 24px 40px rgba(78,42,26,.22); background-image:repeating-linear-gradient(transparent 0 66px, rgba(94,156,131,.3) 66px 68px); }
+.ficha::before { content:''; position:absolute; top:0; bottom:0; left:110px; width:4px; background:rgba(226,104,127,.5); }
+.ing { display:flex; justify-content:space-between; align-items:baseline; font-family:Caveat; font-size:58px; line-height:68px; }
+.ing b { color:var(--rosa-e); }
+/* antes/depois */
+.feed { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; background:#fff; padding:10px; border-radius:22px; }
+.feed div { aspect-ratio:3/4; border-radius:6px; }
+.feed img { width:100%; aspect-ratio:3/4; object-fit:cover; object-position:top; border-radius:6px; display:block; }
+.rotulo { display:inline-block; font-family:Fredoka; font-weight:700; padding:6px 26px; border-radius:999px; border:5px solid var(--choco-e); }
+/* retrô */
+.win { position:absolute; background:#EFE7EA; border:5px solid var(--choco-e); border-radius:14px; box-shadow:12px 12px 0 rgba(78,42,26,.35); overflow:hidden; }
+.win .tb { display:flex; align-items:center; gap:12px; background:linear-gradient(90deg, var(--rosa-e), var(--rosa)); color:#fff; font-family:VT323; font-size:44px; padding:4px 18px; border-bottom:5px solid var(--choco-e); }
+.win .tb i { margin-left:auto; display:flex; gap:8px; font-style:normal; } .win .tb i b { width:34px; height:30px; background:#fff; border:3px solid var(--choco-e); color:var(--choco-e); display:grid; place-items:center; font-size:26px; line-height:1; }
+.win .ct { padding:26px 30px; font-family:VT323; color:var(--choco-e); }
+.barra { height:50px; border:4px solid var(--choco-e); background:#fff; padding:5px; } .barra div { height:100%; background:repeating-linear-gradient(90deg, var(--menta-e) 0 30px, transparent 30px 36px); }
+.bt98 { display:inline-block; font-family:VT323; font-size:44px; padding:6px 30px; background:#fff; border:4px solid var(--choco-e); box-shadow:5px 5px 0 var(--choco-e); }
+.icone { position:absolute; width:150px; text-align:center; font-family:VT323; font-size:34px; color:#fff; text-shadow:2px 2px 0 var(--choco-e); }
+.icone span { display:block; font-size:90px; line-height:1.1; text-shadow:none; }
+</style></head>
+<body>
+
+<!-- ===== 1 · CARTINHA ===== -->
+<div class="f" id="c1f" style="background:var(--rosa-c);background-image:radial-gradient(rgba(226,104,127,.2) 7px, transparent 8px);background-size:56px 56px">
+  <p class="a mao" style="left:0;right:0;top:60px;text-align:center;font-size:74px;color:var(--rosa-e)">chegou uma cartinha pra você ✉</p>
+  <div class="envelope" style="left:90px;top:560px;width:900px;height:600px"></div>
+  <div class="carta" style="left:150px;top:180px;width:780px;height:760px;transform:rotate(-2deg)">
+    <p class="mao" style="font-size:60px;line-height:60px">Querida marca,</p>
+    <p class="mao" style="font-size:52px;line-height:60px;margin-top:60px">você merece um site lindo, posts com a sua cara e uma identidade que todo mundo lembra ♡</p>
+    <p class="mao" style="font-size:52px;line-height:60px;margin-top:60px">com carinho,</p>
+    <p style="font-family:'Pinyon Script';font-size:96px;line-height:80px;color:var(--rosa-e)">Ternura</p>
+  </div>
+  <div class="selo" style="right:110px;top:150px"><img src="arte/recortes/pirulito.png" style="width:120px;border-radius:8px"></div>
+  <div class="carimbo" style="right:40px;top:1000px;width:190px;height:190px;font-size:24px;background:rgba(251,227,234,.9);z-index:3">SITES<br>DESDE<br>R$290</div>
+  <div class="lacre" style="left:455px;top:900px">♥</div>
+  <div class="a" style="left:0;right:0;bottom:50px;text-align:center"><span class="cta" style="font-size:42px;padding:16px 38px;background:var(--rosa-e)">abra seu orçamento → link na bio</span></div>
+</div>
+<div class="s" id="c1s" style="background:var(--rosa-c);background-image:radial-gradient(rgba(226,104,127,.2) 7px, transparent 8px);background-size:56px 56px">
+  <p class="a mao" style="left:0;right:0;top:180px;text-align:center;font-size:84px;color:var(--rosa-e)">chegou uma cartinha<br>pra você ✉</p>
+  <div class="envelope" style="left:80px;top:980px;width:920px;height:640px"></div>
+  <div class="carta" style="left:130px;top:420px;width:820px;height:880px;transform:rotate(-2deg)">
+    <p class="mao" style="font-size:64px;line-height:60px">Querida marca,</p>
+    <p class="mao" style="font-size:56px;line-height:60px;margin-top:60px">você merece um site lindo, posts com a sua cara e uma identidade que todo mundo lembra ♡</p>
+    <p class="mao" style="font-size:56px;line-height:60px;margin-top:60px">com carinho,</p>
+    <p style="font-family:'Pinyon Script';font-size:110px;line-height:90px;color:var(--rosa-e)">Ternura</p>
+  </div>
+  <div class="selo" style="right:90px;top:360px"><img src="arte/recortes/pirulito.png" style="width:120px;border-radius:8px"></div>
+  <div class="carimbo" style="left:60px;top:1250px;width:210px;height:210px;font-size:26px">SITES<br>DESDE<br>R$290</div>
+  <div class="lacre" style="left:455px;top:1300px">♥</div>
+  <div class="a" style="left:0;right:0;top:1700px;text-align:center"><span class="cta" style="font-size:48px;padding:20px 44px;background:var(--rosa-e)">abra seu orçamento ↑</span></div>
+</div>
+
+<!-- ===== 2 · RECEITA ===== -->
+<div class="f" id="c2f" style="background:repeating-linear-gradient(45deg, #F7E6E0 0 40px, #FBF1EC 40px 80px)">
+  <div class="a" style="left:0;right:0;top:0;height:40px;background:repeating-linear-gradient(90deg, var(--rosa) 0 40px, var(--creme) 40px 80px)"></div>
+  <h1 class="a serif" style="left:70px;top:90px;font-size:96px;line-height:1">Receita de uma<br><span class="it" style="color:var(--rosa-e)">marca irresistível</span></h1>
+  <div class="ficha" style="left:70px;top:370px;width:700px;height:820px;transform:rotate(-1.5deg)">
+    <div style="position:absolute;left:150px;right:44px;top:40px">
+      <p style="font-weight:900;font-size:32px;letter-spacing:.12em;color:var(--menta-e);line-height:66px">INGREDIENTES</p>
+      <div class="ing"><span>1 paleta de cores</span><b>✓</b></div>
+      <div class="ing"><span>1 logo com a sua cara</span><b>✓</b></div>
+      <div class="ing"><span>1 site bonito</span><b>✓</b></div>
+      <div class="ing"><span>posts caprichados</span><b>✓</b></div>
+      <div class="ing"><span>muito carinho</span><b>♡</b></div>
+      <p style="font-weight:900;font-size:32px;letter-spacing:.12em;color:var(--menta-e);line-height:66px;margin-top:22px">MODO DE PREPARO</p>
+      <p class="mao" style="font-size:52px;line-height:68px">misture tudo no meu site e veja o preço na hora!</p>
+    </div>
+  </div>
+  <img class="k" src="kit/saco-confeiteiro.png" style="right:60px;top:300px;height:440px;transform:rotate(22deg)">
+  <img class="k" src="kit2/carolina3.png" style="right:70px;top:760px;width:250px;transform:rotate(8deg)">
+  <img class="k" src="kit/chantilly.png" style="right:40px;top:960px;width:250px">
+  <div class="a" style="left:70px;bottom:50px"><span class="cta" style="font-size:40px;padding:16px 36px">rende 1 marca linda · desde R$190</span></div>
+</div>
+<div class="s" id="c2s" style="background:repeating-linear-gradient(45deg, #F7E6E0 0 40px, #FBF1EC 40px 80px)">
+  <div class="a" style="left:0;right:0;top:0;height:50px;background:repeating-linear-gradient(90deg, var(--rosa) 0 40px, var(--creme) 40px 80px)"></div>
+  <h1 class="a serif" style="left:70px;top:200px;font-size:108px;line-height:1">Receita de uma<br><span class="it" style="color:var(--rosa-e)">marca irresistível</span></h1>
+  <div class="ficha" style="left:70px;top:520px;width:940px;height:760px;transform:rotate(-1.5deg)">
+    <div style="position:absolute;left:150px;right:50px;top:40px">
+      <p style="font-weight:900;font-size:34px;letter-spacing:.12em;color:var(--menta-e);line-height:66px">INGREDIENTES</p>
+      <div class="ing"><span>1 paleta de cores</span><b>✓</b></div>
+      <div class="ing"><span>1 logo com a sua cara</span><b>✓</b></div>
+      <div class="ing"><span>1 site bonito</span><b>✓</b></div>
+      <div class="ing"><span>posts caprichados</span><b>✓</b></div>
+      <div class="ing"><span>muito carinho</span><b>♡</b></div>
+      <p style="font-weight:900;font-size:34px;letter-spacing:.12em;color:var(--menta-e);line-height:66px;margin-top:22px">MODO DE PREPARO</p>
+      <p class="mao" style="font-size:56px;line-height:68px">misture tudo no meu site e veja o preço na hora!</p>
+    </div>
+  </div>
+  <img class="k" src="kit/saco-confeiteiro.png" style="right:80px;top:1290px;height:400px;transform:rotate(22deg)">
+  <img class="k" src="kit2/carolina3.png" style="left:80px;top:1330px;width:320px;transform:rotate(-8deg)">
+  <img class="k" src="kit/chantilly.png" style="left:400px;top:1370px;width:260px">
+  <div class="a" style="left:0;right:0;top:1700px;text-align:center"><span class="cta" style="font-size:46px;padding:20px 44px">desde R$190 · toque ↑</span></div>
+</div>
+
+<!-- ===== 3 · ANTES E DEPOIS ===== -->
+<div class="f" id="c3f" style="background:var(--creme)">
+  <h1 class="a tit" style="left:0;right:0;top:60px;text-align:center;font-size:118px">seu feed<br><span style="color:var(--rosa)">antes</span> e <span style="color:var(--menta)">depois</span></h1>
+  <div class="a" style="left:60px;top:390px;width:450px;text-align:center"><span class="rotulo" style="font-size:44px;background:#ddd">antes 😕</span>
+    <div class="feed" style="margin-top:22px;border:5px solid #bbb;filter:saturate(.6)">
+      <div style="background:#5B7BD5"></div><div style="background:#F4D03F"></div><div style="background:#222"></div>
+      <div style="background:#E74C3C"></div><div style="background:#ccc"></div><div style="background:#8E44AD"></div>
+      <div style="background:#2ECC71"></div><div style="background:#F39C12"></div><div style="background:#95A5A6"></div>
+    </div></div>
+  <div class="a" style="left:570px;top:390px;width:450px;text-align:center"><span class="rotulo" style="font-size:44px;background:var(--menta)">depois ♡</span>
+    <div class="feed" style="margin-top:22px;border:5px solid var(--choco-e)">
+      <img src="../public/exemplos/social/img/13.jpg"><img src="../public/exemplos/social/img/08.jpg"><img src="../public/exemplos/social/img/07.jpg">
+      <img src="../public/exemplos/social/img/01.jpg"><img src="../public/exemplos/social/img/12.jpg"><img src="../public/exemplos/social/img/03.jpg">
+      <img src="../public/exemplos/social/img/05.jpg"><img src="../public/exemplos/social/img/10.jpg"><img src="../public/exemplos/social/img/04.jpg">
+    </div></div>
+  <svg class="a" style="left:470px;top:700px" width="140" height="100" viewBox="0 0 140 100"><path d="M10 50 H110 M80 15 L120 50 L80 85" fill="none" stroke="#E2687F" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <p class="a" style="left:0;right:0;top:1130px;text-align:center;font-weight:800;font-size:40px">social media com identidade · <span style="color:var(--rosa-e)">desde R$290/mês</span></p>
+  <div class="a" style="left:0;right:0;bottom:50px;text-align:center"><span class="cta" style="font-size:42px;padding:16px 38px">quero o meu assim →</span></div>
+</div>
+<div class="s" id="c3s" style="background:var(--creme)">
+  <h1 class="a tit" style="left:0;right:0;top:180px;text-align:center;font-size:130px">seu feed<br><span style="color:var(--rosa)">antes</span> e <span style="color:var(--menta)">depois</span></h1>
+  <div class="a" style="left:190px;top:530px;width:700px;text-align:center"><span class="rotulo" style="font-size:44px;background:#ddd">antes 😕</span>
+    <div class="feed" style="margin-top:18px;border:5px solid #bbb;filter:saturate(.6);grid-template-columns:repeat(6,1fr)">
+      <div style="background:#5B7BD5"></div><div style="background:#F4D03F"></div><div style="background:#222"></div><div style="background:#E74C3C"></div><div style="background:#ccc"></div><div style="background:#8E44AD"></div>
+    </div></div>
+  <div class="a" style="left:110px;top:820px;width:860px;text-align:center"><span class="rotulo" style="font-size:48px;background:var(--menta)">depois ♡</span>
+    <div class="feed" style="margin-top:18px;border:5px solid var(--choco-e)">
+      <img src="../public/exemplos/social/img/13.jpg"><img src="../public/exemplos/social/img/08.jpg"><img src="../public/exemplos/social/img/07.jpg">
+      <img src="../public/exemplos/social/img/01.jpg"><img src="../public/exemplos/social/img/12.jpg"><img src="../public/exemplos/social/img/03.jpg">
+    </div></div>
+  <div class="a" style="left:0;right:0;top:1680px;text-align:center"><span class="cta" style="font-size:46px;padding:20px 44px">quero o meu assim ↑</span></div>
+</div>
+
+<!-- ===== 4 · COMPUTADOR RETRÔ ===== -->
+<div class="f" id="c4f" style="background:var(--menta-e);background-image:radial-gradient(rgba(255,255,255,.18) 3px, transparent 3.5px);background-size:24px 24px">
+  <div class="icone" style="left:40px;top:50px"><span>📁</span>sites</div>
+  <div class="icone" style="left:40px;top:250px"><span>🎨</span>design</div>
+  <div class="icone" style="left:40px;top:450px"><span>💌</span>social</div>
+  <div class="icone" style="left:40px;top:650px"><span>📱</span>apps</div>
+  <div class="win" style="left:220px;top:70px;width:800px">
+    <div class="tb">sua_marca.exe<i><b>_</b><b>□</b><b>x</b></i></div>
+    <div class="ct"><p style="font-size:64px;line-height:1">carregando sua nova marca...</p>
+      <div class="barra" style="margin-top:20px"><div style="width:92%"></div></div>
+      <p style="font-size:44px;margin-top:10px">92% ♡ falta só você clicar</p></div>
+  </div>
+  <div class="win" style="left:260px;top:470px;width:700px;transform:rotate(-2deg)">
+    <div class="tb">orçamento.txt<i><b>x</b></i></div>
+    <div class="ct" style="background:#fff"><p style="font-size:50px;line-height:1.15">&gt; site ............ R$290<br>&gt; design .......... R$190<br>&gt; social media .... R$290/mês<br>&gt; prévia .......... grátis ♡</p></div>
+  </div>
+  <div class="win" style="left:330px;top:960px;width:620px">
+    <div class="tb">ternura.pages.dev<i><b>x</b></i></div>
+    <div class="ct" style="text-align:center"><p style="font-size:52px">deseja montar seu projeto?</p><p style="margin-top:20px"><span class="bt98" style="background:var(--rosa);color:#fff">sim ♡</span> &nbsp; <span class="bt98">claro!</span></p></div>
+  </div>
+  <img class="k" src="arte/recortes/look1.png" style="left:20px;bottom:-20px;height:470px">
+</div>
+<div class="s" id="c4s" style="background:var(--menta-e);background-image:radial-gradient(rgba(255,255,255,.18) 3px, transparent 3.5px);background-size:24px 24px">
+  <div class="icone" style="left:60px;top:160px"><span>📁</span>sites</div>
+  <div class="icone" style="left:260px;top:160px"><span>🎨</span>design</div>
+  <div class="icone" style="left:460px;top:160px"><span>💌</span>social</div>
+  <div class="icone" style="left:660px;top:160px"><span>📱</span>apps</div>
+  <div class="win" style="left:60px;top:420px;width:960px">
+    <div class="tb">sua_marca.exe<i><b>_</b><b>□</b><b>x</b></i></div>
+    <div class="ct"><p style="font-size:70px;line-height:1">carregando sua nova marca...</p>
+      <div class="barra" style="margin-top:24px"><div style="width:92%"></div></div>
+      <p style="font-size:48px;margin-top:10px">92% ♡ falta só você clicar</p></div>
+  </div>
+  <div class="win" style="left:110px;top:840px;width:860px;transform:rotate(-2deg)">
+    <div class="tb">orçamento.txt<i><b>x</b></i></div>
+    <div class="ct" style="background:#fff"><p style="font-size:58px;line-height:1.15">&gt; site ............ R$290<br>&gt; design .......... R$190<br>&gt; social media .... R$290/mês<br>&gt; prévia .......... grátis ♡</p></div>
+  </div>
+  <div class="win" style="left:180px;top:1360px;width:720px">
+    <div class="tb">ternura.pages.dev<i><b>x</b></i></div>
+    <div class="ct" style="text-align:center"><p style="font-size:56px">deseja montar seu projeto?</p><p style="margin-top:20px"><span class="bt98" style="background:var(--rosa);color:#fff">sim ♡ ↑</span></p></div>
+  </div>
+  <img class="k" src="arte/recortes/look1.png" style="right:40px;bottom:-20px;height:560px">
+</div>
+</body></html>
