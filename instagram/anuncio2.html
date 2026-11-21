@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@700;800;900&family=Caveat:wght@700&family=Playfair+Display:ital,wght@0,700;0,800;1,500;1,600&family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+:root { --menta:#AFD4C0; --menta-e:#5E9C83; --choco:#88553E; --choco-e:#4E2A1A; --creme:#FAF6E6; --rosa:#F594A7; --rosa-e:#E2687F; --rosa-c:#FBE3EA; }
+* { box-sizing:border-box; margin:0; }
+body { background:#999; display:flex; flex-wrap:wrap; gap:40px; padding:40px; font-family:Nunito, sans-serif; color:var(--choco-e); }
+.ad { width:1080px; height:1350px; position:relative; overflow:hidden; }
+.a { position:absolute; }
+.k { position:absolute; filter:drop-shadow(0 14px 18px rgba(78,42,26,.25)); }
+.tit { font-family:Fredoka; font-weight:700; line-height:.92; color:var(--creme); -webkit-text-stroke:20px var(--choco-e); paint-order:stroke fill; text-shadow:0 10px 0 rgba(78,42,26,.45); }
+.serif { font-family:'Playfair Display', serif; font-weight:800; } .it { font-family:'Playfair Display', serif; font-style:italic; font-weight:500; }
+.mao { font-family:Caveat; font-weight:700; }
+.cta { display:inline-flex; align-items:center; gap:16px; background:var(--choco-e); color:var(--creme); font-family:Fredoka; font-weight:700; border-radius:999px; border:6px solid var(--creme); box-shadow:0 0 0 6px var(--choco-e), 0 14px 0 6px rgba(78,42,26,.35); white-space:nowrap; }
+.handle { font-weight:900; font-size:28px; background:var(--creme); color:var(--choco-e); border:4px solid var(--choco-e); border-radius:999px; padding:6px 20px; }
+.preco { display:grid; place-items:center; text-align:center; font-family:Fredoka; font-weight:700; line-height:.95; }
+.preco small { display:block; font-size:.3em; font-weight:600; }
+.papel { background:#FFFDF6; box-shadow:0 14px 26px rgba(78,42,26,.2); }
+</style></head>
+<body>
+
+<!-- 1 · SCRAPBOOK -->
+<div class="ad" id="a1" style="background:#F8EEE4;background-image:linear-gradient(rgba(175,212,192,.4) 2px, transparent 2px), linear-gradient(90deg, rgba(175,212,192,.4) 2px, transparent 2px);background-size:50px 50px">
+  <img class="k" src="kit/renda-canto.png" style="left:-40px;bottom:120px;width:420px;transform:rotate(8deg);z-index:1">
+  <img class="k" src="kit/papel-bolinha.png" style="right:-60px;top:-50px;width:380px;transform:rotate(90deg)">
+  <p class="a mao" style="left:70px;top:120px;font-size:80px;color:var(--rosa-e);transform:rotate(-4deg);z-index:3">seu site com a</p>
+  <h1 class="a tit" style="left:60px;top:210px;font-size:150px;z-index:3">cara da sua<br><span style="color:var(--rosa)">marca</span> ♡</h1>
+  <img class="k" src="kit/notebook-site.png" style="left:60px;top:560px;width:640px;transform:rotate(-4deg);z-index:2">
+  <img class="k" src="kit/alfinete-rosa.png" style="left:300px;top:520px;width:110px;transform:rotate(-12deg);z-index:4">
+  <div class="a" style="right:50px;top:540px;width:380px;z-index:4;transform:rotate(5deg)">
+    <img src="kit/post-it.png" style="width:100%;display:block;filter:drop-shadow(0 12px 16px rgba(78,42,26,.2))">
+    <div class="a mao" style="left:40px;top:40px;right:40px;font-size:54px;line-height:1.05;color:var(--choco-e)">orçamento<br>e prévia<br><span style="color:var(--rosa-e)">na hora ✓</span></div>
+  </div>
+  <img class="k" src="kit/alfinete-menta.png" style="right:70px;top:500px;width:80px;transform:rotate(18deg);z-index:5">
+  <img class="k" src="kit/estrela-xadrez.png" style="left:40px;top:1080px;width:230px;transform:rotate(-12deg);z-index:3">
+  <div class="a preco" style="left:290px;top:1020px;width:300px;height:180px;background:var(--choco-e);color:var(--creme);border-radius:30px;font-size:92px;transform:rotate(-3deg);box-shadow:0 12px 0 var(--rosa);z-index:4"><div><small>sites a partir de</small>R$290</div></div>
+  <img class="k" src="arte/recortes/look3.png" style="right:30px;bottom:-30px;height:560px;z-index:5">
+  <img class="k" src="kit/botoes.png" style="right:-10px;top:120px;height:380px;transform:rotate(90deg);transform-origin:center;opacity:0">
+  <div class="a" style="left:70px;bottom:40px;z-index:6"><span class="cta" style="font-size:42px;padding:16px 36px">monte o seu → link na bio</span></div>
+</div>
+
+<!-- 2 · DOCERIA -->
+<div class="ad" id="a2" style="background:var(--rosa-c);background-image:radial-gradient(rgba(226,104,127,.18) 9px, transparent 10px);background-size:64px 64px">
+  <svg class="a" style="left:0;top:0;z-index:2" width="1080" height="260" viewBox="0 0 1080 260"><path fill="#4E2A1A" d="M0 0H1080V120C1050 120 1046 210 1020 210C992 210 1000 140 970 140C940 140 948 250 915 250C882 250 892 130 860 130C830 130 836 180 808 180C780 180 790 110 760 110C728 110 736 230 704 230C672 230 682 120 650 120C620 120 628 170 600 170C570 170 578 100 548 100C516 100 526 240 492 240C458 240 470 130 438 130C406 130 414 190 384 190C354 190 362 110 330 110C298 110 308 220 274 220C240 220 250 120 218 120C188 120 196 160 166 160C136 160 144 100 112 100C80 100 90 200 58 200C26 200 36 120 0 120Z"/></svg>
+  <span class="a handle" style="right:60px;top:40px;z-index:3">@ternvra</span>
+  <p class="a it" style="left:70px;top:260px;font-size:62px;color:var(--rosa-e);z-index:3">fresquinho, saindo do forno</p>
+  <h1 class="a serif" style="left:66px;top:340px;font-size:150px;line-height:.95;z-index:3">Seu site<br><span class="it" style="color:var(--choco)">feito com</span><br>carinho</h1>
+  <img class="k" src="kit/saco-confeiteiro.png" style="right:80px;top:380px;height:420px;transform:rotate(28deg);z-index:3">
+  <img class="k" src="kit/prato-coracao.png" style="left:330px;top:820px;width:720px;z-index:2">
+  <div class="a preco" style="left:520px;top:870px;width:330px;height:220px;font-size:100px;color:var(--choco-e);z-index:4"><div><small>a partir de</small>R$290</div></div>
+  <img class="k" src="kit/chantilly.png" style="left:60px;top:860px;width:320px;z-index:3">
+  <img class="k" src="arte/recortes/apontando.png" style="left:-40px;bottom:-30px;height:420px;z-index:4;transform:scaleX(-1)">
+  <div class="a" style="right:60px;bottom:50px;z-index:6"><span class="cta" style="font-size:42px;padding:16px 36px;background:var(--rosa-e)">peça o seu orçamento ♡</span></div>
+</div>
+
+<!-- 3 · Y2K / PRESS START -->
+<div class="ad" id="a3" style="background:repeating-conic-gradient(var(--menta) 0 25%, #C9E7D8 0 50%) 0 0/120px 120px">
+  <div class="a" style="inset:40px;border:8px solid var(--choco-e);border-radius:40px;background:rgba(250,246,230,.55)"></div>
+  <p class="a" style="left:0;right:0;top:90px;text-align:center;font-family:'Press Start 2P';font-size:34px;color:var(--rosa-e);z-index:3">▶ PRESS START</p>
+  <h1 class="a tit" style="left:0;right:0;top:160px;text-align:center;font-size:132px;z-index:3">no seu<br><span style="color:var(--rosa)">projeto digital</span></h1>
+  <img class="k" src="kit/gameboy-blast.png" style="left:70px;top:520px;width:430px;transform:rotate(-8deg);z-index:3">
+  <img class="k" src="kit/celular-orcamento.png" style="left:450px;top:470px;width:270px;transform:rotate(6deg);z-index:4">
+  <img class="k" src="arte/recortes/look1.png" style="right:60px;top:440px;height:640px;z-index:5">
+  <div class="a" style="left:80px;top:1060px;display:flex;gap:14px;z-index:6">
+    <span class="handle" style="font-size:32px;background:var(--rosa);color:#fff">sites</span><span class="handle" style="font-size:32px;background:var(--menta-e);color:#fff">apps</span><span class="handle" style="font-size:32px">software</span><span class="handle" style="font-size:32px;background:var(--choco-e);color:var(--creme)">design</span>
+  </div>
+  <div class="a" style="left:0;right:0;bottom:80px;text-align:center;z-index:6"><span class="cta" style="font-size:40px;padding:16px 36px">orçamento na hora · a partir de R$190</span></div>
+</div>
+
+<!-- 4 · COELHINHO EDITORIAL -->
+<div class="ad" id="a4" style="background:repeating-linear-gradient(90deg,#F6EEE2 0 80px,#EFE2D2 80px 160px)">
+  <span class="a handle" style="left:60px;top:50px;z-index:3">@ternvra</span>
+  <h1 class="a serif" style="left:0;right:0;top:150px;text-align:center;font-size:120px;line-height:1;z-index:3">Uma colherada<br>de <span class="it" style="color:var(--rosa-e)">carinho</span></h1>
+  <p class="a it" style="left:0;right:0;top:420px;text-align:center;font-size:64px;color:var(--choco);z-index:3">pra sua marca</p>
+  <img class="k" src="kit/coelho-colher.png" style="left:110px;top:520px;width:860px;z-index:2">
+  
+  <div class="a" style="left:70px;right:70px;top:1030px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;z-index:3">
+    <div class="papel" style="border-radius:24px;padding:20px;text-align:center;border:4px solid var(--choco-e)"><p style="font-weight:800;font-size:30px">design</p><p class="serif" style="font-size:52px;color:var(--rosa-e)">R$190</p></div>
+    <div class="papel" style="border-radius:24px;padding:20px;text-align:center;border:4px solid var(--choco-e);background:var(--menta)"><p style="font-weight:800;font-size:30px">sites</p><p class="serif" style="font-size:52px">R$290</p></div>
+    <div class="papel" style="border-radius:24px;padding:20px;text-align:center;border:4px solid var(--choco-e)"><p style="font-weight:800;font-size:30px">social</p><p class="serif" style="font-size:52px;color:var(--rosa-e)">R$290<small style="font-size:24px">/mês</small></p></div>
+  </div>
+  <p class="a" style="left:0;right:0;bottom:46px;text-align:center;font-weight:900;font-size:34px;z-index:3">orçamento na hora ♡ link na bio</p>
+</div>
+
+<!-- 5 · DOILY / MOLDURA -->
+<div class="ad" id="a5" style="background:url(fotos/novas/bolinhas-menta.png) center/400px">
+  <img class="k" src="kit/doily-chocolate.png" style="left:50%;top:150px;width:980px;transform:translateX(-50%)">
+  <p class="a mao" style="left:0;right:0;top:300px;text-align:center;font-size:64px;color:var(--rosa);z-index:3">sites · apps · design · social</p>
+  <h1 class="a" style="left:0;right:0;top:390px;text-align:center;font-family:Fredoka;font-weight:700;font-size:112px;line-height:.95;color:var(--creme);z-index:3">sua marca<br>merece <span style="color:var(--rosa)">ternura</span></h1>
+  <p class="a" style="left:0;right:0;top:700px;text-align:center;font-weight:800;font-size:40px;color:var(--creme);z-index:3">monte seu projeto, veja a prévia<br>e saiba o preço na hora</p>
+  
+  <img class="k" src="arte/recortes/ursinho.png" style="left:40px;bottom:-30px;height:420px;z-index:4">
+  <img class="k" src="arte/recortes/apontando.png" style="right:20px;bottom:-30px;height:440px;z-index:4">
+  <div class="a" style="left:0;right:0;bottom:90px;text-align:center;z-index:6"><span class="cta" style="font-size:42px;padding:18px 40px;background:var(--rosa-e)">a partir de R$190 ✦</span></div>
+</div>
+</body></html>
