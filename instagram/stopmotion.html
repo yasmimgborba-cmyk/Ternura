@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Nunito:wght@800;900&family=Caveat:wght@700&display=swap" rel="stylesheet">
+<style>
+:root { --menta:#AFD4C0; --menta-e:#5E9C83; --choco:#88553E; --choco-e:#4E2A1A; --creme:#FAF6E6; --rosa:#F594A7; --rosa-e:#E2687F; --rosa-c:#FBE3EA; }
+* { box-sizing:border-box; margin:0; }
+body { width:1080px; height:1920px; overflow:hidden; font-family:Nunito, sans-serif; color:var(--choco-e); }
+#palco { position:relative; width:1080px; height:1920px; overflow:hidden; background:#FFF6EE;
+  background-image:linear-gradient(rgba(175,212,192,.5) 2px, transparent 2px), linear-gradient(90deg, rgba(175,212,192,.5) 2px, transparent 2px); background-size:60px 60px; }
+#palco.rosa { background-color:var(--rosa-c); } #palco.menta { background-color:#DDF2E9; } #palco.choco { background-color:#5A3322; background-image:radial-gradient(rgba(250,246,230,.12) 10px, transparent 11px); background-size:70px 70px; }
+.e { position:absolute; transform-origin:center; filter:drop-shadow(0 16px 18px rgba(78,42,26,.25)); }
+.tit { font-family:Fredoka; font-weight:700; line-height:.92; color:var(--creme); -webkit-text-stroke:22px var(--choco-e); paint-order:stroke fill; text-shadow:0 12px 0 rgba(78,42,26,.45); text-align:center; }
+.balao { background:#fff; border:7px solid var(--choco-e); border-radius:44px; padding:30px 40px; font-weight:900; font-size:56px; text-align:center; }
+.pol { background:#fff; padding:18px 18px 86px; }
+.pol img { display:block; width:100%; height:100%; object-fit:cover; object-position:top; }
+.pol span { position:absolute; left:0; right:0; bottom:16px; text-align:center; font-family:Caveat; font-size:56px; }
+.tag { font-family:Fredoka; font-weight:700; font-size:70px; padding:10px 40px; border-radius:999px; border:7px solid var(--choco-e); }
+.selo { width:360px; height:360px; border-radius:50%; background:var(--rosa-e); color:#fff; border:10px solid var(--choco-e); display:grid; place-items:center; text-align:center; font-family:Fredoka; font-weight:700; font-size:120px; line-height:.9; }
+.selo small { display:block; font-size:40px; }
+.cel { background:#161616; border-radius:62px; padding:16px; }
+.cel img { display:block; width:100%; border-radius:48px; }
+.cor { color:var(--rosa-e); font-size:110px; }
+.papel { position:absolute; inset:0; pointer-events:none; opacity:.08; background-image:radial-gradient(#000 1px, transparent 1.3px); background-size:4px 4px; }
+</style></head>
+<body><div id="palco"></div>
+<script>
+const P = (n) => `arte/recortes/${n}.png`;
+const palco = document.getElementById('palco');
+let seed = 1; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+
+// cada cena: duração em quadros + função que devolve elementos [html, x, y, w, rot, aparece-no-quadro]
+const FPS = 12;
+const cenas = [
+  { q: 26, fundo: '', els: (f) => [
+      ...(f >= 0 ? [[`<img src="${P('apontando')}" style="width:100%">`, Math.max(380, 1080 - f * 70), 520, 700, -2]] : []),
+      ...(f >= 8 ? [[`<div class="balao">oii! ♡<br><span style="font-size:42px;color:#E2687F">eu sou a Ternura</span></div>`, 70, 320 - (f < 10 ? 40 : 0), 520, -5]] : []),
+      ...(f >= 14 ? [[`<span style="font-size:110px">♡</span>`, 120, 900, 120, 10]] : []),
+      ...(f >= 17 ? [[`<span style="font-size:80px;color:#E2687F">✦</span>`, 300, 1050, 90, -8]] : []),
+      ...(f >= 20 ? [[`<span style="font-size:120px;color:#5E9C83">✦</span>`, 160, 1250, 140, 6]] : []),
+  ]},
+  { q: 30, fundo: 'rosa', els: (f) => [
+      [`<h1 class="tit" style="font-size:150px">meus<br><span style="color:#F594A7">projetos</span></h1>`, 140, 90, 800, 0],
+      ...(f >= 4 ? [[`<div class="pol" style="height:620px"><img src="arte/print-blast.png"><span>Blast</span></div>`, 80, 460 - (f < 6 ? 120 : 0), 480, -6]] : []),
+      ...(f >= 10 ? [[`<div class="pol" style="height:620px"><img src="arte/print-underground-cel.png"><span>Underground</span></div>`, 540, 520 - (f < 12 ? 120 : 0), 460, 5]] : []),
+      ...(f >= 16 ? [[`<div class="pol" style="height:640px"><img src="../public/exemplos/social/img/13.jpg"><span>Instagram</span></div>`, 280, 1060 - (f < 18 ? 120 : 0), 500, -2]] : []),
+  ]},
+  { q: 36, fundo: 'menta', els: (f) => {
+      const poses = ['look2', 'look3', 'look1', 'pirulito', 'ursinho', 'corpo'];
+      const tags = [['sites', '#F594A7', '#fff'], ['apps', '#5E9C83', '#fff'], ['design', '#FAF6E6', '#4E2A1A'], ['social', '#4E2A1A', '#FAF6E6'], ['marcas', '#F594A7', '#fff'], ['tudo ♡', '#FAF6E6', '#4E2A1A']];
+      const i = Math.min(poses.length - 1, Math.floor(f / 6));
+      const larg = { look1: 560, look2: 590, look3: 620, pirulito: 900, ursinho: 720, corpo: 700 }[poses[i]];
+      return [
+        [`<h1 class="tit" style="font-size:120px">eu crio...</h1>`, 140, 110, 800, 0],
+        [`<img src="${P(poses[i])}" style="width:100%">`, 540 - larg / 2, 420, larg, 0],
+        [`<span class="tag" style="background:${tags[i][1]};color:${tags[i][2]};font-size:84px">${tags[i][0]}</span>`, 300, 1700, 480, i % 2 ? 4 : -4],
+      ];
+  }},
+  { q: 30, fundo: '', els: (f) => [
+      [`<h1 class="tit" style="font-size:130px">orçamento<br><span style="color:#AFD4C0">na hora</span></h1>`, 120, 100, 840, 0],
+      [`<div class="cel"><img src="arte/print-orcamento-template.png"></div>`, Math.max(140, 1080 - f * 120), 520, 470, 5],
+      ...(f >= 10 ? [[`<img src="${P('apontando')}" style="width:100%;transform:scaleX(-1)">`, 560, 560, 560, 0]] : []),
+      ...(f >= 16 ? [[`<div class="selo"><div><small>a partir de</small>R$190</div></div>`, 120 + (f < 18 ? -30 : 0), 1360 + (f < 18 ? -30 : 0), 360 + (f < 18 ? 60 : 0), -10]] : []),
+  ]},
+  { q: 34, fundo: 'choco', els: (f) => [
+      [`<img src="arte/logo.png" style="width:100%">`, 140, 260 - (f < 3 ? 80 : 0), 800, -3],
+      ...(f >= 6 ? [[`<p style="font-family:Fredoka;font-weight:700;font-size:84px;color:#FAF6E6;text-align:center;line-height:1.05">seu projeto digital<br>feito com <span style="color:#F594A7">carinho</span></p>`, 90, 760, 900, 0]] : []),
+      ...(f >= 12 ? [[`<img src="${P('ursinho')}" style="width:100%">`, 330, 1060, 420, 0]] : []),
+      ...(f >= 18 ? [[`<span class="tag" style="background:#E2687F;color:#fff;border-color:#FAF6E6;font-size:64px">link na bio ♡</span>`, 270, 1700, 540, -3]] : []),
+      ...(f >= 8 ? [[`<span style="font-size:100px;color:#F594A7">♡</span>`, 90, 1150, 110, -12]] : []),
+      ...(f >= 14 ? [[`<span style="font-size:90px;color:#AFD4C0">✦</span>`, 880, 1200, 100, 8]] : []),
+      ...(f >= 20 ? [[`<span style="font-size:120px;color:#F594A7">♡</span>`, 840, 1450, 130, 10]] : []),
+  ]},
+];
+const TOTAL = cenas.reduce((t, c) => t + c.q, 0);
+window.TOTAL = TOTAL;
+
+window.quadro = (n) => {
+  let f = n, c = 0;
+  while (f >= cenas[c].q) { f -= cenas[c].q; c++; }
+  const cena = cenas[c];
+  palco.className = cena.fundo;
+  seed = 1 + Math.floor(n / 2) * 7; // tremidinho "on twos": muda a cada 2 quadros
+  palco.innerHTML = cena.els(f).map(([html, x, y, w, r]) => {
+    const jx = (rnd() - .5) * 8, jy = (rnd() - .5) * 8, jr = (rnd() - .5) * 2.4;
+    return `<div class="e" style="left:${x + jx}px;top:${y + jy}px;width:${w}px;transform:rotate(${r + jr}deg)">${html}</div>`;
+  }).join('') + '<div class="papel"></div>';
+};
+</script></body></html>
