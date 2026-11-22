@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@700;800;900&family=Caveat:wght@700&family=Playfair+Display:ital,wght@0,800;1,600&family=Gochi+Hand&display=swap" rel="stylesheet">
+<style>
+:root { --menta:#AFD4C0; --menta-e:#5E9C83; --choco:#88553E; --choco-e:#4E2A1A; --creme:#FAF6E6; --rosa:#F594A7; --rosa-e:#E2687F; --rosa-c:#FBE3EA; }
+* { box-sizing:border-box; margin:0; }
+body { width:1080px; height:1920px; overflow:hidden; font-family:Nunito, sans-serif; color:var(--choco-e); }
+#p { position:relative; width:1080px; height:1920px; overflow:hidden; }
+.x { position:absolute; transform-origin:center; will-change:transform; }
+.som { filter:drop-shadow(0 18px 22px rgba(78,42,26,.28)); }
+.tit { font-family:Fredoka; font-weight:700; line-height:.95; color:var(--creme); -webkit-text-stroke:20px var(--choco-e); paint-order:stroke fill; text-shadow:0 10px 0 rgba(78,42,26,.45); text-align:center; }
+.pill { display:inline-block; font-family:Fredoka; font-weight:700; padding:10px 34px; border-radius:999px; border:7px solid var(--choco-e); white-space:nowrap; }
+.pol { background:#fff; padding:22px 22px 110px; box-shadow:0 20px 40px rgba(0,0,0,.25); }
+.pol .ft { width:100%; aspect-ratio:1; overflow:hidden; background:#2b2420; }
+.pol .ft img { width:100%; height:100%; object-fit:cover; object-position:top; display:block; }
+.pol .lg { position:absolute; left:0; right:0; bottom:22px; text-align:center; font-family:Caveat; font-size:62px; color:var(--choco-e); }
+.notif { width:960px; background:rgba(255,255,255,.88); backdrop-filter:blur(20px); border-radius:44px; padding:30px 34px; display:flex; gap:26px; align-items:center; box-shadow:0 14px 30px rgba(0,0,0,.18); }
+.notif .ic { width:110px; height:110px; border-radius:28px; display:grid; place-items:center; font-size:62px; flex:none; }
+.notif b { font-size:38px; display:block; } .notif span { font-size:36px; color:#5a4a44; } .notif small { margin-left:auto; align-self:flex-start; font-size:30px; color:#8a7a74; }
+.grao { position:absolute; inset:0; pointer-events:none; opacity:.06; background-image:radial-gradient(#000 1px, transparent 1.3px); background-size:4px 4px; z-index:99; }
+</style></head>
+<body><div id="p"></div>
+<script>
+const K = 'kit3/', R = 'arte/recortes/', S = (n) => `../public/exemplos/social/img/${String(n).padStart(2, '0')}.jpg`;
+const p = document.getElementById('p');
+const cl = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const lin = (t, a, b) => cl((t - a) / (b - a));
+const eo = (x) => 1 - Math.pow(1 - x, 3);
+const back = (x) => { const c = 1.7; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
+const bounce = (x) => { const n = 7.5625, d = 2.75; if (x < 1 / d) return n * x * x; if (x < 2 / d) return n * (x -= 1.5 / d) * x + .75; if (x < 2.5 / d) return n * (x -= 2.25 / d) * x + .9375; return n * (x -= 2.625 / d) * x + .984375; };
+const mix = (a, b, t) => a + (b - a) * t;
+const X = (html, x, y, w, { r = 0, s = 1, o = 1, cls = '', z = 1, sx, sy } = {}) =>
+  `<div class="x ${cls}" style="left:${x}px;top:${y}px;width:${w}px;opacity:${o};z-index:${z};transform:rotate(${r}deg) scale(${sx ?? s},${sy ?? s})">${html}</div>`;
+const img = (src) => `<img src="${src}" style="width:100%;display:block">`;
+const pop = (t, t0, d = .35) => back(lin(t, t0, t0 + d));
+let sd = 3; const rnd = () => (sd = (sd * 16807) % 2147483647) / 2147483647;
+
+const V = {};
+
+// ===================== A · CLICK! polaroids =====================
+const FOTOS = [[S(13), 'feed'], ['arte/print-blast.png', 'Blast'], [S(8), 'carrossel'], ['arte/print-underground-cel.png', 'app'], [S(1), 'posts'], ['kit2/logo-final.png', 'logo']];
+V.click = { dur: 13, fundo: `background:url(${K}fundo-arabesco.jpg) center/700px`, f: (t) => {
+  let h = '';
+  const flashT = [2.2, 3.6, 5.0, 6.4, 7.8, 9.2];
+  // câmera / bonequinha
+  const camY = t < .5 ? mix(1950, 760, eo(lin(t, 0, .5))) : 760;
+  const fl = flashT.find((f) => t >= f && t < f + .25);
+  const shake = fl ? (rnd() - .5) * 18 : 0;
+  h += X(img(K + 'fotografando.png'), 180 + shake, camY + shake, 720, { cls: 'som', z: 5, r: -2 });
+  // texto gancho
+  h += X(`<div style="background:#FAF6E6;border:7px solid #4E2A1A;border-radius:44px;padding:26px 36px;text-align:center;box-shadow:0 12px 0 #4E2A1A"><b style="font-family:Fredoka;font-size:70px">o que eu criei<br>esse mês</b> <span style="font-size:70px">📸</span></div>`, 140, mix(-400, 90, back(lin(t, .2, .7))), 800, { r: -3, z: 9 });
+  // contagem
+  if (t > .9 && t < 2.2) { const n = 3 - Math.floor((t - .9) / .43); h += X(`<p class="tit" style="font-size:300px">${n}</p>`, 340, 330, 400, { s: mix(1.6, 1, eo(((t - .9) % .43) / .43)), z: 8 }); }
+  // polaroids
+  FOTOS.forEach(([src, lg], i) => {
+    const t0 = flashT[i]; if (t < t0) return;
+    const k = eo(lin(t, t0, t0 + .7)), rev = lin(t, t0 + .3, t0 + 1.4);
+    const fx = [60, 560, 90, 600, 320, 330][i], fy = [380, 330, 840, 800, 560, 430][i], rr = [-9, 7, 5, -6, -3, 2][i];
+    const x = mix(390, fx, k), y = mix(1080, fy, k), sz = i === 5 ? 520 : 420;
+    const dentro = i === 5 ? `<div style="width:100%;height:100%;background:#FBE3EA;display:grid;place-items:center">${img(src)}</div>` : `<img src="${src}">`;
+    h += X(`<div class="pol"><div class="ft" style="filter:brightness(${mix(.15, 1, rev)}) blur(${mix(14, 0, rev)}px) sepia(${mix(.8, 0, rev)})">${dentro}</div><span class="lg">${lg}</span></div>`, x, y, sz, { r: mix(0, rr, k), z: i === 5 ? 20 : 6 + i, cls: 'som' });
+  });
+  if (fl) h += X('', 0, 0, 1080, { o: 1 - (t - fl) / .25, z: 50 }).replace('style="', 'style="height:1920px;background:#fff;');
+  if (t > 10.6) h += X(`<span class="pill" style="font-size:60px;background:#E2687F;color:#fff">quer o seu? link na bio ♡</span>`, 150, 1640, 780, { s: pop(t, 10.6), r: -3, z: 30 });
+  return h;
+}};
+
+// ===================== B · POV notificações =====================
+const NOT = [['#25D366', '💬', 'Cliente nova', '"oi! vi seu site, quero fazer um pedido!!"'], ['#4E2A1A', '💸', 'Pix recebido', 'R$ 180,00 · pedido #A21'], ['#E2687F', '♡', 'Instagram', '@cliente e mais 120 pessoas curtiram seu post'], ['#5E9C83', '🛍️', 'Seu site', '3 pedidos novos hoje'], ['#F4C95D', '⭐', 'Avaliação', '"marca mais linda que eu já vi"']];
+V.notif = { dur: 12, fundo: 'background:#FBE3EA', f: (t) => {
+  let h = '';
+  // papel de parede do celular
+  h += X(`<div style="height:1920px;background:url(${K}fundo-arabesco.jpg) center/620px;filter:brightness(1.05)"></div>`, 0, 0, 1080, { z: 0 });
+  const hora = `${9}:${String(41 + Math.floor(t / 3)).padStart(2, '0')}`;
+  h += X(`<p style="text-align:center;font-family:Fredoka;font-weight:600;color:#FAF6E6;font-size:52px">sábado, 22 de novembro</p><p style="text-align:center;font-family:Fredoka;font-weight:600;color:#FAF6E6;font-size:250px;line-height:1">${hora}</p>`, 0, 170, 1080, { z: 2 });
+  h += X(`<div style="background:#fff;border:7px solid #4E2A1A;border-radius:40px;padding:22px 30px;text-align:center;font-family:Fredoka;font-weight:700;font-size:56px;box-shadow:0 12px 0 #4E2A1A">POV: o celular da sua marca<br>depois de um <span style="color:#E2687F">site lindo</span> 📱</div>`, 90, mix(-300, 40, back(lin(t, 0, .6))), 900, { z: 10, r: -2 });
+  NOT.forEach(([c, e, tt, tx], i) => {
+    const t0 = 1.2 + i * 1.3; if (t < t0) return;
+    const y0 = 560 + (NOT.length - 1 - Math.min(NOT.length - 1, Math.floor((t - 1.2) / 1.3))) * 0;
+    const pos = Math.min(NOT.length - 1, Math.floor((t - 1.2) / 1.3)) - i; // quantas chegaram depois
+    const k = back(lin(t, t0, t0 + .45));
+    const y = mix(-220, 470 + pos * 178, k);
+    h += X(`<div class="notif"><div class="ic" style="background:${c};color:#fff">${e}</div><div><b>${tt}</b><span>${tx}</span></div><small>agora</small></div>`, 60, y, 960, { z: 5 + i, s: mix(.9, 1, k) });
+  });
+  const ty = mix(2000, 1260, back(lin(t, 7.4, 8.1)));
+  h += X(img(K + 'tablet.png'), 520, ty, 560, { cls: 'som', z: 20 });
+  if (t > 8.3) h += X(`<div style="background:#fff;border:6px solid #4E2A1A;border-radius:36px;padding:20px 28px;font-family:Fredoka;font-weight:700;font-size:50px;text-align:center">a gente faz isso<br>acontecer ♡</div>`, 50, 1440, 480, { s: pop(t, 8.3), r: -4, z: 21 });
+  if (t > 9.6) h += X(`<span class="pill" style="font-size:52px;background:#E2687F;color:#fff">sites desde R$290 · link na bio</span>`, 70, 1770, 940, { s: pop(t, 9.6), z: 22 });
+  h += X(`<p style="font-size:24px;color:#FAF6E6;text-align:right">*simulação ilustrativa</p>`, 600, 1880, 440, { z: 22, o: .8 });
+  return h;
+}};
+
+// ===================== C · do rabisco ao logo =====================
+V.rabisco = { dur: 13, fundo: 'background:#FFFDF6;background-image:linear-gradient(rgba(175,212,192,.45) 2px,transparent 2px),linear-gradient(90deg,rgba(175,212,192,.45) 2px,transparent 2px);background-size:54px 54px', f: (t) => {
+  let h = '';
+  h += X(`<div style="background:#4E2A1A;color:#FAF6E6;border-radius:40px;padding:24px 34px;text-align:center;font-family:Fredoka;font-weight:700;font-size:60px">assiste eu criar um logo<br>em <span style="color:#F594A7">10 segundos</span> ✏️</div>`, 110, mix(-300, 70, back(lin(t, 0, .6))), 860, { r: -2, z: 10 });
+  const d1 = lin(t, .8, 3.2), d2 = lin(t, 2.6, 5.2), cor = lin(t, 5.4, 7.2), stk = eo(lin(t, 7.6, 8.4)), cair = back(lin(t, 9, 9.6));
+  const L = 2600;
+  const lapis = '#7a6a64';
+  const sticker = stk > 0 ? `filter:drop-shadow(0 0 0 #fff) drop-shadow(0 ${mix(0, 26, stk)}px ${mix(0, 30, stk)}px rgba(78,42,26,.35))` : '';
+  h += X(`<svg viewBox="0 0 900 900" width="900" height="900" style="overflow:visible;${sticker}">
+    <g transform="translate(450 330)">
+      <path d="M0 210 C-260 60 -260 -170 -120 -170 C-50 -170 -10 -120 0 -80 C10 -120 50 -170 120 -170 C260 -170 260 60 0 210Z" fill="${cor > 0 ? '#F594A7' : 'none'}" fill-opacity="${cor}" stroke="${cor > .5 ? '#4E2A1A' : lapis}" stroke-width="${mix(5, 16, cor)}" stroke-linejoin="round" stroke-dasharray="${L}" stroke-dashoffset="${L * (1 - d1)}"/>
+      <path d="M-120 -60 C-150 -10 -120 50 -60 70" fill="none" stroke="#fff" stroke-width="18" stroke-linecap="round" opacity="${cor}"/>
+      <g opacity="${cor}"><path d="M-40 -175 Q-90 -230 -70 -250 Q-40 -260 0 -200 Q40 -260 70 -250 Q90 -230 40 -175 Z" fill="#88553E" stroke="#4E2A1A" stroke-width="10"/><circle cx="0" cy="-188" r="18" fill="#4E2A1A"/></g>
+    </g>
+    <text x="450" y="720" text-anchor="middle" font-family="Gochi Hand" font-size="150" fill="${cor > .3 ? '#4E2A1A' : 'none'}" fill-opacity="${cor}" stroke="${lapis}" stroke-width="${mix(3, 0, cor)}" stroke-dasharray="1400" stroke-dashoffset="${1400 * (1 - d2)}">Doces da Bia</text>
+    <text x="450" y="810" text-anchor="middle" font-family="Caveat" font-size="70" fill="#E2687F" opacity="${cor}">confeitaria artesanal</text>
+  </svg>`, 90, mix(420, 380, stk), 900, { s: mix(1, 1.04, stk), r: mix(0, -3, stk), z: 3 });
+  // lápis / caneta seguindo
+  if (t > .8 && t < 5.3) { const a = d1 < 1 ? d1 * Math.PI * 2 : d2 * Math.PI; const px = d1 < 1 ? 540 + Math.sin(a) * 260 : 260 + d2 * 560, py = d1 < 1 ? 620 - Math.cos(a) * 200 : 1080 + Math.sin(t * 20) * 20; h += X(img(K + 'src/posca.png'), px - 40, py - 360, 260, { r: -30, z: 6 }); }
+  if (cor > 0 && cor < 1) h += X(img(K + 'src/posca.png'), 600 + Math.sin(t * 9) * 160, 420 + Math.cos(t * 7) * 120, 260, { r: -10, z: 6 });
+  // etiquetas de etapa
+  const etapa = t < 5.3 ? '1. rabisco' : t < 7.4 ? '2. cor' : t < 9 ? '3. adesivo' : '4. aplicado ♡';
+  h += X(`<span class="pill" style="font-size:52px;background:#fff">${etapa}</span>`, 340, 330, 420, { z: 9, r: 2 });
+  // aplicações
+  if (t > 9) {
+    h += X(`<div style="height:300px;border-radius:26px;background:#88553E;padding:30px;color:#FAF6E6;font-family:Gochi Hand;font-size:62px;line-height:1">Doces da Bia<br><span style="font-family:Nunito;font-size:28px">cartão de visita</span></div>`, 60, mix(1950, 1320, cair), 460, { r: -7, z: 7, cls: 'som' });
+    h += X(`<div style="height:300px;border-radius:26px;background:repeating-linear-gradient(90deg,#FBE3EA 0 34px,#fff 34px 68px);border:6px solid #4E2A1A;display:grid;place-items:center;font-family:Gochi Hand;font-size:62px;color:#E2687F">tag ♡</div>`, 560, mix(1950, 1350, back(lin(t, 9.3, 9.9))), 440, { r: 6, z: 7, cls: 'som' });
+  }
+  h += X(img(K + 'card-caderno.jpg'), 760, mix(1950, 1500, back(lin(t, .4, 1))), 300, { r: 8, z: 8, cls: 'som', o: t > 9 ? 0 : 1 });
+  if (t > 10.5) h += X(`<span class="pill" style="font-size:54px;background:#E2687F;color:#fff">qual marca eu desenho agora? ↓</span>`, 70, 1740, 940, { s: pop(t, 10.5), z: 20 });
+  return h;
+}};
+
+// ===================== D · isso ou aquilo =====================
+const RODADAS = [
+  [['fofa', K + 'card-boba.jpg', '#F594A7'], ['elegante', K + 'card-caderno.jpg', '#4E2A1A']],
+  [['listras', K + 'coracao0.png', '#E2687F'], ['xadrez', K + 'coracao1.png', '#5E9C83']],
+  [['violão', K + 'card-violao.jpg', '#88553E'], ['câmera', K + 'card-camera.jpg', '#5E9C83']],
+  [['morango', K + 'morango.png', '#E2687F'], ['flor', K + 'flor.png', '#F594A7']],
+];
+V.isso = { dur: 13, fundo: 'background:#E6F5EE', f: (t) => {
+  let h = '';
+  const ri = Math.min(RODADAS.length - 1, Math.floor(lin(t, 1, 10.6) * RODADAS.length * .9999));
+  const t0 = 1 + ri * 2.4, k = back(lin(t, t0, t0 + .5)), sai = eo(lin(t, t0 + 2.1, t0 + 2.4));
+  // fundo dividido
+  h += X(`<div style="height:1920px;display:flex"><div style="flex:1;background:${RODADAS[ri][0][2]}"></div><div style="flex:1;background:${RODADAS[ri][1][2]}"></div></div>`, 0, 0, 1080, { z: 0, o: .9 });
+  h += X(`<div style="height:1920px;background-image:radial-gradient(rgba(255,255,255,.35) 10px,transparent 11px);background-size:70px 70px"></div>`, 0, 0, 1080, { z: 1 });
+  h += X(`<div style="background:#FAF6E6;border:7px solid #4E2A1A;border-radius:40px;padding:22px 30px;text-align:center;font-family:Fredoka;font-weight:700;font-size:62px;box-shadow:0 12px 0 #4E2A1A">isso ou aquilo:<br><span style="color:#E2687F">edição marca</span> ✦</div>`, 140, mix(-300, 70, back(lin(t, 0, .6))), 800, { z: 10, r: -2 });
+  RODADAS[ri].forEach(([nome, src, c], j) => {
+    const lado = j ? 1 : -1;
+    const x = (j ? 580 : 60) + lado * mix(700, 0, k) + lado * sai * 700;
+    const flut = Math.sin(t * 4 + j) * 14;
+    h += X(`<div style="background:#fff;border:8px solid #4E2A1A;border-radius:40px;padding:24px;box-shadow:0 14px 0 #4E2A1A"><div style="height:520px;display:grid;place-items:center;overflow:hidden;border-radius:24px">${`<img src="${src}" style="max-width:100%;max-height:100%">`}</div><p style="font-family:Fredoka;font-weight:700;font-size:72px;text-align:center;margin-top:10px">${nome}</p></div>`, x, 600 + flut, 440, { r: j ? 4 : -4, z: 5 });
+  });
+  const vs = pop(t, t0 + .3, .4);
+  h += X(`<div style="width:220px;height:220px;border-radius:50%;background:#4E2A1A;border:10px solid #FAF6E6;display:grid;place-items:center;font-family:Fredoka;font-weight:700;font-size:96px;color:#FAF6E6">ou</div>`, 430, 820, 220, { s: vs * (1 - sai), r: Math.sin(t * 6) * 8, z: 7 });
+  h += X(`<p class="tit" style="font-size:80px">rodada ${ri + 1}/4</p>`, 240, 1420, 600, { z: 8 });
+  h += X(img(K + 'lendo.png'), 700, mix(2000, 1430, back(lin(t, .3, .9))), 340, { z: 9, cls: 'som' });
+  if (t > 10.6) {
+    h += X(`<div style="height:1920px;background:rgba(78,42,26,.85)"></div>`, 0, 0, 1080, { z: 30, o: eo(lin(t, 10.6, 11)) });
+    h += X(`<p class="tit" style="font-size:110px;-webkit-text-stroke-color:#E2687F">comenta suas<br>respostas ↓</p>`, 90, 700, 900, { s: pop(t, 10.8), z: 31 });
+    h += X(img('kit2/logo-final.png'), 240, 1050, 600, { s: pop(t, 11.2), z: 31 });
+  }
+  return h;
+}};
+
+const v = V[new URLSearchParams(location.search).get('v')];
+p.setAttribute('style', v.fundo);
+window.DUR = v.dur;
+window.quadro = (t) => { sd = 3 + Math.floor(t * 12); p.innerHTML = v.f(t) + '<div class="grao"></div>'; };
+</script></body></html>
