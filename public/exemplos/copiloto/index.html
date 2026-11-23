@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Copilot · AI chatbot</title>
+<style>
+:root{--bg:#0f0f12;--card:#1a1a20;--linha:#2a2a33;--txt:#f1f1f4;--sub:#9a9aa6;--rosa:#ff5fa2;--verde:#3ecf8e;--amar:#ffc94d;--verm:#ff5d5d}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+header{display:flex;justify-content:space-between;align-items:center;padding:20px 0}
+.logo{font-weight:800;font-size:20px;letter-spacing:-.02em}.logo span{color:var(--rosa)}
+.pill{border:1px solid var(--linha);border-radius:999px;padding:6px 14px;font-size:13px;color:var(--sub)}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;padding:40px 0 70px}
+.selo{display:inline-block;background:#2a1a24;color:var(--rosa);border-radius:999px;padding:5px 12px;font-size:13px;font-weight:700;margin-bottom:16px}
+h1{font-size:clamp(34px,5vw,56px);line-height:1.04;margin:0 0 18px;letter-spacing:-.03em}
+h1 em{font-style:normal;color:var(--rosa)}
+.lead{color:var(--sub);font-size:18px;max-width:520px;margin:0 0 26px}
+.btn{display:inline-block;background:var(--rosa);color:#000;font-weight:800;border-radius:12px;padding:13px 20px;text-decoration:none}
+.btn.sec{background:transparent;color:var(--txt);border:1px solid var(--linha);margin-left:8px}
+.nums{display:flex;gap:32px;margin-top:34px;flex-wrap:wrap}.nums b{display:block;font-size:24px}.nums span{color:var(--sub);font-size:13px}
+/* celular */
+.cel{width:330px;max-width:100%;margin:0 auto;background:#07070a;border:10px solid #22222a;border-radius:42px;padding:14px 12px 18px;box-shadow:0 30px 80px #ff5fa222}
+.st{display:flex;justify-content:space-between;font-size:12px;color:var(--sub);padding:0 8px 8px}
+.ap{display:flex;align-items:baseline;gap:8px;padding:0 6px 8px}.ap b{color:var(--rosa);font-size:17px}.ap small{color:var(--sub);font-size:12px}
+.abas{display:flex;gap:5px;overflow:hidden;padding:0 4px 10px;border-bottom:1px solid var(--linha)}
+.abas span{flex:none;background:var(--card);border:1px solid var(--linha);border-radius:20px;padding:4px 10px;font-size:12px;color:var(--sub)}
+.abas span.on{color:var(--txt);border-color:var(--rosa)}.abas i{font-style:normal;background:var(--rosa);color:#000;border-radius:9px;padding:0 5px;font-size:11px;margin-left:3px}
+.card{background:var(--card);border:1px solid var(--linha);border-radius:14px;padding:11px;margin:10px 2px 0}
+.topo{display:flex;justify-content:space-between;align-items:baseline}.topo b{font-size:14px}.topo small{color:var(--sub);font-size:11px}
+.tag{display:inline-block;border-radius:7px;padding:0 6px;font-size:11px;background:#123d2c;color:var(--verde);margin-left:4px}
+.conv{display:flex;flex-direction:column;gap:4px;margin:9px 0}
+.b{max-width:85%;padding:6px 9px;border-radius:12px;font-size:13px}
+.b.ele{background:#2c2c36;align-self:flex-start}.b.eu{background:#4a2238;align-self:flex-end}
+.ia{border:1px solid var(--rosa);border-radius:10px;padding:7px 9px;font-size:13px;position:relative}
+.ia small{display:block;color:var(--rosa);font-size:10px;font-weight:700;letter-spacing:.06em;margin-bottom:2px}
+.digitando::after{content:"▍";animation:pisca 1s steps(1) infinite;color:var(--rosa)}
+@keyframes pisca{50%{opacity:0}}
+.ctx{background:#24202a;border-left:3px solid var(--rosa);border-radius:8px;padding:6px 8px;margin-top:7px;font-size:12px;color:#d9d3e0}
+.bts{display:flex;gap:5px;margin-top:8px}.bts span{border-radius:9px;padding:7px 9px;background:#2c2c36;font-size:12px}
+.bts .ok{background:var(--rosa);color:#000;font-weight:800;flex:1;text-align:center}
+/* seções */
+section{padding:60px 0;border-top:1px solid var(--linha)}
+h2{font-size:clamp(26px,3.4vw,38px);margin:0 0 10px;letter-spacing:-.02em}
+.sub{color:var(--sub);max-width:620px;margin:0 0 30px}
+.grade{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.item{background:var(--card);border:1px solid var(--linha);border-radius:16px;padding:20px}
+.item .ic{width:38px;height:38px;border-radius:11px;background:#2a1a24;color:var(--rosa);display:grid;place-items:center;font-size:18px;margin-bottom:12px}
+.item h3{margin:0 0 6px;font-size:17px}.item p{margin:0;color:var(--sub);font-size:14px}
+.passos{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;counter-reset:p}
+.passo{padding:18px;border:1px dashed var(--linha);border-radius:16px}
+.passo::before{counter-increment:p;content:"0" counter(p);color:var(--rosa);font-weight:800;display:block;margin-bottom:8px}
+.passo b{display:block;margin-bottom:4px}.passo span{color:var(--sub);font-size:14px}
+.tg{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.tgbox{background:#17212b;border-radius:18px;padding:16px;font-size:14px}
+.tgmsg{background:#182533;border:1px solid #2b5278;border-radius:12px;padding:10px 12px;color:#e6edf3}
+.tgmsg b{color:#6ab3f3}.tgbts{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
+.tgbts span{background:#2b5278;border-radius:8px;padding:7px;text-align:center;font-size:13px}
+.lista{list-style:none;padding:0;margin:0}.lista li{padding:8px 0 8px 28px;position:relative;color:#d6d6de}
+.lista li::before{content:"✓";position:absolute;left:0;color:var(--verde);font-weight:800}
+footer{padding:30px 0 40px;color:var(--sub);font-size:13px;border-top:1px solid var(--linha)}
+@media (max-width:860px){.hero,.tg{grid-template-columns:1fr}.grade{grid-template-columns:1fr}.passos{grid-template-columns:1fr 1fr}.btn.sec{margin:8px 0 0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><div class="logo">Co<span>pilot</span></div><span class="pill">AI chatbot</span></header>
+
+  <div class="hero">
+    <div>
+      <span class="selo">✦ Chatbot com IA + aprovação humana</span>
+      <h1>Responda todas as DMs <em>no seu estilo</em>, sem passar o dia no chat.</h1>
+      <p class="lead">A IA lê a conversa, escreve uma resposta com a sua voz e manda pro seu celular. Você aprova com um toque, edita ou pede outra. Nada sai sem você.</p>
+      <a class="btn" href="#como">Ver como funciona</a><a class="btn sec" href="#recursos">Recursos</a>
+      <div class="nums"><div><b>1 toque</b><span>pra aprovar</span></div><div><b>24h</b><span>fila de respostas</span></div><div><b>PT · EN · ES</b><span>idiomas</span></div></div>
+    </div>
+    <div class="cel" aria-hidden="true">
+      <div class="st"><span>9:41</span><span>●●● 5G</span></div>
+      <div class="ap"><b>Copilot</b><small>12 respondidas hoje · R$ 840 em vendas</small></div>
+      <div class="abas"><span class="on">Fila<i>3</i></span><span>Contatos</span><span>Catálogo</span><span>Vendas</span><span>Persona</span></div>
+      <div class="card">
+        <div class="topo"><b>@marina.s <span class="tag">cliente fiel</span></b><small>agora</small></div>
+        <div class="conv">
+          <div class="b ele">oiii, ainda tem aquele kit de presets que você postou?</div>
+          <div class="b ele">quanto tá?</div>
+        </div>
+        <div class="ia"><small>RESPOSTA SUGERIDA</small><span id="txt" class="digitando"></span></div>
+        <div class="ctx">📝 Comprou 2x este mês · prefere respostas curtas · item do catálogo: Kit 12 presets · R$ 39</div>
+        <div class="bts"><span class="ok">Enviar</span><span>Editar</span><span>Refazer</span></div>
+      </div>
+      <div class="card" style="opacity:.55">
+        <div class="topo"><b>@joao_p</b><small>2 min</small></div>
+        <div class="conv"><div class="b ele">vc faz desconto pra 2?</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="recursos"><div class="wrap">
+  <h2>Tudo num painel só</h2>
+  <p class="sub">Feito para quem vende pelo chat e recebe mais mensagem do que consegue responder.</p>
+  <div class="grade">
+    <div class="item"><div class="ic">✍️</div><h3>Persona</h3><p>Você ensina como fala: gírias, emojis, tamanho das mensagens. A IA escreve igual a você.</p></div>
+    <div class="item"><div class="ic">✅</div><h3>Aprovação humana</h3><p>Cada resposta espera o seu ok. Enviar, editar ou refazer com uma dica.</p></div>
+    <div class="item"><div class="ic">🗂️</div><h3>Notas de cada contato</h3><p>Resumo da conversa, quanto já comprou e listas (novo, fiel, VIP, bloqueado).</p></div>
+    <div class="item"><div class="ic">🛍️</div><h3>Catálogo e vendas</h3><p>A IA só oferece o que está no seu catálogo, com o seu preço. Cada venda vai para a planilha.</p></div>
+    <div class="item"><div class="ic">🛡️</div><h3>Filtros de segurança</h3><p>Assuntos proibidos viram alerta em vez de resposta, e palavras vetadas nunca saem.</p></div>
+    <div class="item"><div class="ic">📲</div><h3>App + Telegram</h3><p>Aprove pelo app no celular ou direto no Telegram, com botões em cada mensagem.</p></div>
+  </div>
+</div></section>
+
+<section id="como"><div class="wrap">
+  <h2>Como funciona</h2>
+  <p class="sub">Uma extensão no computador lê os chats, o servidor pede a resposta à IA e você decide pelo celular.</p>
+  <div class="passos">
+    <div class="passo"><b>Chega a mensagem</b><span>A extensão do Chrome vê a conversa nova.</span></div>
+    <div class="passo"><b>A IA escreve</b><span>Uma resposta só, no seu estilo, usando as notas do contato.</span></div>
+    <div class="passo"><b>Você aprova</b><span>No app ou no Telegram: enviar, editar ou refazer.</span></div>
+    <div class="passo"><b>Ela envia</b><span>A extensão digita e envia. Se falhar, avisa e não reenvia sozinha.</span></div>
+  </div>
+</div></section>
+
+<section><div class="wrap tg">
+  <div>
+    <h2>Aprovação pelo Telegram</h2>
+    <p class="sub">Para quem não quer abrir mais um app: cada resposta chega como mensagem, com o contexto e os botões.</p>
+    <ul class="lista"><li>Últimas mensagens e resumo da conversa</li><li>Editar mandando o texto ou uma dica</li><li>Alertas de erro e de assuntos bloqueados</li><li>Só o seu chat controla o bot</li></ul>
+  </div>
+  <div class="tgbox" aria-hidden="true">
+    <div class="tgmsg"><b>@marina.s</b> · cliente fiel · R$ 78 gastos<br><span style="color:#9fb3c8">📝 quer o kit de presets, perguntou preço</span><br><br>💬 <i>Tem sim! São 12 presets por R$ 39. Quer que eu te mande o link agora? 💕</i>
+      <div class="tgbts"><span>✅ Enviar</span><span>✏️ Editar</span><span>🔄 Refazer</span><span>✕ Ignorar</span></div>
+    </div>
+  </div>
+</div></section>
+
+<div class="wrap"><footer>Copilot · AI chatbot · projeto desenvolvido pela Ternura</footer></div>
+
+<script>
+const frase = 'Tem sim! São 12 presets por R$ 39. Quer que eu te mande o link agora? 💕';
+const el = document.getElementById('txt');
+let i = 0;
+function digitar() {
+  el.textContent = frase.slice(0, ++i);
+  if (i < frase.length) setTimeout(digitar, 38);
+  else setTimeout(() => { i = 0; digitar(); }, 3500);
+}
+setTimeout(digitar, 600);
+</script>
+</body>
+</html>

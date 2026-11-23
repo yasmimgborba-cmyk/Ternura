@@ -40,6 +40,9 @@ export default {
   'Sua marca pessoal completa: identidade, site, bio e conteúdo com a sua cara.': ['Your complete personal brand: identity, website, bio and content that feel like you.', 'Tu marca personal completa: identidad, sitio, bio y contenido con tu estilo.'],
   // ---- portfólio
   'Trabalhos selecionados': ['Selected work', 'Trabajos seleccionados'],
+  'Projetos reais. Clique para abrir e navegar.': ['Real projects. Click to open and browse.', 'Proyectos reales. Haz clic para abrir y navegar.'],
+  'AI chatbot que responde DMs no seu estilo, com aprovação pelo celular': ['AI chatbot that answers DMs in your voice, with approval from your phone', 'Chatbot con IA que responde DMs con tu estilo, con aprobación desde el celular'],
+  'AI chatbot': ['AI chatbot', 'chatbot con IA'],
   'Projetos reais e projetos conceito. Clique para abrir e navegar.': ['Real and concept projects. Click to open and browse.', 'Proyectos reales y proyectos concepto. Haz clic para abrir y navegar.'],
   'Software de marketing para X/Twitter': ['Marketing software for X/Twitter', 'Software de marketing para X/Twitter'],
   'projeto real': ['real project', 'proyecto real'],
