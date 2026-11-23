@@ -22,11 +22,11 @@ const ir = (para, status = 302) => new Response(null, { status, headers: { locat
 function pagina(cfg, titulo, corpo, { admin = false } = {}) {
   return `<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
-<title>${esc(titulo)} · ${esc(cfg.brand)}</title>
+<title>${admin ? esc(titulo) + ' · ' : ''}${esc(cfg.brand)}</title>
 <link rel="icon" href="/img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/ternura.css"></head>
+<link rel="stylesheet" href="/css/ternura.css">${admin ? '' : '<script type="module" src="/js/i18n.js"></script>'}</head>
 <body class="inner"><header class="topo"><div class="topo-in"><a class="marca" href="/"><img src="/img/logo.png" alt="${esc(cfg.brand)}"></a>
 ${admin ? '<nav class="menu"><a href="/admin">Pedidos</a></nav>' : '<nav class="menu"><a href="/#portfolio">Portfólio</a><a class="btn sm" href="/orcamento">Fazer orçamento</a></nav>'}</div></header>
 <main class="wrap estreito">${corpo}</main></body></html>`;
@@ -115,7 +115,7 @@ async function paginaPagar(env, cfg, token, url) {
   }
   if (p.status === 'pago') {
     return html(pagina(cfg, 'Pago', `<div class="cartao centro"><div class="icone-ok">✓</div><h1>Pagamento confirmado!</h1>
-      <p>Obrigada, ${esc(primeiroNome(p.nome))}! O pedido <b>#${p.id}</b> está pago. Em até 1 dia útil eu te chamo no WhatsApp ou e-mail que você deixou pra gente começar.</p>
+      <p><span>Obrigada</span>, ${esc(primeiroNome(p.nome))}! <span>O pedido</span> <b>#${p.id}</b> <span>está pago. Em até 1 dia útil eu te chamo no WhatsApp ou e-mail que você deixou pra gente começar.</span></p>
       <a class="btn" href="/">Voltar ao site</a></div>`));
   }
 
@@ -123,21 +123,21 @@ async function paginaPagar(env, cfg, token, url) {
   const nomeMetodos = metodos.includes('pix') && metodos.includes('card') ? 'Pix ou cartão' : metodos.includes('pix') ? 'Pix' : 'Cartão';
   const blocoPag = stripeAtivo(env)
     ? `<div class="opcao-pag"><h3>${nomeMetodos}</h3>
-      <p class="suave">Pagamento seguro pela Stripe.${metodos.includes('pix') ? ' No Pix a aprovação é na hora.' : ''}${env.STRIPE_PARCELAS === '1' ? ' No cartão dá pra parcelar.' : ''}</p>
-      <form method="post" action="/pagar/${esc(p.token)}/stripe"><button class="btn largo">Pagar ${brl(p.valor)}</button></form></div>`
+      <p class="suave"><span>Pagamento seguro pela Stripe.</span>${metodos.includes('pix') ? ' <span>No Pix a aprovação é na hora.</span>' : ''}${env.STRIPE_PARCELAS === '1' ? ' <span>No cartão dá pra parcelar.</span>' : ''}</p>
+      <form method="post" action="/pagar/${esc(p.token)}/stripe"><button class="btn largo"><span>Pagar</span> ${brl(p.valor)}</button></form></div>`
     : `<div class="opcao-pag"><h3>Pedido recebido</h3><p class="suave">Vou te chamar no WhatsApp ou e-mail que você informou pra combinar o pagamento.</p></div>`;
-  const itens = (p.itens || []).map((i) => `<li><span>${esc(i.nome)}</span><b>${brl(i.valor)}</b></li>`).join('');
+  const itens = (p.itens || []).map((i) => `<li><span data-item>${esc(i.nome)}</span><b>${brl(i.valor)}</b></li>`).join('');
   const resumo = p.itens
     ? `<ul class="itens">${itens}</ul>
-       <div class="total"><span>Total do projeto${p.mensal ? ' (por mês)' : ''}</span><strong>${brl(p.total)}</strong></div>
+       <div class="total"><span>${p.mensal ? 'Total do projeto (por mês)' : 'Total do projeto'}</span><strong>${brl(p.total)}</strong></div>
        ${p.valor !== p.total ? `<div class="total agora"><span>Entrada agora (50%)</span><strong>${brl(p.valor)}</strong></div>` : ''}
-       ${p.prazo ? `<p class="suave peq">Prazo estimado: ${esc(p.prazo)}, contado depois do pagamento e do briefing.</p>` : ''}`
+       ${p.prazo ? `<p class="suave peq" data-prazo="${esc(p.prazo)}">Prazo estimado: ${esc(p.prazo)}, contado depois do pagamento e do briefing.</p>` : ''}`
     : `<p class="pre">${esc(p.proposta || '')}</p><div class="total"><span>Total</span><strong>${brl(p.valor)}</strong></div>`;
 
   return html(pagina(cfg, `Pedido #${p.id}`, `
-    <p class="sobretitulo">Orçamento #${p.id}</p>
-    <h1>${esc(p.titulo || 'Seu projeto')}</h1>
-    ${p.negocio ? `<p class="suave">Para <b>${esc(p.negocio)}</b></p>` : ''}
+    <p class="sobretitulo"><span>Orçamento</span> #${p.id}</p>
+    <h1 data-item>${esc(p.titulo || 'Seu projeto')}</h1>
+    ${p.negocio ? `<p class="suave"><span>Para</span> <b>${esc(p.negocio)}</b></p>` : ''}
     <div class="cartao">${resumo}</div>
     <h2>Como você quer pagar?</h2>
     <div class="grade-pag">${blocoPag}</div>

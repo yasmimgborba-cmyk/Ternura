@@ -185,20 +185,22 @@
   <span>© <span id="ano"></span> Ternura</span>
 </div></footer>
 
+<script type="module" src="/js/i18n.js"></script>
 <script>
+const T = (s) => (window.T ? window.T(s) : s);
 document.getElementById('ano').textContent = new Date().getFullYear();
 
 const form = document.getElementById('form'), msg = document.getElementById('msg');
 form.addEventListener('submit', async e => {
   e.preventDefault();
-  const btn = form.querySelector('button'); btn.disabled = true; msg.className = 'msg'; msg.textContent = 'Enviando...';
+  const btn = form.querySelector('button'); btn.disabled = true; msg.className = 'msg'; msg.textContent = T('Enviando...');
   try {
     const r = await fetch('/api/orcamento', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(Object.fromEntries(new FormData(form))) });
     const d = await r.json();
     if (!d.ok) throw new Error(d.erro);
     form.reset(); msg.className = 'msg ok';
-    msg.textContent = 'Pedido enviado. ' + (d.id ? `Número #${d.id}. ` : '') + 'Logo te mando a proposta.';
-  } catch (err) { msg.className = 'msg erro'; msg.textContent = err.message || 'Não deu para enviar. Tente de novo.'; }
+    msg.textContent = T('Pedido enviado.') + ' ' + (d.id ? `${T('Número')} #${d.id}. ` : '') + T('Logo te mando a proposta.');
+  } catch (err) { msg.className = 'msg erro'; msg.textContent = T(err.message) || T('Não deu para enviar. Tente de novo.'); }
   btn.disabled = false;
 });
 </script>

@@ -117,7 +117,7 @@ function calcular(cfg = {}) {
     servico: cfg.servico, modelo, estilo, urgencia: urg, pagamento: s.mensal ? 'total' : pag,
     itens, total, agora, mensal: !!s.mensal,
     prazo: s.prazo[modelo],
-    titulo: `${s.nome} ${modelos[modelo].nome.toLowerCase()} · estilo ${estilos[estilo].nome.toLowerCase()}`,
+    titulo: `${s.nome} · ${modelos[modelo].nome} · Estilo ${estilos[estilo].nome}`,
   };
 }
 
